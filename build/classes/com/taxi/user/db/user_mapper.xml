@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.taxi.user">
+
+	<resultMap type="com.taxi.user.dto.UserDto" id="UserTableMap">
+		<result property="u_no" column="U_NO"/>
+		<result property="u_name" column="U_NAME"/>
+		<result property="u_id" column="U_ID"/>
+		<result property="u_pw" column="U_PW"/>
+		<result property="u_birth" column="U_BIRTH"/>
+		<result property="u_gender" column="U_GENDER"/>
+		<result property="u_phone" column="U_PHONE"/>
+		<result property="u_email" column="U_EMAIL"/>
+		<result property="u_role" column="U_ROLE"/>
+		<result property="u_enabled" column="U_ENABLED"/>
+	</resultMap>
+	
+	<select id="selectlogin" parameterType="UserDto" resultType="UserDto">
+	SELECT * FROM USER_TABLE WHERE U_ID = #{u_id} AND U_PW = #{u_pw} AND U_ENABLED = 'Y'
+	</select>
+	
+	<select id="selectChk" parameterType="String" resultType="String">
+	SELECT U_ID FROM USER_TABLE WHERE U_ID = #{u_id}
+	</select>
+	
+	<insert id="insert" parameterType="UserDto">
+	INSERT INTO USER_TABLE VALUES(U_NO_SEQ.NEXTVAL, #{u_name}, #{u_id}, #{u_pw}, #{u_birth}, #{u_gender}, #{u_phone}, #{u_email}, 'USER', 'Y')
+	</insert>
+
+</mapper>

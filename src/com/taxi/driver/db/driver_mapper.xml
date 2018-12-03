@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.taxi.driver">
+  
+  	<resultMap type="com.taxi.driver.dto.DriverDto" id="DriverTableMap">
+  		<result property="d_no" column="D_NO" />
+		<result property="d_name" column="D_NAME" />
+		<result property="d_id" column="D_ID" />
+		<result property="d_pw" column="D_PW" />
+		<result property="d_birth" column="D_BIRTH" />
+		<result property="d_gender" column="D_GENDER" />
+		<result property="d_phone" column="D_PHONE" />
+		<result property="d_email" column="D_EMAIL" />
+		<result property="d_enabled" column="D_ENABLED" />
+		<result property="d_license" column="D_LICENSE" />
+		<result property="d_carnum" column="D_CARNUM" />
+		<result property="d_role" column="D_ROLE" />
+  	</resultMap>
+  	
+  	
+  	
+  	
+<insert id="regist" parameterType="DriverDto" >
+	INSERT INTO DRIVER_TABLE VALUES(D_NO_SEQ.NEXTVAL, #{d_name}, #{d_id}, #{d_pw}, #{d_birth}, #{d_gender}, #{d_phone}, #{d_email}, 'Y', #{d_license}, #{d_carnum}, 'DRIVER')
+</insert>
+
+
+
+<select id="login" parameterType="DriverDto" resultType="DriverDto">
+	SELECT * FROM DRIVER_TABLE WHERE D_ID = #{d_id} AND D_PW = #{d_pw} AND D_ENABLED = 'Y' 
+</select>
+
+
+<select id="idchk" parameterType="String" resultType="String">
+	SELECT D_ID FROM DRIVER_TABLE WHERE D_ID = #{d_id} 
+</select>
+  	
+  	
+<select id="driverinfo" parameterType="int" resultType="DriverDto">
+	SELECT * FROM DRIVER_TABLE WHERE D_NO = #{d_no}  
+</select>  	
+  	
+  	
+<update id="driverupdate" parameterType="DriverDto">
+	UPDATE DRIVER_TABLE SET D_CARNUM = #{d_carnum}, D_LICENSE = #{d_license}, D_EMAIL = #{d_email}, D_PHONE = #{d_phone}, D_PW = #{d_pw} WHERE D_NO = #{d_no}
+</update>  	
+  	
+  	
+<update id="driverdelete" parameterType="DriverDto">
+	UPDATE DRIVER_TABLE SET D_ENABLED = 'N' WHERE D_NO = #{d_no}
+</update>  	
+  	
+  	
+<select id="driverlist"  resultMap="DriverTableMap">  	
+  	SELECT * FROM DRIVER_TABLE WHERE D_ENABLED = 'Y' ORDER BY D_NO DESC
+</select> 	
+
+
+  </mapper>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  

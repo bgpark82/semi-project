@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.taxi.rboard">
+
+	<resultMap type="com.taxi.board.dto.RBoardDto" id="RBoardMap">
+		<result property="r_no" column="R_NO"/>
+		<result property="r_writer" column="R_WRITER"/>
+		<result property="r_title" column="R_TITLE"/>
+		<result property="r_content" column="R_CONTENT"/>
+		<result property="r_area" column="R_AREA"/>
+		<result property="r_date" column="R_DATE"/>
+		<result property="r_count" column="R_COUNT"/>
+	</resultMap>
+	
+	<select id="selectAll" resultMap="RBoardMap">
+	SELECT * FROM REVIEWBOARD ORDER BY R_NO DESC
+	</select>
+
+	<select id="selectOne" parameterType="int" resultType="RBoardDto">
+	SELECT * FROM REVIEWBOARD WHERE R_NO = #{r_no}
+	</select>
+
+	<insert id="insert" parameterType="RBoardDto">
+	INSERT INTO REVIEWBOARD VALUES(R_NO_SEQ.NEXTVAL, #{r_writer}, #{r_title}, #{r_content}, #{r_area}, SYSDATE, 0)
+	</insert>
+
+	<update id="update" parameterType="RBoardDto">
+	UPDATE REVIEWBOARD SET R_TITLE = #{r_title}, R_CONTENT = #{r_content}, R_AREA = #{r_area} WHERE R_NO = #{r_no}
+	</update>
+	
+	<delete id="delete" parameterType="int">
+	DELETE FROM REVIEWBOARD WHERE R_NO = #{r_no}
+	</delete>
+	
+	<update id="updatecount" parameterType="RBoardDto">
+	UPDATE REVIEWBOARD SET R_COUNT = #{r_count} WHERE R_NO = #{r_no}
+	</update>
+
+</mapper>
