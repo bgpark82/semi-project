@@ -1,4 +1,4 @@
-package com.taxi.user.dao;
+package com.taxi.common;
 
 import java.io.IOException;
 import java.io.Reader;
@@ -13,8 +13,7 @@ public class SqlMapConfig {
 	
 	public SqlSessionFactory getSqlSessionFactory() {
 		
-		String resource = "com/taxi/user/db/user_config.xml";
-		
+		String resource = "com/taxi/common/taxi_config.xml";
 		
 		try {
 			Reader reader = Resources.getResourceAsReader(resource);

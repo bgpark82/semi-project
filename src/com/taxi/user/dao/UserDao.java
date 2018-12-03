@@ -2,6 +2,7 @@ package com.taxi.user.dao;
 
 import org.apache.ibatis.session.SqlSession;
 
+import com.taxi.common.SqlMapConfig;
 import com.taxi.user.dto.UserDto;
 
 public class UserDao extends SqlMapConfig {
@@ -15,7 +16,7 @@ public class UserDao extends SqlMapConfig {
  * 5.회원 탈퇴
  */
 	
-	//로그인
+	// 로그인
 	public UserDto login(String u_id, String u_pw) {
 		UserDto res = new UserDto();
 		UserDto dto = new UserDto();
@@ -28,17 +29,18 @@ public class UserDao extends SqlMapConfig {
 		return res;
 	}
 	
+	// 회원가입
 	public int insertUser(UserDto dto) {
 		int res = 0;
 		SqlSession session = null;
-		System.out.println(dto.getU_birth());
 		try {
 			session = getSqlSessionFactory().openSession(true);
 			res = session.insert(namespace+"insert", dto);
 		} catch(Exception e){
+			e.printStackTrace();
+		} finally {
 			session.close();
 		}
-		
 		return res;
 	}
 	

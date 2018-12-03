@@ -18,9 +18,7 @@
 		<result property="d_carnum" column="D_CARNUM" />
 		<result property="d_role" column="D_ROLE" />
   	</resultMap>
-  	
-  	
-  	
+  
   	
 <insert id="regist" parameterType="DriverDto" >
 	INSERT INTO DRIVER_TABLE VALUES(D_NO_SEQ.NEXTVAL, #{d_name}, #{d_id}, #{d_pw}, #{d_birth}, #{d_gender}, #{d_phone}, #{d_email}, 'Y', #{d_license}, #{d_carnum}, 'DRIVER')

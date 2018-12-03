@@ -21,7 +21,6 @@ public class UserController extends HttpServlet {
     public UserController() {
        
     }
-
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
@@ -29,7 +28,6 @@ public class UserController extends HttpServlet {
 		
 		HttpSession session = request.getSession();
 		String command = request.getParameter("command");
-		System.out.println("["+command+"]");
 		
 		UserDao dao = new UserDao();
 		
@@ -44,12 +42,12 @@ public class UserController extends HttpServlet {
 				session.setMaxInactiveInterval(60*60);
 				
 				if(dto.getU_role().equals("ADMIN")) {
-					response.sendRedirect("admin_main.jsp");
+					jsResponse("로그인 성공","admin_main.jsp", response);
 				} else if(dto.getU_role().equals("USER")) {
-					response.sendRedirect("user_main.jsp");
+					jsResponse("로그인 성공","user_main.jsp", response);
 				}
 			} else {
-				jsResponse("로그인실패","index.jsp", response);
+				jsResponse("로그인 실패","index.jsp", response);
 			}
 			
 		} else if(command.equals("registform")) {
@@ -66,7 +64,7 @@ public class UserController extends HttpServlet {
 			String u_phone2 = request.getParameter("u_phone2");
 			String u_phone = u_phone0+"-"+u_phone1+"-"+u_phone2;
 			String u_email = request.getParameter("u_email");
-			System.out.println(u_id+u_pw+u_name+u_birth+u_gender+u_phone+u_email);
+			
 			UserDto dto = new UserDto();
 			dto.setU_id(u_id);
 			dto.setU_pw(u_pw);
@@ -78,11 +76,10 @@ public class UserController extends HttpServlet {
 			
 			int res = dao.insertUser(dto);
 			
-			if(res > 0 ) {
-				
-				jsResponse("회원 가입 성공", "user_main.jsp", response);
+			if(res > 0) {
+				jsResponse("회원가입 성공", "user_main.jsp", response);
 			} else {
-				jsResponse("회원 가입 실패", "user_registform.jsp", response);
+				jsResponse("회원가입 실패", "user_registform.jsp", response);
 			}
 		} else if(command.equals("idchk")) {
 			String u_id = request.getParameter("id");
@@ -93,10 +90,7 @@ public class UserController extends HttpServlet {
 				idnotused = false;
 			}
 			response.sendRedirect("user_idchk.jsp?idnotused="+idnotused);
-		}
-		
-		
-		
+		}	
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

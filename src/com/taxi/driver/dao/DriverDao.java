@@ -5,25 +5,20 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
+import com.taxi.common.SqlMapConfig;
 import com.taxi.driver.dto.DriverDto;
-import com.taxi.user.dao.SqlMapConfig;
 
 public class DriverDao extends SqlMapConfig{
 
 	private String namespace = "com.taxi.driver.";
 	
-	
 	//회원가입
 	public int insertDriver(DriverDto dto) {
-		
 		SqlSession session = null;
-		
 		int res = 0;
-		
 		
 		try {
 			session = getSqlSessionFactory().openSession(true);
-			
 			res = session.insert(namespace + "regist", dto);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -31,18 +26,14 @@ public class DriverDao extends SqlMapConfig{
 		} finally {
 			session.close();
 		}
-		
 		return res;
-		
 	}
 	
 	
 	//아이디체크
 	public String idChk(String d_id) {
-		
 		SqlSession session = null;
 		String res = null;
-		
 		
 			try {
 				session = getSqlSessionFactory().openSession(true);
@@ -53,27 +44,19 @@ public class DriverDao extends SqlMapConfig{
 			} finally {
 				session.close();
 			}
-		
-		
-		return res;
-		
+		return res;	
 	}
 	
 	
 	//로그인
-	
 	public DriverDto login(String d_id, String d_pw) {
 		SqlSession session = null;
 		
 		DriverDto res = new DriverDto();
-	
 		// id,pw를 dto라는 그릇에 담는 공식
 		DriverDto dto = new DriverDto();
 		dto.setD_id(d_id);
 		dto.setD_pw(d_pw);
-		
-		
-	
 			try {
 				session = getSqlSessionFactory().openSession(true);
 				res = session.selectOne(namespace + "login", dto);
@@ -83,12 +66,7 @@ public class DriverDao extends SqlMapConfig{
 			} finally {
 				session.close();
 			}
-	
-		
-		
 		return res;
-		
-		
 	}
 	
 	
@@ -107,10 +85,6 @@ public class DriverDao extends SqlMapConfig{
 		} finally {
 			session.close();
 		}
-		
-		
-		
-		
 		return dto;
 		
 	}
@@ -133,13 +107,8 @@ public class DriverDao extends SqlMapConfig{
 		} finally {
 			session.close();
 		}
-		
 		return res;
-	
 	}
-	
-	
-	
 	
 	//마이페이지 탈퇴
 	public int deleteDriver(int d_no) {
@@ -161,22 +130,23 @@ public class DriverDao extends SqlMapConfig{
 		
 	}
 	
-	
-	//운전자리스트 조회
-	public List<DriverDto> DriverList() {
+	//운전자 리스트 조회
+	public List<DriverDto> DriverList(){
 		List<DriverDto> res = new ArrayList<DriverDto>();
-		
 		SqlSession session = null;
-		
-		session = getSqlSessionFactory().openSession(true);
-		
-		res = session.selectList(namespace + "driverlist");
-	
-		session.close();
-		
+		try {
+			session = getSqlSessionFactory().openSession(true);
+			res = session.selectList(namespace + "driverlist");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
 		return res;
-		
 	}
+	
+	
 	
 	
 	

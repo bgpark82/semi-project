@@ -25,7 +25,7 @@ CREATE TABLE USER_TABLE(
 );
 
 INSERT INTO USER_TABLE
-VALUES(U_NO_SEQ.NEXTVAL,'박병길','test','test','890521','M','010-1234-1234','test@gmail.com','USER','Y');
+VALUES(U_NO_SEQ.NEXTVAL,'박병길','test','test','890521','M','010-1234-1234','test@gmail.com','Y','USER');
 
 SELECT * FROM USER_TABLE;
 

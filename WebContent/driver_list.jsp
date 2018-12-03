@@ -1,15 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-<%
-	request.setCharacterEncoding("UTF-8");
-%>
-<%
-	response.setContentType("text/html; charset=UTF-8");
-%>
+<%request.setCharacterEncoding("UTF-8");%>
+<%response.setContentType("text/html; charset=UTF-8");%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page import="com.taxi.driver.dto.DriverDto"%>
+
 
 <!DOCTYPE html>
 <html>
@@ -17,10 +13,6 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
-<%
-	DriverDto dto = (DriverDto) request.getAttribute("dto");
-%>
-
 
 <body>
 
@@ -47,10 +39,10 @@
 			<c:otherwise>
 				<c:forEach var="dto" items="${list }">
 					<tr>
-						<td><%=dto.getD_no()%></td>
-						<td><a href="DriverController?command=driverinfo&seq=${dto.d_no}"><%=dto.getD_name()%></a></td>
-						<td><%=dto.getD_birth()%></td>
-						<td><%=dto.getD_gender()%></td>
+						<td>${dto.d_no }</td>
+						<td><a href="DriverController?command=driverinfo&seq=${dto.d_no}">${dto.d_name }</a></td>
+						<td>${dto.d_birth }</td>
+						<td>${dto.d_gender }</td>
 					</tr>
 				</c:forEach>
 		</c:otherwise>

@@ -13,7 +13,6 @@
 <body>
 
 	<h1><a href="RBoardController?command=boardlist">리뷰게시판</a></h1>
-	
 
 </body>
 </html>

@@ -9,7 +9,12 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
+<!-- 뷰포트 -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- 부트스트랩 -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<!-- jQuery -->
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script type="text/javascript">
 	function idChk(){
 		var doc = document.getElementsByName("u_id")[0].value;
@@ -22,7 +27,10 @@
 	}
 	
 	function idChkConfirm(){
-		
+		/* alert($("input").prop("tagName"));
+		if($("input").prop("title") == 'n'){
+			alert("아이디를 입력해주세요"); */
+		/* } */
 	}
 
 </script>
@@ -56,7 +64,7 @@
 			<tr>
 				<th>생년월일</th>
 				<td>
-					<input type="text" name="u_birth" onclick="idChkConfirm();" required="required"/>
+					<input type="text" name="u_birth" onclick="idChkConfirm();" placeholder="890522" required="required"/>
 				</td>
 			</tr>
 			<tr>

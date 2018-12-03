@@ -4,12 +4,12 @@
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
   <configuration>
   
-  	<properties resource="com/taxi/user/db/user.properties"/>
+  	<properties resource="com/taxi/common/taxi.properties"/>
   	
   	<typeAliases>
   		<typeAlias type="com.taxi.user.dto.UserDto" alias="UserDto"/>
-  		<typeAlias type="com.taxi.board.dto.RBoardDto" alias="RBoardDto"/>
   		<typeAlias type="com.taxi.driver.dto.DriverDto" alias="DriverDto"/>
+  		<typeAlias type="com.taxi.board.dto.RBoardDto" alias="RBoardDto"/>
   	</typeAliases>
   
   <environments default="development">

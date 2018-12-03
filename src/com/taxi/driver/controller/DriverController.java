@@ -30,26 +30,18 @@ public class DriverController extends HttpServlet {
 
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
 		
-		//값 받아서 페이지 출력할때 모든 페이지 가능 session 신고문
 		HttpSession session = request.getSession();
-	
 		
 		String command = request.getParameter("command");
 		System.out.println("[" + command + "]");
-		
 		DriverDao dao = new DriverDao();
-		
 		
 		//회원가입 폼
 		if(command.equals("registform")) {
 			response.sendRedirect("driver_registform.jsp");
-			
-			
 			
 		//아이디 중복체크	
 		} else if(command.equals("idchk")) {
@@ -60,12 +52,10 @@ public class DriverController extends HttpServlet {
 			boolean idnotused = true;
 			
 			if(res != null) {
-				idnotused = false;
-				
+				idnotused = false;				
 			}
 			response.sendRedirect("driver_idchk.jsp?idnotused=" + idnotused);
-			
-			
+
 			
 		// 회원가입 값 전달	
 		} else if(command.equals("registdriver")) {
@@ -79,30 +69,28 @@ public class DriverController extends HttpServlet {
 			String d_license = request.getParameter("d_license");
 			String d_carnum = request.getParameter("d_carnum");
 			String d_role = request.getParameter("d_role");
-		
-		DriverDto dto = new DriverDto();
-		
-		dto.setD_name(d_name);
-		dto.setD_id(d_id);
-		dto.setD_pw(d_pw);
-		dto.setD_birth(d_birth);
-		dto.setD_gender(d_gender);
-		dto.setD_phone(d_phone);
-		dto.setD_email(d_email);
-		dto.setD_license(d_license);
-		dto.setD_carnum(d_carnum);
-		dto.setD_role(d_role);
-		
-		int res = dao.insertDriver(dto);
-		
-		if(res > 0) {
 			
-			session.setAttribute("dto", dto);
+			DriverDto dto = new DriverDto();
 			
-			jsResponse("회원가입성공", "index.jsp", response);
-		} else {
-			jsResponse("회원가입실패", "driver_registform.jsp", response);
-		}
+			dto.setD_name(d_name);
+			dto.setD_id(d_id);
+			dto.setD_pw(d_pw);
+			dto.setD_birth(d_birth);
+			dto.setD_gender(d_gender);
+			dto.setD_phone(d_phone);
+			dto.setD_email(d_email);
+			dto.setD_license(d_license);
+			dto.setD_carnum(d_carnum);
+			dto.setD_role(d_role);
+			
+			int res = dao.insertDriver(dto);
+			
+			if(res > 0) {
+				session.setAttribute("dto", dto);
+				jsResponse("회원가입 성공", "index.jsp", response);
+			} else {
+				jsResponse("회원가입 실패", "driver_registform.jsp", response);
+			}
 	
 		
 	//로그인	
@@ -114,14 +102,10 @@ public class DriverController extends HttpServlet {
 		
 		if(dto.getD_id().equals(id)) {
 			session.setAttribute("dto", dto);
-		
 			session.setMaxInactiveInterval(60*60);
-			
-			jsResponse("로그인성공", "driver_main.jsp", response);
-			
+			jsResponse("로그인 성공", "driver_main.jsp", response);
 		} else {
-			jsResponse("로그인실패", "index.jsp", response);
-			
+			jsResponse("로그인 실패", "index.jsp", response);	
 		}
 	
 	//로그아웃
@@ -132,15 +116,10 @@ public class DriverController extends HttpServlet {
 	//마이페이지	
 	} else if(command.equals("driverinfo")) {
 		int d_no = Integer.parseInt(request.getParameter("d_no"));
-		
 		DriverDto dto = dao.selectDriver(d_no);
-		
 		request.setAttribute("dto", dto);
-		
 		dispatch("driver_info.jsp", request, response);
 		
-		
-	
 	
 	//회원탈퇴	
 	} else if(command.equals("driverdelete")) {
@@ -194,13 +173,10 @@ public class DriverController extends HttpServlet {
 		int res = dao.updateDriver(dto);
 		
 		if(res > 0) {
-			
 			request.setAttribute("dto", dto);
-			
 			jsResponse("글 수정 성공", "DriverController?command=driverinfo&d_no=" + d_no, response);
 			
 		} else {
-			
 			dispatch("driver_main.jsp", request, response);
 		}
 		
@@ -210,22 +186,11 @@ public class DriverController extends HttpServlet {
 	} else if(command.equals("driverlist")) {
 		List<DriverDto> list = dao.DriverList();
 		request.setAttribute("list", list);
-		
 		dispatch("driver_list.jsp", request, response);
-		
 	} else {
-		
 		jsResponse("리스트 수정 실패", "driver_info.jsp", response);
 	}
-		
-		
-
-		
-		
-		
-		
-
-	}
+}
 
 
 	private void jsResponse(String msg, String url, HttpServletResponse response) 
