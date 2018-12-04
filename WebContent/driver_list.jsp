@@ -18,14 +18,21 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <!-- jQuery -->
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<!-- font awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+.checked {
+    color: orange;
+}
+</style>
 </head>
 
 <body>
 <%@ include file="form/header.jsp" %>
 	
-
 	<div class="container">
-		<h1>운전자정보조회리스트</h1>
+	<h1 align="center">운전자정보 조회리스트</h1><br><hr>
+		
 		<ul class="list-group">
 			<c:choose>
 				<c:when test="${empty list }">
@@ -35,16 +42,48 @@
 				</c:when>
 				<c:otherwise>
 					<c:forEach var="dto" items="${list }">
-						<li class="list-group-item">
-							<a href="DriverController?command=driverinfo&seq=${dto.d_no}">${dto.d_name }</a></td>
-							${dto.d_birth }
-							${dto.d_gender }
-						</li>
+						<li class="list-group-item" style="margin:0 20%" >
+  							<div class="container" style="max-height: 150px; width:100%">
+  								<div class="row">
+     							<div class="col-xs-4"><img src="img/td.png" width="150px"/></div>
+  								<div class="col-xs-4" style="margin-top: 0px;">
+									<div style="margin-bottom: 5px"><h3><strong>${dto.d_name }</strong></h3></div>
+									<div style="margin-bottom: 5px"><b>성별 </b><span>${dto.d_gender }</span></div>
+									<div style="margin-bottom: 5px"><b>나이 </b><span>${dto.d_birth }</span></div>               
+									<div style="margin-bottom: 5px"><b>지역 </b> <span></span></div>
+								</div>    
+     
+								<div class="col-xs-4" style="margin-top: 18px;">
+									<div>
+										<span class="fa fa-star checked"></span>
+										<span class="fa fa-star checked"></span>
+										<span class="fa fa-star checked"></span>
+										<span class="fa fa-star"></span>
+										<span class="fa fa-star"></span>
+									</div>
+
+     							<div>
+									<!-- <label class="checkbox-inline"> -->
+										
+										<input type="button" value="선택" style="margin: 40% 0 0 60%;" class="btn btn-primary" >
+									<!-- </label> -->
+								</div>
+     						</div>
+     						</div>    
+						</div>
+					</li>
+
 					</c:forEach>
 				</c:otherwise>
 			</c:choose>
 		</ul>
-		<button onclick="location.href='route_payment.jsp'" style="float:right" class="btn btn-default">결제</button>
+		<br><hr>
+		<div class="row" align="center">
+			<h1><span>운전자를 선택 하시겠습니까?</span></h1>
+			<input type="button" value="확인" class="btn btn-default btn-big" onclick="location.href='route_payment.jsp'"/>
+			<input type="button" value="취소" class="btn btn-default btn-big" onclick="history.back()"/>
+		</div>
+		
 	</div>
 <%@ include file="form/footer.jsp" %>
 

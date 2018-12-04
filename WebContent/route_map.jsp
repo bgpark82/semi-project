@@ -19,10 +19,9 @@
 <body>
 <%@ include file="form/header.jsp" %>
 
-<h1>관광지 정보</h1>
 	
 	<fieldset>
-		<legend>지역별 관광정보 조회</legend>
+		
 		<select id="local">
 			<option>-------지역선택-------</option>
 			<option value="1">서울</option>
@@ -67,13 +66,15 @@
 				<!-- right box -->
 				<div class="col-md-2">
 					<div class="card">
-						<div class="card-body">총 여행 시간 : <span id="totalDuration"></span></div>
+						<div class="card-body"><h2><span id="totalDuration"></span></h2></div>
 					</div>
 					<ul><ins id="trip_selected"></ins></ul>
 				</div>
-				<form action="#" method="post" id="route">
-					<input  type="submit" value="경로지정" class="btn btn-default btn-lg">
+				<form action="ScheduleController" method="post" id="route">
+					<input type="hidden" name="command" value="route">
+					<input type="button" value="경로지정" class="btn btn-default btn-lg" onclick="sendData()">
 				</form>
+				
 			</div>
 		</div>
 		
@@ -88,14 +89,19 @@
 <script src="http://code.jquery.com/jquery-1.11.3.js"></script>
 <script src="js/map.js"></script>
 <script>
-var placeList = [];
-	$("#route").on("submit",function(){
+
+	function sendData(){
+		var placeList = [];
 		var list = $("#trip_selected").find("li");
+		var location = $("#local option:selected").text();
 		for(var i = 0; i < list.length; i++){
-			placeList.push(list.eq(i).find("#title").text());
+			placeList.push(list.eq(i).find("#title").html());
 		};
-		location.href ="controller"
-	})
+		var listToJson = JSON.stringify(placeList);
+		$("#route").append("<input type='hidden' name='location' value="+location+">");
+		$("#route").append("<input type='hidden' name='list' value="+listToJson+">");
+		$("#route").submit();
+	}
 </script>
 
 

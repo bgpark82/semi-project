@@ -39,7 +39,7 @@
 	</div>
 </div>
 
-<button class="btn btn-default">결제 완료</button>
+<button class="btn btn-default" onclick="location.href='route_payment_confirmed.jsp'">결제 완료</button>
 
 <script>
     paypal.Button.render({

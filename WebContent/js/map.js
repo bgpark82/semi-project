@@ -13,7 +13,7 @@ var durationArr = [];
 var totalDuration = 0;
 var count = 0;
 var countCood = 0;
-
+var contentid = [];
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------->> main
 
@@ -108,41 +108,63 @@ $(function() {
 				// display the location information on the top of the page
 				.done(function(data){
 					$(data).find("item").each(function(i){
-						var id = i;
-			           var addr1 = $(this).find("addr1").text();
-			           var title = $(this).find("title").text();
-			           var tel = $(this).find("tel").text();
-			           var latitude = parseFloat($(this).find("mapy").text());
-			           var longitude = parseFloat($(this).find("mapx").text());
-					   storeCoordi(id,latitude,longitude,addr1,title,tel,coordinate);
-					   
-					   // the tour site list depending on province
-					   $("#trip_info").append(item(id,title,addr1,tel,latitude,longitude));
+						var contentid = $(this).find("contentid").text();
+						
+						var url2 = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/detailCommon?ServiceKey=TfotMHpUdUtGCMBSV%2BBxCG7vi%2FzLocIn1xq%2FeycGAO9NFBGIz37scDa0ABTB92P8%2BaMGgmsDIKCXTcNA6zditg%3D%3D"
+		                     +"&contentTypeId=12" 
+		                     +"&contentId="+contentid
+		                     +"&MobileOS=ETC&MobileApp=TourAPI3.0_Guide&defaultYN=Y" 
+		                     +"&firstImageYN=Y&areacodeYN=Y" 
+		                     +"&catcodeYN=Y&addrinfoYN=Y&mapinfoYN=Y" 
+		                     +"&overviewYN=Y&transGuideYN=Y";
+						$.ajax({
+							type: "GET",
+							url: url2,
+							dataType: "xml"})
+							.done(function(data){
+								$(data).find("item").each(function(i){
+									var id = i;
+									var firstimage = $(this).find("firstimage").text();
+									var addr1 = $(this).find("addr1").text();
+									var title = $(this).find("title").text();
+									var tel = $(this).find("tel").text();
+									var latitude = parseFloat($(this).find("mapy").text());
+									var longitude = parseFloat($(this).find("mapx").text());
+									var overview = $(this).find("overview").text();
+									storeCoordi(id,latitude,longitude,addr1,title,tel,overview,coordinate);
+									
+									 // the tour site list depending on province
+									$("#trip_info").append(item(id,title,addr1,tel,latitude,longitude));
+								})
+							})
+							.done(function(){
+								for(var cor in coordinate){
+									var id = coordinate[cor].id;
+									var firstimage = coordinate[cor].firstimage;
+									var latitude = coordinate[cor].lat;
+									var longitude = coordinate[cor].lng;
+									var addr1 = coordinate[cor].addr1;
+									var title = coordinate[cor].title;
+									var tel = coordinate[cor].tel;
+									var overview = coordinate[cor].overview;
+									
+										map.setCenter({lat:latitude,lng:longitude});
+										marker = new google.maps.Marker({
+									        position : {lat:latitude,lng:longitude},
+									        map : map,
+									        draggable: true,
+									        info : item(id,firstimage,title,addr1,tel,latitude,longitude)
+									    });
+						
+									marker.addListener('click',function(){
+										infowindow.setContent(this.info);
+										infowindow.open(map,this);
+									})
+								}
+							});
 					});
 				// display marker of the location information on map
-				}).done(function(){
-					for(var cor in coordinate){
-						var id = coordinate[cor].id;
-						var latitude = coordinate[cor].lat;
-						var longitude = coordinate[cor].lng;
-						var addr1 = coordinate[cor].addr1;
-						var title = coordinate[cor].title;
-						var tel = coordinate[cor].tel;
-						
-							map.setCenter({lat:latitude,lng:longitude});
-							marker = new google.maps.Marker({
-						        position : {lat:latitude,lng:longitude},
-						        map : map,
-						        draggable: true,
-						        info : item(id,title,addr1,tel,latitude,longitude)
-						    });
-			
-						marker.addListener('click',function(){
-							infowindow.setContent(this.info);
-							infowindow.open(map,this);
-						})
-					}
-				});
+				})
 				
 			
 	});
@@ -156,15 +178,33 @@ function item(id, title, addr1, tel, latitude, longitude){
 	+"<strong>전화번호</strong> : <span id='tel'>"+tel+"</span><br>" 
 	+"<span id="+latitude+"></span><span id="+longitude+"></span></div></a><hr></li>";
 }
-
+//
+//function item(id, firstimage, title, addr1, latitude, longitude){
+//	   return "<li id="+id+"><input type='checkbox' name='here' onclick='onCheck(this)'/><a href='#' onclick='openDescription(this)'>"
+//	   +"<div><img src='"+firstimage+"' width='200' height='150'/><br>"
+//	   +"<strong><span id='title'>"+title+"</span></strong><br>"
+//	   +"<span id='addr1'>"+addr1+"</span><br>"
+//	   +"<span id="+latitude+"></span><span id="+longitude+"></span>";
+//	   +"</div></a><hr></li>";
+//	}
+//
+//function item02(id, firstimage, title, addr1, tel, overview, latitude, longitude){
+//	   return "<li id="+id+"><input type='checkbox' name='here' onclick='onCheck(this)'/><a href='#' onclick='openDescription(this)'>"
+//	   +"<div class='row'><div class = 'col-lg-4 col-md-4'><img class='img-responsive' src='"+firstimage+"' width='210' height='200'/></div>"
+//	   +"<div class='col-lg-8 col-md-8'><h4><strong><span id='title'>"+title+"</span></strong></h4>"
+//	   +"<h5><span id='addr1'>"+addr1+"</span></h5>"
+//	   //+"<strong>전화번호</strong> : <span id='tel'>"+tel+"</span><br>" 
+//	   +"<strong>설명 : </strong><span id='overview'>"+overview+"</span></div><br>"
+//	   +"<span id="+latitude+"></span><span id="+longitude+"></span></a><hr></div></li>";
+//	} 
 
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------->> function
 
 //store the place information from tour API
-function storeCoordi(id, latitude,longitude,addr1,title,tel,array){
-	array.push({id:id, lat:latitude, lng:longitude, addr1:addr1, title:title, tel:tel});
+function storeCoordi(id, latitude, longitude, addr1,title,tel, overview, array){
+	array.push({id:id, lat:latitude, lng:longitude, addr1:addr1, title:title, tel:tel, overview:overview});
 }
 
 
