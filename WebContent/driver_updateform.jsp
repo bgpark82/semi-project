@@ -10,7 +10,12 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
+<!-- 뷰포트 -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- 부트스트랩 -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<!-- jQuery -->
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 
 </head>
 <%
@@ -19,7 +24,7 @@
 
 
 <body>
-
+<%@ include file="form/header.jsp" %>
 	<h1>회원정보 수정</h1>
 	
 	<form action="DriverController" method="post" id="driverupdate">
@@ -70,5 +75,6 @@
 			</tr>				
 		</table>
 	</form>
+<%@ include file="form/footer.jsp" %>
 </body>
 </html>

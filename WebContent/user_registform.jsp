@@ -37,7 +37,7 @@
 
 </head>
 <body>
-
+<%@ include file="form/header.jsp" %>
 	<h1>회원가입</h1>
 	
 	<form action="UserController" method="post">
@@ -102,6 +102,6 @@
 		</table>
 	
 	</form>
-
+<%@ include file="form/footer.jsp" %>
 </body>
 </html>

@@ -7,13 +7,12 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script type="text/javascript">
 	function loginFunction(){
 		$('#messageModal').modal('show');
 	}
-		
 	</script>
 </head>
 <body>
@@ -29,15 +28,16 @@
                 <li class="dropdown">
                 	<a href="#" class="dropdown-toggle" data-toggle="dropdown">회원관리<span class="caret"></span></a>
                 	<ul class="dropdown-menu">
-                		<li><a href="answer.do?command=signup">회원가입</a></li>
-                		<li><a href="#" data-toggle="modal" data-target="#myModal">로그인</a></li>
+                		<li><a href="taxi_registform.jsp">회원가입</a></li>
+                		<li><a href="taxi_login.jsp" data-toggle="modal" data-target="#myModal">로그인</a></li>
                 	</ul>
                 </li>
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+				<li><a href="#"><span class="glyphicon glyphicon-user"></span><span>안혜진</span>님 반갑습니다. </a></li>               
             </ul>
         </div>
     </nav>
-    
-    
 	
 	<div class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog">
@@ -60,6 +60,8 @@
         </div>
         </div>
       </div>
+    </div>
+  </div>
       
     </div>
   </div>

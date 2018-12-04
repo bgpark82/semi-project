@@ -12,7 +12,7 @@
 
 <div class="container bg-dark" style="margin:0 auto; height: 200px; text-align:center;">
 	<hr>
-	<div style="height:100px;"> &copy; all right reserved.. 박병길</div>
+	<div style="height:100px;"> &copy; all right reserved.. TaxiRo</div>
 </div>
 
 </body>
