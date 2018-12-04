@@ -18,6 +18,8 @@
 <body>
 <%@ include file="form/header.jsp" %>
 
+결제 완료
+<a href="index.jsp"></a>
 
 <%@ include file="form/footer.jsp" %>
 

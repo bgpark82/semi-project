@@ -22,43 +22,30 @@
 
 <body>
 <%@ include file="form/header.jsp" %>
-	<h1>운전자정보조회리스트</h1>
+	
 
-	<table border="1">
-		<col width="50" />
-		<col width="300" />
-		<col width="100" />
-		<col width="50" />
-		<tr>
-			<th>번호</th>
-			<th>이름</th>
-			<th>생년월일</th>
-			<th>성별</th>
-		</tr>
-
-		<c:choose>
-			<c:when test="${empty list }">
-				<tr>
-					<td colspan="4">-------작성된 글이 없습니다.</td>
-				</tr>
-			</c:when>
-			<c:otherwise>
-				<c:forEach var="dto" items="${list }">
-					<tr>
-						<td>${dto.d_no }</td>
-						<td><a href="DriverController?command=driverinfo&seq=${dto.d_no}">${dto.d_name }</a></td>
-						<td>${dto.d_birth }</td>
-						<td>${dto.d_gender }</td>
-					</tr>
-				</c:forEach>
-		</c:otherwise>
-		</c:choose>
-		<tr>
-			<td colspan="4">
-				<button onclick="location.href='driver_main.jsp'">메인</button>
-			</td>
-		</tr>
-	</table>
+	<div class="container">
+		<h1>운전자정보조회리스트</h1>
+		<ul class="list-group">
+			<c:choose>
+				<c:when test="${empty list }">
+					<li class="list-group-item">
+						-------작성된 글이 없습니다.
+					</li>
+				</c:when>
+				<c:otherwise>
+					<c:forEach var="dto" items="${list }">
+						<li class="list-group-item">
+							<a href="DriverController?command=driverinfo&seq=${dto.d_no}">${dto.d_name }</a></td>
+							${dto.d_birth }
+							${dto.d_gender }
+						</li>
+					</c:forEach>
+				</c:otherwise>
+			</c:choose>
+		</ul>
+		<button onclick="location.href='route_payment.jsp'" style="float:right" class="btn btn-default">결제</button>
+	</div>
 <%@ include file="form/footer.jsp" %>
 
 </body>

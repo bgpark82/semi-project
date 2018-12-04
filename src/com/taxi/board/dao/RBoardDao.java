@@ -6,6 +6,7 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 
 import com.taxi.board.dto.RBoardDto;
+import com.taxi.common.SqlMapConfig;
 
 public class RBoardDao extends SqlMapConfig {
 	
