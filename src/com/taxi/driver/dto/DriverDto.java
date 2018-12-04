@@ -20,11 +20,6 @@ public class DriverDto {
 	public DriverDto() {
 		
 	}
-	
-	
-	
-	
-	
 
 	public DriverDto(int d_no, String d_name, String d_id, String d_pw, String d_birth, String d_gender, String d_phone,
 			String d_email, String d_enabled, String d_license, String d_carnum, String d_role) {

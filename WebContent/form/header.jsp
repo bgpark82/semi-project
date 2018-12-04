@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <% request.setCharacterEncoding("UTF-8"); %>				
 <% response.setContentType("text/html; charset=UTF-8"); %> 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,13 +29,33 @@
                 <li class="dropdown">
                 	<a href="#" class="dropdown-toggle" data-toggle="dropdown">회원관리<span class="caret"></span></a>
                 	<ul class="dropdown-menu">
-                		<li><a href="taxi_registform.jsp">회원가입</a></li>
-                		<li><a href="taxi_login.jsp" data-toggle="modal" data-target="#myModal">로그인</a></li>
+	                	<c:choose>
+							<c:when test="${userDto.u_name != null }">
+								<li><a href="DriverController?command=logout">로그아웃</a></li>
+							</c:when>
+							<c:when test="${driverDto.d_name != null }">
+								<li><a href="DriverController?command=logout">로그아웃</a></li>
+							</c:when>
+							<c:otherwise>
+								<li><a href="taxi_registform.jsp">회원가입</a></li>
+								<li><a href="taxi_login.jsp" data-toggle="modal" data-target="#myModal">로그인</a></li>
+							</c:otherwise>
+						</c:choose>
                 	</ul>
                 </li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
-				<li><a href="#"><span class="glyphicon glyphicon-user"></span><span>안혜진</span>님 반갑습니다. </a></li>               
+				<c:choose>
+					<c:when test="${userDto.u_name != null}">
+						<li><a href="#"><span class="glyphicon glyphicon-user"></span><span>${userDto.u_name }</span>님 반갑습니다. </a></li>	
+					</c:when>
+					<c:when test="${driverDto.d_name != null}">
+						<li><a href="#"><span class="glyphicon glyphicon-user"></span><span>${driverDto.d_name }</span>님 반갑습니다. </a></li>
+					</c:when>
+					<c:otherwise>
+					</c:otherwise>
+				</c:choose>
+				               
             </ul>
         </div>
     </nav>

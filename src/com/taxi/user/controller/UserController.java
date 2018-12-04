@@ -31,6 +31,7 @@ public class UserController extends HttpServlet {
 		
 		UserDao dao = new UserDao();
 		
+		//로그인
 		if(command.equals("login")) {
 			String id = request.getParameter("id");
 			String pw = request.getParameter("pw");
@@ -38,13 +39,13 @@ public class UserController extends HttpServlet {
 			UserDto dto = dao.login(id, pw);
 			
 			if(dto.getU_id().equals(id)) {
-				session.setAttribute("dto", dto);
+				session.setAttribute("userDto", dto);
 				session.setMaxInactiveInterval(60*60);
 				
 				if(dto.getU_role().equals("ADMIN")) {
-					jsResponse("로그인 성공","admin_main.jsp", response);
+					jsResponse("로그인 성공","index.jsp", response);
 				} else if(dto.getU_role().equals("USER")) {
-					jsResponse("로그인 성공","user_main.jsp", response);
+					jsResponse("로그인 성공","index.jsp", response);
 				}
 			} else {
 				jsResponse("로그인 실패","index.jsp", response);
@@ -53,6 +54,7 @@ public class UserController extends HttpServlet {
 		} else if(command.equals("registform")) {
 			response.sendRedirect("user_registform.jsp");
 			
+		// 회원가입	
 		} else if(command.equals("regist")) {
 			String u_id = request.getParameter("u_id");
 			String u_pw = request.getParameter("u_pw");
