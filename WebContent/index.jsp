@@ -15,7 +15,7 @@
 <!-- jQuery -->
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <!-- css -->
-<link href="css/style.css" rel="stylesheet"/>
+<link href="css/index.css" rel="stylesheet"/>
 <!-- font-awesome -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
@@ -25,14 +25,12 @@
 <%@ include file="form/header.jsp" %>
      
 	
-	
-	
 	<!-- 1번 배경 -->
 <div id="home">
    <div class="landing-text">
-      <h1>BOOTSTRAP</h1>
-      <h3>Learn the basic building blocks.</h3>
-      <button class="btn btn-default btn-lg" onclick="location.href='route_map.jsp'">Get Started</button>
+      <h1>TaxiRo</h1>
+      <h3>당신의 여행을 편하게 TaxiRo!</h3>
+      <button class="btn btn-default btn-lg" onclick="location.href='route_map.jsp'">일정 만들기</button><br><br><br><br><br><br><br><br>
    </div>
 </div>
 
@@ -40,15 +38,15 @@
 <div class="container">
    <div class="row">
       <div class="col-sm-6">
-         <img src="img/bootstrap.png">
+         <img src="img/best.jpeg">
       </div>
-      <div class="col-sm-6 text-center">
-         <h2>All About Using Bootstrap.</h2>
-         <p class="lead">부트스트랩은...어렵고 짲응이 나지만 그냥 해야한다,,,
-            집에 가고싶은것이 솔찍헌 헤징희의 심정...
-         </p>
-         <p class="lead">부트스트랩은...어렵고 짲응이 나지만 그냥 해야한다,,,
-               집에 가고싶은것이 솔찍헌 헤징희의 심정...
+      <div class="col-sm-6 text-center"><br><br><br><br>
+         <h2><b>사용자가 선정한 Best 여행지!</b></h2>
+         <p class="lead">
+            어디로 여행을 가야하는지! 어디가 명소인지 궁금하다면? 
+        </p>
+         <p class="lead">
+           TaxiRo에서는 직접 다녀온 여행지 리뷰게시판에서 추천수가 높은 코스와 관광지를 한눈에 볼 수 있습니다! 
          </p>
       </div>
 
@@ -60,40 +58,27 @@
 <div class="container">
    <div class="row">
       <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-         <h4>Built with Sass</h4>
-         <p>여수밤바다:여수 밤바다 이 바람에 걸린 알 수 없는 향기가 있어
-               네게 전해주고파 전활 걸어 뭐하고 있냐고
-               나는 지금 여수 밤바다 여수 밤바다
-               
-               아 아 아 아 아 어 어 
-               
-               
-               너와 함께 걷고 싶다
-               이 바다를 너와 함께 걷고 싶어
-               이 거리를 너와 함께 걷고 싶다
-               이 바다를 너와 함께 너와 함께 오
-               </p>
+         <h4><b>오 나의 기사님!</b></h4>
+         <p>
+            기분좋게 떠나는 여행.<br> 
+            하루종일 함께하는 기사님을 여행객 스스로 선택할 수 있는 TaxiRo!<br>
+            TaxiRo에서는 여행객이 일정을 만들때, 
+            해당 지역의 기사님 리스트와 평점을 보여주어 여행객 스스로 원하는 기사님을 3명! 우선선택 할 수 있습니다.        
+         </p>
       </div>
       <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-         <img src="img/sass.png" class="img-responsive">
+         <img src="img/car.jpg" class="img-responsive">
       </div>
       <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-            <h4>And Less</h4>
-            <p>여수밤바다:여수 밤바다 이 바람에 걸린 알 수 없는 향기가 있어
-                  네게 전해주고파 전활 걸어 뭐하고 있냐고
-                  나는 지금 여수 밤바다 여수 밤바다
-                  
-                  아 아 아 아 아 어 어 
-                  
-                  
-                  너와 함께 걷고 싶다
-                  이 바다를 너와 함께 걷고 싶어
-                  이 거리를 너와 함께 걷고 싶다
-                  이 바다를 너와 함께 너와 함께 오
-                  </p>
+            <h4><b>내가 선택하는 코스!</b></h4>
+            <p>
+                패키지로 짜여진 코스를 원하지 않는다면?
+                자신이 직접 자신만의 여행지를 여행하고 싶다면?<br>
+                TaxiRo에서는 각 지역마다 관광지를 볼 수 있으며, 자신이 선택한 관광지로 자신만의 여행코스를 만들 수 있습니다!    
+            </p>
       </div>      
       <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-            <img src="img/less.png" class="img-responsive">
+            <img src="img/course.jpeg" class="img-responsive">
       </div>                           
    </div>
 </div>
@@ -106,28 +91,23 @@
 <div class="container">
    <div class="row">
          <div class="col-sm-6">      
-         <h4>Here's the cool thing about Bootstrap...</h4>
-         <p>부트스트랩은...어렵고 짲응이 나지만 그냥 해야한다,,,
-            집에 가고싶은것이 솔찍헌 헤징희의 심정...
-            부트스트랩은...어렵고 짲응이 나지만 그냥 해야한다,,,
-            집에 가고싶은것이 솔찍헌 헤징희의 심정...
-            부트스트랩은...어렵고 짲응이 나지만 그냥 해야한다,,,
-            집에 가고싶은것이 솔찍헌 헤징희의 심정...
+         <h4><b>여행객을 위한, 기사님을 위한 TaxiRo!</b></h4>
+         <p>
+            TaxiRo는 여행객이 보다 편리하게 떠날 수 있는 홈페이지 입니다.<br>
+            또한 택시기사님은 자신이 잘 알고있는 지역을 소개하며, 하루에 한명의 탑승자로 편리하게 수익을 낼 수 있습니다.<br>
+            각 지역의 경제발전과 관광산업의 공동발전을 추구하며, 여행객과 기사님 모두를 생각하는 TaxiRo!
+            이제는 여행 갈때 자신이 기사님을 선택할 수 있고, 여행코스를 지정할 수 있으며, 자신만의 택시로 편리하게 여행하세요.
+            TaxiRo가 당신의 여행을 함께 하겠습니다!
          </p>
-         <p>부트스트랩은...어렵고 짲응이 나지만 그냥 해야한다,,,
-            집에 가고싶은것이 솔찍헌 헤징희의 심정...
-            부트스트랩은...어렵고 짲응이 나지만 그냥 해야한다,,,
-            집에 가고싶은것이 솔찍헌 헤징희의 심정...
-            부트스트랩은...어렵고 짲응이 나지만 그냥 해야한다,,,
-            집에 가고싶은것이 솔찍헌 헤징희의 심정...   
-         </p>   
+         
       </div>       
       <div class="col-sm-6">
-         <img src="img/bootstrap2.png">
+         <img src="img/taxi2.png">
       </div>      
    </div>
 </div>
 </div>
+
 
 
 	

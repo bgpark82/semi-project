@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.taxi.calendar.db.CalendarDB"> 
+
+	<resultMap type="com.taxi.calendar.dto.CalendarDto" id="UserCalTableMap">
+		<result property="cal_no" column="CAL_NO" />
+		<result property="cal_id" column="CAL_ID"/>
+		<result property="cal_title" column="CAL_TITLE"/>
+		<result property="cal_content" column="CAL_CONTENT"/>
+		<result property="cal_mdate" column="CAL_MDATE"/>
+		<result property="cal_regdate" column="CAL_REGDATE"/>
+	</resultMap>
+	
+	<select id="UserCalView" parameterType="CalendarDto" resultType="CalendarDto" >
+	SELECT *
+	FROM (SELECT (ROW_NUMBER() OVER (PARTITION BY SUBSTR(CAL_MDATE,1,8) ORDER BY CAL_MDATE)) 
+		RN, CAL_NO, CAL_ID, CAL_TITLE, CAL_CONTENT, CAL_MDATE, CAL_REGDATE 
+		FROM USER_CALENDAR WHERE CAL_ID = '단비짱' AND SUBSTR(CAL_MDATE,1,6)= #{cal_mdate} ) 
+	WHERE RN BETWEEN 1 AND 3
+	</select>
+	
+	<select id="UserCalDetail" parameterType="CalendarDto" resultType="CalendarDto">
+	SELECT * FROM USER_CALENDAR 
+	WHERE CAL_ID= '단비짱' AND CAL_MDATE AND CAL_NO = #{cal_no}
+	
+	</select>
+	
+
+	
+</mapper>
+
+
+
+
+
+

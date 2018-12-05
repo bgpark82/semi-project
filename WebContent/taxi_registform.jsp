@@ -13,12 +13,48 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <!-- jQuery -->
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<link rel="stylesheet" href="css/register.css">
 </head>
 <body>
 <%@ include file="form/header.jsp" %>
 
-<a href="UserController?command=registform">사용자</a>
-<a href="DriverController?command=registform">운전자</a>
+
+
+<div class="container-fluid row" style="margin-bottom: 10%;">
+	
+	<br><h1 style="text-align: center;">회 원 가 입</h1><br><hr>
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" align="center">
+<div class="col-md-2"></div>
+
+
+<div class="container col-md-3" style="margin-top:5%">
+
+<img class="image" src="img/driver.png" style="cursor: pointer;">
+  <div class="overlay" onclick="location.href='DriverController?command=registform'" style="cursor: pointer;">
+    <div class="text"><strong>운전자</strong></div>
+  </div>
+</div>
+
+<div class="col-md-2">
+
+</div>
+
+<div class="container col-md-3" style="margin-top:5%">
+
+<img class="image" src="img/user.png" style="cursor: pointer;">
+  <div class="overlay" onclick="location.href='UserController?command=registform'" style="cursor: pointer;" >
+    <div class="text"><strong>사용자</strong></div>
+  </div>
+</div>
+
+
+
+<div class="col-md-2"></div>
+</div>
+
+
+</div>
+
 
 
 <%@ include file="form/footer.jsp" %>

@@ -20,26 +20,82 @@
 <%@ include file="form/header.jsp" %>
 
 
-결제 정보
 
-<div class="container">
-	
-	<div id="paypal-button-container"></div>
-	
-	<div id="confirm" class="hidden">
-	    <div>Ship to:</div>
-	    <div><span id="recipient"></span>, <span id="line1"></span>, <span id="city"></span></div>
-	    <div><span id="state"></span>, <span id="zip"></span>, <span id="country"></span></div>
-	
-	    <button id="confirmButton">Complete Payment</button>
-	</div>
-	
-	<div id="thanks" class="hidden">
-	    Thanks, <span id="thanksname"></span>
-	</div>
+
+ <div class="container">   
+      <div class="row">
+         <div class="col-md-3"></div>         
+         <div class="col-md-6">
+            <h1 style="text-align:center; margin-top:100px;">결제 정보</h1><hr>
+            <p><span>박병길</span>님의 결제정보창입니다.</p>
+            <table class="table table-hover">
+               <thead>
+                  <tr>
+                     <th width="40%"></th>
+                     <th></th>
+                  </tr>
+               </thead>
+               <tbody>
+                  <tr>
+                     <td>이름</td>
+                     <td><span>박병길</span></td>
+                  </tr>
+                  <tr>
+                     <td>금액</td>
+                     <td><span>100000</span></td>
+                  </tr>
+                  <tr>
+                     <td>결제일</td>
+                     <td><span>2018-12-05</span></td>
+                  </tr>
+                  <tr>
+                     <td>인원수</td>
+                     <td><span>3</span></td>
+                  </tr>
+                  <tr>
+                     <td>휴대전화</td>
+                     <td><span>010-4580-8682</span></td>
+                  </tr>
+                  <tr>
+                     <td>예약날짜</td>
+                     <td><span>popo8682-buyer@gmail.com</span></td>
+                  </tr>
+               </tbody>
+            </table>
+            
+				<div class="container" style="float:center">
+					
+					<div id="paypal-button-container"></div>
+					
+					<div id="confirm" class="hidden">
+					    <div>Ship to:</div>
+					    <div><span id="recipient"></span>, <span id="line1"></span>, <span id="city"></span></div>
+					    <div><span id="state"></span>, <span id="zip"></span>, <span id="country"></span></div>
+					
+					    <button id="confirmButton">Complete Payment</button>
+					</div>
+					
+					<div id="thanks" class="hidden">
+					    Thanks, <span id="thanksname"></span>
+					</div>
+				</div>
+        	 <div class="col-md-3">
+        	 
+        	 </div>
+        	 <button class="btn btn-default" onclick="location.href='route_payment_confirmed.jsp'" style="float:right">결제 완료</button>
+      	</div>
+                  
+   
+
+
+
+
+
+
+
+
+
 </div>
-
-<button class="btn btn-default" onclick="location.href='route_payment_confirmed.jsp'">결제 완료</button>
 
 <script>
     paypal.Button.render({

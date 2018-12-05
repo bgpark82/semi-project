@@ -61,10 +61,7 @@ public class UserController extends HttpServlet {
 			String u_name = request.getParameter("u_name");
 			String u_birth = request.getParameter("u_birth");
 			String u_gender = request.getParameter("u_gender");
-			String u_phone0 = request.getParameter("u_phone0");
-			String u_phone1 = request.getParameter("u_phone1");
-			String u_phone2 = request.getParameter("u_phone2");
-			String u_phone = u_phone0+"-"+u_phone1+"-"+u_phone2;
+			String u_phone = request.getParameter("u_phone");
 			String u_email = request.getParameter("u_email");
 			
 			UserDto dto = new UserDto();
@@ -79,7 +76,7 @@ public class UserController extends HttpServlet {
 			int res = dao.insertUser(dto);
 			
 			if(res > 0) {
-				jsResponse("회원가입 성공", "user_main.jsp", response);
+				jsResponse("회원가입 성공", "index.jsp", response);
 			} else {
 				jsResponse("회원가입 실패", "user_registform.jsp", response);
 			}

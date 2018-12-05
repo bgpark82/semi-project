@@ -44,15 +44,16 @@
 </script>
 </head>
 <body>
-    <nav class="navbar navbar-default">
+    <nav class="navbar navbar-default" style="margin-bottom:0px;">
         <div class="container-fluid">
             <div class="navbar-header">
                 <a class="navbar-brand" href="index.jsp">TaxiRo</a>
             </div>
             <ul class="nav navbar-nav">
-                <li><a href="#">목록</a></li>
                 <li><a href="answer.do?command=list">게시판</a></li>
-                <li><a href="DriverController?command=driverlist">운전자리스트</a></li>
+                <li><a href="DriverController?command=driverlist">운전자 리스트</a></li>
+                <li><a href="taxi_best.jsp">베스트 여행지</a></li>
+                <li><a href="taxi_calendar.jsp">일정관리</a></li>
                 <li><a href="taxi_chat.jsp">채팅</a></li>
                 <li class="dropdown">
                 	<a href="#" class="dropdown-toggle" data-toggle="dropdown">회원관리<span class="caret"></span></a>
