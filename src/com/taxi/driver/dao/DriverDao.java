@@ -148,12 +148,12 @@ public class DriverDao extends SqlMapConfig{
 	
 	
 	//프로필 사진
-		public String getProfile(String d_id) {
+		public String getProfile(int d_no) {
 			SqlSession session = null;
 			
 			try {
 				session = getSqlSessionFactory().openSession();
-				String rs = session.selectOne(namespace+"d_profile", d_id);
+				String rs = session.selectOne(namespace+"getprofile", d_no);
 				
 				if(rs.equals("")) {
 					return "http://localhost:8787/SemiProject/images/icon.jpg";

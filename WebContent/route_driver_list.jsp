@@ -45,7 +45,7 @@
 						<li class="list-group-item" style="margin:0 20%" >
   							<div class="container" style="max-height: 150px; width:100%">
   								<div class="row">
-     							<div class="col-xs-4"><img src="img/td.png" width="150px"/></div>
+     							<div class="col-xs-4"><img src="${dto.d_profile }" width="150px"/></div>
   								<div class="col-xs-4" style="margin-top: 0px;">
 									<div style="margin-bottom: 5px"><h3><strong>${dto.d_name }</strong></h3></div>
 									<div style="margin-bottom: 5px"><b>성별 </b><span>${dto.d_gender }</span></div>

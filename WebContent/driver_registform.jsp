@@ -16,7 +16,7 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script type="text/javascript">
 
-/* function idChk() {
+function idChk() {
 	var doc = document.getElementsByName("d_id")[0];
 	if(doc.value.trim()==""||doc.value==null){
 		alert("아이디를 입력하세요.");
@@ -33,7 +33,7 @@ function idChkConfirm() {
 		alert("아이디 중복체크를 해주세요");
 		document.getElementsByName("d_id")[0].focus();
 	}
-} */
+}
 
 </script>
 </head>
@@ -47,9 +47,7 @@ function idChkConfirm() {
    <div class=container align="center">
    <div class="jumbotron" style="width: 800px; " >
       
-      <form class="form-horizontal" action="DriverController" method="post" enctype="multipart/form-data">
-         <input name="command" value="registdriver"  type="hidden"/>
-         
+      <form class="form-horizontal" action="DriverRegistController" method="post" enctype="multipart/form-data">
 		<div class="form-group">
             <div class="col-sm-1"></div>
             <label class="col-sm-2 control-label">프로필</label>
@@ -109,7 +107,7 @@ function idChkConfirm() {
           </div>
 
 
-      <div class="form-group">
+		<div class="form-group">
              <div class="col-sm-1"></div>
                <label class="col-sm-2 control-label">성별</label>
             <div class="col-sm-5" style="margin-top: 6px;">
@@ -118,6 +116,34 @@ function idChkConfirm() {
             
              </div>
           </div>
+      
+	<div class="form-group">
+		<div class="col-sm-1"></div>
+		<label class="col-sm-2 control-label">성별</label>
+		<div class="col-sm-5" style="margin-top: 6px;">
+      		<select id="local" name="d_region" class="form-control">
+				<option >지역을 선택해주세요</option>
+				<option value="서울">서울</option>
+				<option value="인천">인천</option>
+				<option value="대전">대전</option>
+				<option value="대구">대구</option>
+				<option value="광주">광주</option>
+				<option value="부산">부산</option>
+				<option value="울산">울산</option>
+				<option value="세종특별자치시">세종특별자치시</option>
+				<option value="경기도">경기도</option>
+				<option value="강원도">강원도</option>
+				<option value="충청북도">충청북도</option>
+				<option value="충청남도">충청남도</option>
+				<option value="경상북도">경상북도</option>
+				<option value="경상남도">경상남도</option>
+				<option value="전라북도">전라북도</option>
+				<option value="전라남도">전라남도</option>
+				<option value="제주도">제주도</option>
+				</select>	
+             </div>
+          </div>
+      
       
 
           

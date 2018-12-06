@@ -39,9 +39,11 @@
 						<col width="150" />
 						<col width="300" />
 						<tr>
-							<th>프로필 사진</th>
-							<td><img style="width: 50px; height: 50px;" src="driverProfile"/></td>
-						</tr>	
+						<th>프로필 사진</th>
+							<td><img style="width: 200px; height: 200px;" src="${dto.d_profile }"/></td>
+						
+						
+					</tr>	
 					<tr>
 						<th>아이디</th>
 						<td>${dto.d_id }</td>

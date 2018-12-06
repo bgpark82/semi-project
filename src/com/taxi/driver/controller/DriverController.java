@@ -35,30 +35,6 @@ public class DriverController extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
 		
-		MultipartRequest multi = null;
-		int fileMaxSize = 10 * 1024 * 1024;
-		String savePath = request.getRealPath("/upload").replaceAll("\\\\", "/");
-		System.out.println("savePath : " +savePath);
-		DefaultFileRenamePolicy dr = new DefaultFileRenamePolicy();
-		try {
-			multi  = new MultipartRequest(request, savePath, fileMaxSize, "UTF-8", dr); //DefaultFileRenamePolicy: 파일이름이 겹치는 등의 오류를 처리해줌
-			System.out.println("multi : " +multi);
-		} catch(Exception e) {
-			System.out.println("오류");
-			response.sendRedirect("driver_registform.jsp");
-			return;
-		}
-		String d_ID = multi.getParameter("d_id");
-		
-		System.out.println("드라이버id"+d_ID);
-		
-		String fileName = "";
-		File file = multi.getFile("driverProfile"); //getFile : 파일의 경로
-		
-		
-		
-		
-		
 		HttpSession session = request.getSession();
 		
 		String command = request.getParameter("command");
@@ -84,103 +60,7 @@ public class DriverController extends HttpServlet {
 
 			
 		// 회원가입
-		} else if(command.equals("registdriver")) {
-			String d_name = request.getParameter("d_name");
-			String d_id = request.getParameter("d_id");
-			String d_pw = request.getParameter("d_pw");
-			String d_birth = request.getParameter("d_birth");
-			String d_gender = request.getParameter("d_gender");
-			String d_phone = request.getParameter("d_phone");
-			String d_email = request.getParameter("d_email");
-			String d_license = request.getParameter("d_license");
-			String d_carnum = request.getParameter("d_carnum");
-			String d_role = request.getParameter("d_role");
-			
-			
-			
-			
-			
-			
-			// file upload
-			
-			
-			
-			
-			// db
-//			String d_ID = multi.getParameter("d_id");
-//			
-//			System.out.println("드라이버id"+d_ID);
-//			
-//			String fileName = "";
-//			File file = multi.getFile("driverProfile"); //getFile : 파일의 경로
-
-			if(file != null) {
-				String ext = file.getName().substring(file.getName().lastIndexOf(".") + 1); //lastIndexOf : 오른쪽에서 부터 문자를 찾아 인덱스를 리턴해줌
-				System.out.println(ext);
-				
-				if(ext.equals("jpg") || ext.equals("png") || ext.equals("gif")) {
-					String prev = new DriverDao().getUser(d_ID).getD_profile();
-					
-					System.out.println("prev : "+ prev);
-					
-					File prevFile = new File(savePath + "/" + prev);
-					if(prevFile.exists()) {
-						prevFile.delete();
-					}
-					fileName = file.getName();
-					System.out.println("ddd : "+fileName);
-				}else {
-					if(file.exists()) {
-						file.delete();
-					}
-					System.out.println("d_id : "+d_ID+"filename : " + fileName);
-					//session.setAttribute("messageType", "오류 메시지");
-					//session.setAttribute("messageContent", "이미지 파일만 업로드 가능합니다.");
-					System.out.println("오류3");
-					response.sendRedirect("driver_profileupdate.jsp");
-					return;
-				}
-			}
-			
-			new DriverDao().profile(d_ID, fileName);
-			DriverDto dto = new DriverDao().getUser(d_ID);
-			request.setAttribute("dto", dto);
-			RequestDispatcher dispatch = request.getRequestDispatcher("driver_info.jsp");
-			dispatch.forward(request, response);
-			
-			
-	
-			
-			
-			
-			
-			
-			
-			DriverDto driverDto = new DriverDto();
-			
-			dto.setD_name(d_name);
-			dto.setD_id(d_id);
-			dto.setD_pw(d_pw);
-			dto.setD_birth(d_birth);
-			dto.setD_gender(d_gender);
-			dto.setD_phone(d_phone);
-			dto.setD_email(d_email);
-			dto.setD_license(d_license);
-			dto.setD_carnum(d_carnum);
-			dto.setD_role(d_role);
-			
-			int res = dao.insertDriver(driverDto);
-			
-			if(res > 0) {
-				session.setAttribute("dto", dto);
-				jsResponse("회원가입 성공", "index.jsp", response);
-			} else {
-				jsResponse("회원가입 실패", "driver_registform.jsp", response);
-			}
-	
-			
-		//로그인	
-		} else if(command.equals("login")) {
+		}  else if(command.equals("login")) {
 			String id = request.getParameter("id");
 			String pw = request.getParameter("pw");
 			
@@ -203,7 +83,9 @@ public class DriverController extends HttpServlet {
 		} else if(command.equals("driverinfo")) {
 			int d_no = Integer.parseInt(request.getParameter("d_no"));
 			DriverDto dto = dao.selectDriver(d_no);
+			
 			request.setAttribute("dto", dto);
+			System.out.println("profile check : " + dto.getD_profile());
 			dispatch("driver_info.jsp", request, response);
 			
 		
@@ -299,6 +181,9 @@ public class DriverController extends HttpServlet {
 	
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html; charset=UTF-8");
+		
 		
 		doGet(request, response);
 	}

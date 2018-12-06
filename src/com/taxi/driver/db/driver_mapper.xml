@@ -6,6 +6,8 @@
   
   	<resultMap type="com.taxi.driver.dto.DriverDto" id="DriverTableMap">
   		<result property="d_no" column="D_NO" />
+  		<result property="d_profile" column="D_PROFILE" />
+  		<result property="d_region" column="D_REGION" />
 		<result property="d_name" column="D_NAME" />
 		<result property="d_id" column="D_ID" />
 		<result property="d_pw" column="D_PW" />
@@ -17,11 +19,13 @@
 		<result property="d_license" column="D_LICENSE" />
 		<result property="d_carnum" column="D_CARNUM" />
 		<result property="d_role" column="D_ROLE" />
+		<result property="d_title" column="D_TITLE" />
+		<result property="d_content" column="D_CONTENT" />
   	</resultMap>
   
   	
 <insert id="regist" parameterType="DriverDto" >
-	INSERT INTO DRIVER_TABLE VALUES(D_NO_SEQ.NEXTVAL, #{d_name}, #{d_id}, #{d_pw}, #{d_birth}, #{d_gender}, #{d_phone}, #{d_email}, 'Y', #{d_license}, #{d_carnum}, 'DRIVER')
+	INSERT INTO DRIVER_TABLE VALUES(D_NO_SEQ.NEXTVAL,#{d_profile}, #{d_region}, #{d_name}, #{d_id}, #{d_pw}, #{d_birth}, #{d_gender}, #{d_phone}, #{d_email}, 'Y', #{d_license}, #{d_carnum}, 'DRIVER', NULL, NULL)
 </insert>
 
 
@@ -38,6 +42,10 @@
   	
 <select id="driverinfo" parameterType="int" resultType="DriverDto">
 	SELECT * FROM DRIVER_TABLE WHERE D_NO = #{d_no}  
+</select>
+
+<select id="getprofile" parameterType="int" resultType="String">
+	SELECT D_PROFILE FROM DRIVER_TABLE WHERE D_NO = #{d_no}  
 </select>  	
   	
   	
@@ -54,6 +62,10 @@
 <select id="driverlist"  resultMap="DriverTableMap">  	
   	SELECT * FROM DRIVER_TABLE WHERE D_ENABLED = 'Y' ORDER BY D_NO DESC
 </select> 	
+
+<update id="updateProfile" parameterType="DriverDto">
+	UPDATE DRIVER_TABLE SET D_PROFILE = #{d_profile} WHERE D_ID = #{d_id} 
+</update>
 
 
   </mapper>

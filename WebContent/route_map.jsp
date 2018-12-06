@@ -23,7 +23,13 @@
 		<c:choose>
 			<c:when test="${userDto.u_name == null }">
 				<script>
-					alert("로그인이 필요한 서비스입니다.");
+					alert("로그인이 필요한 서비스입니다");
+					location.href="index.jsp";
+				</script>
+			</c:when>
+			<c:when test="${driverDto.d_name}">
+				<script>
+					alert("사용자 계정으로 로그인 해주세요");
 					location.href="index.jsp";
 				</script>
 			</c:when>
