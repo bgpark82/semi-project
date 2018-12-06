@@ -40,7 +40,7 @@
 						<col width="300" />
 						<tr>
 						<th>프로필 사진</th>
-							<td><img style="width: 200px; height: 200px;" src="${dto.d_profile }"/></td>
+							<td><img style="width: 200px; height: 200px; border-radius:100%;" src="${dto.d_profile }"/></td>
 						
 						
 					</tr>	

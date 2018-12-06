@@ -54,15 +54,19 @@
 
 	<div class="container">
 		<br>
-		<h1>마이페이지</h1>
-		<br>
-		<hr>
+		<br><h1 style="text-align:center">마이페이지</h1><br><hr><hr>
+		
+		
+		
 		<div class="row">
 			<div class="col-md-6">
+				<div class="panel panel-default">
+					<div class="panel-body">
 				<form action="UserController?commad=" method="post" id="userupdate">
 					<input type="hidden" name="command" value="userupdate"> 
 					<input type="hidden" name="u_no" value="${dto.u_no }">
 					<table class="table">
+						
 						<tr>
 							<th>이 름</th>
 							<td>${dto.u_name }</td>
@@ -81,31 +85,33 @@
 						</tr>
 						<tr>
 							<th>비밀번호</th>
-							<td><input type="password" name="pw1" value="${dto.u_pw }">
+							<td><input type="password" name="pw1" value="${dto.u_pw }" class="form-control">
 							</td>
 						</tr>
 						<tr>
 							<th>비밀번호 재확인</th>
-							<td><input type="password" name="pw2"></td>
+							<td><input type="password" name="pw2" class="form-control"></td>
 						</tr>
 						<tr>
 							<th>이메일</th>
 							<td><input type="text" name="u_email"
-								value="${dto.u_email }"></td>
+								value="${dto.u_email }" class="form-control"></td>
 						</tr>
 						<tr>
 							<th>휴대전화</th>
 							<td><input type="text" name="u_phone"
-								value="${dto.u_phone }"></td>
+								value="${dto.u_phone }" class="form-control"></td>
 						</tr>
 						<tr>
-							<td colspan="2"><input type="submit" value="수정하기" /> <input
-								type="button" value="탈퇴하기"
-								onclick="location.href='UserController?command=userout&u_no=${dto.u_no}'" />
+							<td colspan="2">
+							<input type="submit" value="수정하기" class="btn btn-default" style="float:right"/> 
+							<input type="button" value="탈퇴하기" onclick="location.href='UserController?command=userout&u_no=${dto.u_no}'" class='btn btn-default' style="float:right"/>
 							</td>
 						</tr>
 					</table>
 				</form>
+				</div>
+				</div>
 			</div>
 			<div class="col-md-6">
 				<ul>

@@ -27,18 +27,18 @@
 
 	#UserCal{
 		border-collapse: collapse;
-		border: 1px solid gray;
+		border: 1px solid #eeeeee;
 	}
 	
 	#UserCal th{
 		width: 80px;
-		border: 1px solid gray;
+		border: 1px solid #eeeeee;
 	}
 
 	#UserCal td{
 		width: 80px;
-		height: 80px;
-		border: 1px solid gray;
+		height: 150px;
+		border: 1px solid #eeeeee;
 		text-align: left;
 		vertical-align: top;
 		position: relative;
@@ -168,12 +168,15 @@ function UserCalDetail() {
 	String yyyyMM  = year + Util.isTwo(String.valueOf(month));
 	List<CalendarDto> clist = dao.UserCalView("단비짱", yyyyMM);
 	
+
 %>
-<div class="container" style="width:50%; margin:0 25%; margin-top:100px;">
-<h1 style="text-align:center">내 일정 보기</h1><br><hr>
+
+<br><br><h1 style="text-align:center">내 일정 보기</h1><br><hr>
+<div class="container" style="margin:10;">
+
 	
-	<table id="UserCal" style="width:100%">
-		<caption>
+	<table id="UserCal" style="width:100%; height:100%" class="table table-borderless">
+		<caption style="text-align:center">
 			<a href="taxi_calendar.jsp?year=<%=year-1 %>&month=<%=month%>">《</a>
 			<a href="taxi_calendar.jsp?month=<%=month-1 %>&year=<%=year %>">◀</a>
 			<span><%=year %></span>년

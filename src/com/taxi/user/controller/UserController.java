@@ -38,17 +38,14 @@ public class UserController extends HttpServlet {
 			
 			UserDto dto = dao.login(id, pw);
 			
-			if(dto.getU_id().equals(id)) {
+			if(dto != null) {
 				session.setAttribute("userDto", dto);
 				session.setMaxInactiveInterval(60*60);
+			
+				jsResponse("로그인 성공","index.jsp", response);
 				
-				if(dto.getU_role().equals("ADMIN")) {
-					jsResponse("로그인 성공","index.jsp", response);
-				} else if(dto.getU_role().equals("USER")) {
-					jsResponse("로그인 성공","index.jsp", response);
-				}
 			} else {
-				jsResponse("로그인 실패","index.jsp", response);
+				jsResponse("아이디 혹은 비밀번호를 확인해주세요","index.jsp", response);
 			}
 			
 		} else if(command.equals("registform")) {

@@ -28,7 +28,9 @@
          <div class="col-md-6">
             <h1 style="text-align:center; margin-top:100px;">결제 정보</h1><hr>
             <p><span>${userDto.u_name }</span>님의 결제정보창입니다.</p>
-            <table class="table table-hover">
+            <div class="panel panel-default" style="width:400px">
+            	<div class="panel-body">
+            <table class="table ">
                <thead>
                   <tr>
                      <th width="40%"></th>
@@ -62,7 +64,8 @@
                   </tr>
                </tbody>
             </table>
-            
+           </div>
+          </div> 
 				<div class="container" style="float:center">
 					
 					<div id="paypal-button-container"></div>

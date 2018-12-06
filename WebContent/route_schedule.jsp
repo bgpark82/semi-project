@@ -38,8 +38,11 @@
 	</c:when>
 </c:choose>
 
+
 <div class="container-fluid">
-	<div class="container" style="width:400px">
+	<div class="container" style="width:500px">
+	<div class="panel panel-default">
+	<div class="panel-body">
 		<div align="center" >
 			<div class="form-group">
 				<form method="post" action="ScheduleController">
@@ -118,10 +121,9 @@
 				</div>
 			</div>
 		</div>
-
-		
 	</div>
-	
+	</div>
+</div>
 	
 	
 <!-- date picker bootstrap -->

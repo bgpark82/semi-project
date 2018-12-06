@@ -37,8 +37,10 @@
                     <img class="img-responsive" src="img/mountains.jpeg" alt="" width="700px" height="300px">
                 </a>
             </div>
-
             <div class="col-lg-5 col-md-5">
+		<div class="panel panel-default" style="height:100%">
+			<div class="panel-body">
+            
                 <h3><b>${scheduleDto.s_location } </b>${scheduleDto.s_date }</h3><br>           
                 <h4>${scheduleDto.s_course }</h4>
                 <br>
@@ -46,7 +48,8 @@
                 <h5>금액 : ${scheduleDto.s_price }원</h5>
             </div>
         </div>
-       
+       </div>
+       </div>
         <hr>
         
         <div class="container">
