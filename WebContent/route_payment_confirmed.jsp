@@ -39,14 +39,11 @@
             </div>
 
             <div class="col-lg-5 col-md-5">
-                <h3><b>[제주도] </b>2018년 12월 24일</h3><br>           
-                <h4>1.성산일출봉</h4>
-                <h4>2.동백습지</h4>
-                <h4>3.새별오름 </h4>
-                <h4>4.서연의 집 </h4>
-                <h4>5.카멜리아힐 </h4>
-                <h4>6.메이즈러너</h4><br>
-                <h5>인원 : 3명 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 금액 : 100000원</h5>
+                <h3><b>${scheduleDto.s_location } </b>${scheduleDto.s_date }</h3><br>           
+                <h4>${scheduleDto.s_course }</h4>
+                <br>
+                <h5>인원 : ${scheduleDto.s_people }명</h5><br>  
+                <h5>금액 : ${scheduleDto.s_price }원</h5>
             </div>
         </div>
        
@@ -65,58 +62,22 @@
         </div>
 
         <div class="row">
-
             <div class="col-md-4 portfolio-item" align="center">
                 <a href="#project-link">
                     <img class="img-responsive" src="img/td.png">
                 </a>
-                <h3><a>박기사</a></h3>
+                <h3>${driverDto.d_name }</h3>
                 <div>
                 <h4><b>평점</b> :</h4>
-                <span class="fa fa-star checked" style="margin-top: 8px;"></span>
-            <span class="fa fa-star checked"></span>
-            <span class="fa fa-star checked"></span>
-            <span class="fa fa-star"></span>
+					<span class="fa fa-star checked" style="margin-top: 8px;"></span>
+					<span class="fa fa-star checked"></span>
+					<span class="fa fa-star checked"></span>
+					<span class="fa fa-star"></span>
                 </div>
-                <h4><b>성별 :</b> 남자</h4>
-                <h4><b>나이 :</b> 32</h4>
+                <h4><b>성별 :</b> ${driverDto.d_gender }</h4>
+                <h4><b>나이 :</b> ${driverDto.d_birth }</h4>
                 <h4><b>지역 :</b> 제주도</h4>
             </div>
-
-             <div class="col-md-4 portfolio-item" align="center">
-                <a href="#project-link">
-                    <img class="img-responsive" src="img/td.png">
-                </a>
-                <h3><a>김기사</a></h3>
-                <div>
-                <h4><b>평점</b> :</h4>
-                <span class="fa fa-star checked" style="margin-top: 8px;"></span>
-            <span class="fa fa-star checked"></span>
-            <span class="fa fa-star checked"></span>
-            <span class="fa fa-star"></span>
-                </div>
-                <h4><b>성별 :</b> 남자</h4>
-                <h4><b>나이 :</b> 40</h4>
-                <h4><b>지역 :</b> 제주도</h4>
-            </div>
-
-             <div class="col-md-4 portfolio-item" align="center">
-                <a href="#project-link">
-                    <img class="img-responsive" src="img/td.png">
-                </a>
-                <h3><a>이기사</a></h3>
-                <div>
-                <h4><b>평점</b> :</h4>
-                <span class="fa fa-star checked" style="margin-top: 8px;"></span>
-            <span class="fa fa-star checked"></span>
-            <span class="fa fa-star checked"></span>
-            <span class="fa fa-star"></span>
-                </div>
-                <h4><b>성별 :</b> 여자</h4>
-                <h4><b>나이 :</b> 38</h4>
-                <h4><b>지역 :</b> 제주도</h4>
-            </div>
-
         </div>
         </div>
 </div>

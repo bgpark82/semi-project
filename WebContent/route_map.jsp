@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <% request.setCharacterEncoding("UTF-8"); %>				
-<% response.setContentType("text/html; charset=UTF-8"); %> 
+<% response.setContentType("text/html; charset=UTF-8"); %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,46 +20,55 @@
 <body>
 <%@ include file="form/header.jsp" %>
 
-	
-	<fieldset>
-		
-		<select id="local">
-			<option>-------지역선택-------</option>
-			<option value="1">서울</option>
-			<option value="2">인천</option>
-			<option value="3">대전</option>
-			<option value="4">대구</option>
-			<option value="5">광주</option>
-			<option value="6">부산</option>
-			<option value="7">울산</option>
-			<option value="8">세종특별자치시</option>
-			<option value="31">경기도</option>
-			<option value="32">강원도</option>
-			<option value="33">충청북도</option>
-			<option value="34">충청남도</option>
-			<option value="35">경상북도</option>
-			<option value="36">경상남도</option>
-			<option value="37">전라북도</option>
-			<option value="38">전라남도</option>
-			<option value="39">제주도</option>
-		</select>
+		<c:choose>
+			<c:when test="${userDto.u_name == null }">
+				<script>
+					alert("로그인이 필요한 서비스입니다.");
+					location.href="index.jsp";
+				</script>
+			</c:when>
+		</c:choose>
+
+		<br><h1 style="text-align:center; ">지역 조회</h1><br><hr>
 		
 		<div class="container-fluid">
 			<div class="row">
 			
 				<!-- left box -->
 				<div class="col-md-2">
+					<div class="form-group">
+					<select id="local" class="form-control">
+						<option >지역을 선택해주세요</option>
+						<option value="1">서울</option>
+						<option value="2">인천</option>
+						<option value="3">대전</option>
+						<option value="4">대구</option>
+						<option value="5">광주</option>
+						<option value="6">부산</option>
+						<option value="7">울산</option>
+						<option value="8">세종특별자치시</option>
+						<option value="31">경기도</option>
+						<option value="32">강원도</option>
+						<option value="33">충청북도</option>
+						<option value="34">충청남도</option>
+						<option value="35">경상북도</option>
+						<option value="36">경상남도</option>
+						<option value="37">전라북도</option>
+						<option value="38">전라남도</option>
+						<option value="39">제주도</option>
+					</select>
+					</div>
 					<ul><ins id="trip_info"></ins></ul>
 				</div>
 				
 				<!-- map -->
 				<div class="col-md-8">
 					<!-- search box -->
-					<div class="pac-card" id="pac-card">
+					<!-- <div class="pac-card" id="pac-card">
 						<div id="pac-container">
 					        <input id="pac-input" type="text" placeholder="Enter a location">
 						</div>
-					</div>
+					</div> -->
 					<!-- google map -->
 					<div id="map"></div>
 				</div>
@@ -72,18 +82,22 @@
 				</div>
 				<form action="ScheduleController" method="post" id="route">
 					<input type="hidden" name="command" value="route">
-					<input type="button" value="경로지정" class="btn btn-default btn-lg" onclick="sendData()">
 				</form>
 				
 			</div>
+			<div class="row">
+				<input type="button" value="경로지정" class="btn btn-default btn-lg" style="float:right; margin-right:10%;" onclick="sendData()">
+			</div>
 		</div>
-		
-		<div id="infowindow-content">
+	
+	<!-- geoCode -->	
+	<!-- <div id="infowindow-content">
       <img src="" width="16" height="16" id="place-icon">
       <span id="place-name"  class="title"></span><br>
       <span id="place-address"></span>
-    </div>
-	</fieldset><br>
+    </div> -->
+	
+	
 
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDogTL8Fk8vbPq2JCZrZKedH35rNtSGKJE&libraries=places&callback=initMap"></script>
 <script src="http://code.jquery.com/jquery-1.11.3.js"></script>
@@ -91,15 +105,21 @@
 <script>
 
 	function sendData(){
-		var placeList = [];
-		var list = $("#trip_selected").find("li");
+		var course = "";
+		var latitude = "";
+		var longitude = "";
 		var location = $("#local option:selected").text();
+		
+		var list = $("#trip_selected").find("li");
 		for(var i = 0; i < list.length; i++){
-			placeList.push(list.eq(i).find("#title").html());
+			course += list.eq(i).find("#title").html() +"/"
+			latitude += list.eq(i).attr("data_lat") +"/"
+			longitude += list.eq(i).attr("data_lng") +"/"
 		};
-		var listToJson = JSON.stringify(placeList);
 		$("#route").append("<input type='hidden' name='location' value="+location+">");
-		$("#route").append("<input type='hidden' name='list' value="+listToJson+">");
+		$("#route").append("<input type='hidden' name='course' value="+course+">");
+		$("#route").append("<input type='hidden' name='lat' value="+latitude+">");
+		$("#route").append("<input type='hidden' name='lng' value="+longitude+">");
 		$("#route").submit();
 	}
 </script>

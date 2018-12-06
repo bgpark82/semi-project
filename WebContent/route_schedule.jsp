@@ -17,8 +17,8 @@
 <!-- date picker css -->
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker.min.css" />
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker3.min.css" />
-<!-- date picker bootstrap -->
-<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.min.js"></script>
+
+
 <style>
 .table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
 	border-top:0;
@@ -43,6 +43,10 @@
 		<div align="center" >
 			<div class="form-group">
 				<form method="post" action="ScheduleController">
+					<input type="hidden" name="command" value="schedule">
+					<input type="hidden" name="lat" value="${dto.s_latitude }">
+					<input type="hidden" name="lng" value="${dto.s_longitude }">
+					<input type="hidden" name="course" value="${dto.s_course }">
 					<table class="table table-borderless">
 						<col width="50">
 						<col width="150">
@@ -58,7 +62,7 @@
 						<tr>
 							<th>시 간</th>
 							<td>
-								<select id="time" class="form-control">
+								<select id="time" name="time" class="form-control">
 									<option>------시작시간------</option>
 									<option value="6">오전 6:00</option>
 									<option value="7">오전 7:00</option>
@@ -72,12 +76,14 @@
 						</tr>
 						<tr>
 							<th>지 역</th>
-							<td>${location }</td>
+							<td>
+								<input type="text" name="location" value="${dto.s_location }" class="form-control" readonly>
+							</td>
 						</tr>
 						<tr>
 							<th>인 원</th>
 							<td>
-								<select id="people" class="form-control">
+								<select id="people" name="people" class="form-control">
 									<option>------인원선택------</option>
 									<option value="1">1명</option>
 									<option value="2">2명</option>
@@ -88,39 +94,56 @@
 						<tr>
 							<th>코 스</th>
 							<td>
-								<c:forEach var="value" items="${list }" >
+								<%-- <c:forEach var="value" items="${list }" >
 									<c:out value="${value }"></c:out><span>&nbsp;&nbsp; -> &nbsp;&nbsp;</span>
-								</c:forEach>
+								</c:forEach> --%>
+								<!-- <input type="text" name="course" value="" readonly> -->
+								${dto.s_course }
 							</td>
 						</tr>
 						<tr>
 							<th>금 액</th>
-							<td><span id="money">100,000</span></td>
+							<td>
+								<input type="text" class="form-control" id="price" name="price" readonly >
+							</td>
 						</tr>
 					</table>
+					<br><hr>
+		<div class="row" align="center">
+			<h1><span>예약 하시겠습니까?</span></h1>
+			<input type="submit" value="확인" class="btn btn-default btn-big" />
+			<input type="button" value="취소" class="btn btn-default btn-big" onclick="history.back()"/>
+		</div>
 				</form>
 				</div>
 			</div>
 		</div>
 
-		<br><hr>
-		<div class="row" align="center">
-			<h1><span>예약 하시겠습니까?</span></h1>
-			<input type="button" value="확인" class="btn btn-default btn-big" onclick="location.href='DriverController?command=driverlist'"/>
-			<input type="button" value="취소" class="btn btn-default btn-big" onclick="history.back()"/>
-		</div>
+		
 	</div>
 	
 	
-	<script src="makeplanAjax.js"></script>
-	<script src="midinsert.js"></script>
+	
+<!-- date picker bootstrap -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.min.js"></script>
 <script>
 $(document).ready(function() {
-    $('#datePicker')
-        .datepicker({
-            format: 'yyyy/mm/dd'
-        })
+    $('#datePicker').datepicker({
+		format: 'yyyy-mm-dd'
+	})
 });
+
+$("#people").on("change",function(){
+	var num = $("#people option:selected").val()
+	if(num == 1){
+		$("#price").val("100,000");
+	} else if(num == 2){
+		$("#price").val("180,000");
+	} else {
+		$("#price").val("240,000");
+	}
+})
+
 </script>
 
 

@@ -13,8 +13,9 @@
 footer{
     width: 100%;
     background-color: #FAFAFA;
-    padding: 5% 5% 8% 5%;
+    margin: 5% 5% 8% 5%;
     color: black;
+    position:relative;
 }
 
 /* .fa{

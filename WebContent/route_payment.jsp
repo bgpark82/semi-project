@@ -27,7 +27,7 @@
          <div class="col-md-3"></div>         
          <div class="col-md-6">
             <h1 style="text-align:center; margin-top:100px;">결제 정보</h1><hr>
-            <p><span>박병길</span>님의 결제정보창입니다.</p>
+            <p><span>${userDto.u_name }</span>님의 결제정보창입니다.</p>
             <table class="table table-hover">
                <thead>
                   <tr>
@@ -38,27 +38,27 @@
                <tbody>
                   <tr>
                      <td>이름</td>
-                     <td><span>박병길</span></td>
+                     <td><span>${userDto.u_name }</span></td>
                   </tr>
                   <tr>
                      <td>금액</td>
-                     <td><span>100000</span></td>
+                     <td><span>${scheduleDto.s_price }</span></td>
                   </tr>
                   <tr>
                      <td>결제일</td>
-                     <td><span>2018-12-05</span></td>
+                     <td><span>${scheduleDto.s_regdate }</span></td>
                   </tr>
                   <tr>
                      <td>인원수</td>
-                     <td><span>3</span></td>
+                     <td><span>${scheduleDto.s_people }</span></td>
                   </tr>
                   <tr>
                      <td>휴대전화</td>
-                     <td><span>010-4580-8682</span></td>
+                     <td><span>${userDto.u_phone }</span></td>
                   </tr>
                   <tr>
                      <td>예약날짜</td>
-                     <td><span>popo8682-buyer@gmail.com</span></td>
+                     <td><span>${scheduleDto.s_date }</span></td>
                   </tr>
                </tbody>
             </table>
@@ -84,18 +84,9 @@
         	 </div>
         	 <button class="btn btn-default" onclick="location.href='route_payment_confirmed.jsp'" style="float:right">결제 완료</button>
       	</div>
-                  
-   
-
-
-
-
-
-
-
-
-
+	</div>
 </div>
+
 
 <script>
     paypal.Button.render({
