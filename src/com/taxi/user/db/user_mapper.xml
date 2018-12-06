@@ -28,5 +28,20 @@
 	<insert id="insert" parameterType="UserDto">
 	INSERT INTO USER_TABLE VALUES(U_NO_SEQ.NEXTVAL, #{u_name}, #{u_id}, #{u_pw}, #{u_birth}, #{u_gender}, #{u_phone}, #{u_email}, 'Y','USER')
 	</insert>
+	
+	<select id="userinfo" parameterType="int" resultType="UserDto">
+	SELECT * FROM USER_TABLE WHERE U_NO = #{u_no}
+	</select>
+	
+	<update id="update" parameterType="UserDto">
+	UPDATE USER_TABLE SET U_PW = #{u_pw}, U_EMAIL = #{u_email}, U_PHONE = #{u_phone} WHERE U_NO = #{u_no}
+	</update>
+	
+	<update id="userout" parameterType="int">
+	UPDATE USER_TABLE SET U_ENABLED = 'N' WHERE U_NO = #{u_no}
+	</update>
+	
+	
+	
 
 </mapper>

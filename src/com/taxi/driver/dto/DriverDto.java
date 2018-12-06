@@ -3,6 +3,8 @@ package com.taxi.driver.dto;
 public class DriverDto {
 
 	private int d_no;
+	private String d_profile; 
+	private String d_region;
 	private String d_name;
 	private String d_id;
 	private String d_pw;
@@ -14,6 +16,8 @@ public class DriverDto {
 	private String d_license;
 	private String d_carnum;
 	private String d_role;
+	private String d_title;
+	private String d_content;
 	
 	
 	
@@ -21,10 +25,13 @@ public class DriverDto {
 		
 	}
 
-	public DriverDto(int d_no, String d_name, String d_id, String d_pw, String d_birth, String d_gender, String d_phone,
-			String d_email, String d_enabled, String d_license, String d_carnum, String d_role) {
+	public DriverDto(int d_no, String d_profile, String d_region, String d_name, String d_id, String d_pw,
+			String d_birth, String d_gender, String d_phone, String d_email, String d_enabled, String d_license,
+			String d_carnum, String d_role, String d_title, String d_content) {
 		super();
 		this.d_no = d_no;
+		this.d_profile = d_profile;
+		this.d_region = d_region;
 		this.d_name = d_name;
 		this.d_id = d_id;
 		this.d_pw = d_pw;
@@ -36,6 +43,8 @@ public class DriverDto {
 		this.d_license = d_license;
 		this.d_carnum = d_carnum;
 		this.d_role = d_role;
+		this.d_title = d_title;
+		this.d_content = d_content;
 	}
 
 	public int getD_no() {
@@ -44,6 +53,22 @@ public class DriverDto {
 
 	public void setD_no(int d_no) {
 		this.d_no = d_no;
+	}
+
+	public String getD_profile() {
+		return d_profile;
+	}
+
+	public void setD_profile(String d_profile) {
+		this.d_profile = d_profile;
+	}
+
+	public String getD_region() {
+		return d_region;
+	}
+
+	public void setD_region(String d_region) {
+		this.d_region = d_region;
 	}
 
 	public String getD_name() {
@@ -133,6 +158,24 @@ public class DriverDto {
 	public void setD_role(String d_role) {
 		this.d_role = d_role;
 	}
+
+	public String getD_title() {
+		return d_title;
+	}
+
+	public void setD_title(String d_title) {
+		this.d_title = d_title;
+	}
+
+	public String getD_content() {
+		return d_content;
+	}
+
+	public void setD_content(String d_content) {
+		this.d_content = d_content;
+	}
+
+	
 	
 	
 	

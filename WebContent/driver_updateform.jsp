@@ -4,6 +4,7 @@
 <% request.setCharacterEncoding("UTF-8"); %>			 
 <% response.setContentType("text/html; charset=UTF-8"); %>
 
+<%@ page import ="com.taxi.driver.dao.DriverDao" %>
 <%@ page import ="com.taxi.driver.dto.DriverDto" %>
 <!DOCTYPE html>
 <html>
@@ -20,6 +21,9 @@
 </head>
 <%
 	DriverDto dto = (DriverDto)request.getAttribute("dto");
+	String d_id = dto.getD_id();
+	/* String driverProfile = new DriverDao().getProfile(d_id); */
+
 %>
 
 
@@ -31,6 +35,24 @@
 		<input type="hidden" name="command"	value="driverupdate" >
 		<input type="hidden" name="d_no" value="${dto.d_no }">
 		<table border="1">
+			
+			<tr>
+				<th>프로필 사진</th>
+				<td>
+				<img style="width: 50px; height: 50px;" src="driverProfile"/>
+				<input type="button" value="사진 변경하기" onclick="location.href='driver_profileupdate.jsp?d_id=${dto.d_id}'"/>
+				</td>
+			</tr>
+			<tr>
+				<td><h5>사진 업로드</h5></td>
+				<td colspan="2">
+					<span>
+					이미지를 업로드하세요.<input type="file" name="driverProfile" >
+					</span>
+				</td>
+			</tr>
+			
+			
 			<tr>
 				<th>번호</th>
 				<td>${dto.d_no }</td>

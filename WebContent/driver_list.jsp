@@ -83,8 +83,41 @@
 			<input type="button" value="확인" class="btn btn-default btn-big" onclick="location.href='route_payment.jsp'"/>
 			<input type="button" value="취소" class="btn btn-default btn-big" onclick="history.back()"/>
 		</div>
-		
 	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 <%@ include file="form/footer.jsp" %>
 
 </body>

@@ -147,6 +147,62 @@ public class DriverDao extends SqlMapConfig{
 	}
 	
 	
+	//프로필 사진
+		public String getProfile(String d_id) {
+			SqlSession session = null;
+			
+			try {
+				session = getSqlSessionFactory().openSession();
+				String rs = session.selectOne(namespace+"d_profile", d_id);
+				
+				if(rs.equals("")) {
+					return "http://localhost:8787/SemiProject/images/icon.jpg";
+				}
+				return "http://localhost:8787/SemiProject/upload/"+rs;
+				
+			} catch (Exception e) {
+				session.close();
+			}
+			
+			return "http://localhost:8787/SemiProject/images/icon.jpg";
+		}
+		
+		public DriverDto getUser(String d_id) {
+			SqlSession session = null;
+			
+			DriverDto dto = new DriverDto();
+			
+			try {
+				session = getSqlSessionFactory().openSession();
+				dto = session.selectOne(namespace+"driverselect", d_id);
+				
+			} catch (Exception e) {
+				session.close();
+			} 
+			
+			return dto;
+		}
+		
+		public int profile(String d_id, String filename) {
+			SqlSession session = null;
+			DriverDto dto = new DriverDto();
+			int res = 0;
+			
+			
+			try {
+				session = getSqlSessionFactory().openSession(true);
+				dto.setD_id(d_id);
+				dto.setD_profile(filename);
+				res = session.update(namespace+"updateProfile", dto);
+
+			} catch (Exception e) {
+				session.close();
+			}
+			return res;
+		}
+		
+
+	
 	
 	
 	

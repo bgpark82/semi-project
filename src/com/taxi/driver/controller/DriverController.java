@@ -1,5 +1,6 @@
 package com.taxi.driver.controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -11,8 +12,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.servlet.jsp.PageContext;
 
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import com.taxi.driver.dao.DriverDao;
 import com.taxi.driver.dto.DriverDto;
 
@@ -32,6 +34,30 @@ public class DriverController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
+		
+		MultipartRequest multi = null;
+		int fileMaxSize = 10 * 1024 * 1024;
+		String savePath = request.getRealPath("/upload").replaceAll("\\\\", "/");
+		System.out.println("savePath : " +savePath);
+		DefaultFileRenamePolicy dr = new DefaultFileRenamePolicy();
+		try {
+			multi  = new MultipartRequest(request, savePath, fileMaxSize, "UTF-8", dr); //DefaultFileRenamePolicy: 파일이름이 겹치는 등의 오류를 처리해줌
+			System.out.println("multi : " +multi);
+		} catch(Exception e) {
+			System.out.println("오류");
+			response.sendRedirect("driver_registform.jsp");
+			return;
+		}
+		String d_ID = multi.getParameter("d_id");
+		
+		System.out.println("드라이버id"+d_ID);
+		
+		String fileName = "";
+		File file = multi.getFile("driverProfile"); //getFile : 파일의 경로
+		
+		
+		
+		
 		
 		HttpSession session = request.getSession();
 		
@@ -57,7 +83,7 @@ public class DriverController extends HttpServlet {
 			response.sendRedirect("driver_idchk.jsp?idnotused=" + idnotused);
 
 			
-		// 회원가입 값 전달	
+		// 회원가입
 		} else if(command.equals("registdriver")) {
 			String d_name = request.getParameter("d_name");
 			String d_id = request.getParameter("d_id");
@@ -70,7 +96,67 @@ public class DriverController extends HttpServlet {
 			String d_carnum = request.getParameter("d_carnum");
 			String d_role = request.getParameter("d_role");
 			
-			DriverDto dto = new DriverDto();
+			
+			
+			
+			
+			
+			// file upload
+			
+			
+			
+			
+			// db
+//			String d_ID = multi.getParameter("d_id");
+//			
+//			System.out.println("드라이버id"+d_ID);
+//			
+//			String fileName = "";
+//			File file = multi.getFile("driverProfile"); //getFile : 파일의 경로
+
+			if(file != null) {
+				String ext = file.getName().substring(file.getName().lastIndexOf(".") + 1); //lastIndexOf : 오른쪽에서 부터 문자를 찾아 인덱스를 리턴해줌
+				System.out.println(ext);
+				
+				if(ext.equals("jpg") || ext.equals("png") || ext.equals("gif")) {
+					String prev = new DriverDao().getUser(d_ID).getD_profile();
+					
+					System.out.println("prev : "+ prev);
+					
+					File prevFile = new File(savePath + "/" + prev);
+					if(prevFile.exists()) {
+						prevFile.delete();
+					}
+					fileName = file.getName();
+					System.out.println("ddd : "+fileName);
+				}else {
+					if(file.exists()) {
+						file.delete();
+					}
+					System.out.println("d_id : "+d_ID+"filename : " + fileName);
+					//session.setAttribute("messageType", "오류 메시지");
+					//session.setAttribute("messageContent", "이미지 파일만 업로드 가능합니다.");
+					System.out.println("오류3");
+					response.sendRedirect("driver_profileupdate.jsp");
+					return;
+				}
+			}
+			
+			new DriverDao().profile(d_ID, fileName);
+			DriverDto dto = new DriverDao().getUser(d_ID);
+			request.setAttribute("dto", dto);
+			RequestDispatcher dispatch = request.getRequestDispatcher("driver_info.jsp");
+			dispatch.forward(request, response);
+			
+			
+	
+			
+			
+			
+			
+			
+			
+			DriverDto driverDto = new DriverDto();
 			
 			dto.setD_name(d_name);
 			dto.setD_id(d_id);
@@ -83,7 +169,7 @@ public class DriverController extends HttpServlet {
 			dto.setD_carnum(d_carnum);
 			dto.setD_role(d_role);
 			
-			int res = dao.insertDriver(dto);
+			int res = dao.insertDriver(driverDto);
 			
 			if(res > 0) {
 				session.setAttribute("dto", dto);

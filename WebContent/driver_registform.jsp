@@ -16,7 +16,7 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script type="text/javascript">
 
-function idChk() {
+/* function idChk() {
 	var doc = document.getElementsByName("d_id")[0];
 	if(doc.value.trim()==""||doc.value==null){
 		alert("아이디를 입력하세요.");
@@ -33,7 +33,7 @@ function idChkConfirm() {
 		alert("아이디 중복체크를 해주세요");
 		document.getElementsByName("d_id")[0].focus();
 	}
-}
+} */
 
 </script>
 </head>
@@ -47,8 +47,18 @@ function idChkConfirm() {
    <div class=container align="center">
    <div class="jumbotron" style="width: 800px; " >
       
-      <form class="form-horizontal" action="DriverController" method="post">
+      <form class="form-horizontal" action="DriverController" method="post" enctype="multipart/form-data">
          <input name="command" value="registdriver"  type="hidden"/>
+         
+		<div class="form-group">
+            <div class="col-sm-1"></div>
+            <label class="col-sm-2 control-label">프로필</label>
+            <div class="col-sm-5">
+                <span>
+					이미지를 업로드하세요.<input type="file" name="driverProfile" >
+				</span>
+             </div>
+          </div>
                    
         <div class="form-group">
            <div class="col-sm-1"></div>

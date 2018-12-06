@@ -44,6 +44,7 @@ public class UserDao extends SqlMapConfig {
 		return res;
 	}
 	
+	// 아이디 체크
 	public String idChk(String u_id) {
 		String res = null;
 		SqlSession session = null;
@@ -57,6 +58,52 @@ public class UserDao extends SqlMapConfig {
 		
 		return res;
 	}
+	
+	// 마이페이지
+	public UserDto userInfo(int u_no) {
+		UserDto res = new UserDto();
+		SqlSession session = null;
+		
+		try {
+			session = getSqlSessionFactory().openSession();
+			res = session.selectOne(namespace+"userinfo", u_no);
+		} catch(Exception e) {
+			session.close();
+		}
+		
+		return res;
+	}
+	
+	// 회원정보 수정
+	public int updateUser(UserDto dto) {
+		int res = 0;
+		SqlSession session = null;
+		
+		try {
+			session = getSqlSessionFactory().openSession(true);
+			res = session.update(namespace+"update", dto);
+		}catch(Exception e) {
+			session.close();
+		}
+		
+		return res;
+	}
+	
+	// 회원 탈퇴
+	public int userOut(int u_no) {
+		int res = 0;
+		SqlSession session = null;
+		
+		try {
+			session = getSqlSessionFactory().openSession(true);
+			res = session.update(namespace+"userout", u_no);
+		} catch(Exception e) {
+			session.close();
+		}
+		
+		return res;
+	}
+
 	
 	
 }

@@ -60,9 +60,11 @@
                 	<ul class="dropdown-menu">
 	                	<c:choose>
 							<c:when test="${userDto.u_name != null }">
+								<li><a href="UserController?command=userinfo&u_no=${userDto.u_no}">마이페이지</a></li>
 								<li><a href="DriverController?command=logout">로그아웃</a></li>
 							</c:when>
 							<c:when test="${driverDto.d_name != null }">
+								<li><a href="DriverController?command=driverinfo&d_no=${driverDto.d_no}">마이페이지</a></li>
 								<li><a href="DriverController?command=logout">로그아웃</a></li>
 							</c:when>
 							<c:otherwise>

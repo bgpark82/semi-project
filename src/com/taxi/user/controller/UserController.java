@@ -80,6 +80,8 @@ public class UserController extends HttpServlet {
 			} else {
 				jsResponse("회원가입 실패", "user_registform.jsp", response);
 			}
+			
+		// 아이디 중복체크	
 		} else if(command.equals("idchk")) {
 			String u_id = request.getParameter("id");
 			String res = dao.idChk(u_id);
@@ -89,8 +91,50 @@ public class UserController extends HttpServlet {
 				idnotused = false;
 			}
 			response.sendRedirect("user_idchk.jsp?idnotused="+idnotused);
-		}	
+			
+		// 마이페이지
+		} else if(command.equals("userinfo")) {
+			int u_no = Integer.parseInt(request.getParameter("u_no"));
+			UserDto dto = dao.userInfo(u_no);
+			request.setAttribute("dto", dto);
+			dispatch("user_info.jsp", request, response);
+		
+		// 회원정보 수정
+		} else if(command.equals("userupdate")) {
+			int u_no = Integer.parseInt(request.getParameter("u_no"));
+			String u_pw = request.getParameter("pw1");
+			String u_email = request.getParameter("u_email");
+			String u_phone = request.getParameter("u_phone");
+			
+			UserDto dto = new UserDto();
+			dto.setU_no(u_no);
+			dto.setU_pw(u_pw);
+			dto.setU_email(u_email);
+			dto.setU_phone(u_phone);
+			int res = dao.updateUser(dto);
+			if(res > 0) {
+				response.sendRedirect("user_main.jsp");
+			} else {
+				jsResponse("수정 실패", "UserController?command=userinfo", response);
+			}
+		
+		// 회원탈퇴
+		} else if(command.equals("userout")) {
+			int u_no = Integer.parseInt(request.getParameter("u_no"));
+			int res = dao.userOut(u_no);
+			
+			if(res > 0) {
+				jsResponse("탈퇴 완료", "index.jsp", response);
+			} else {
+				jsResponse("탈퇴 실패", "user_main.jsp", response);
+			}
+			
+		}
+		
 	}
+
+	
+
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
