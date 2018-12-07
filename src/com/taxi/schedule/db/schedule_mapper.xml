@@ -5,18 +5,20 @@
 <mapper namespace="com.taxi.schedule">
 
 	<resultMap type="com.taxi.schedule.dto.ScheduleDto" id="ScheduleTableMap">
+		<result property="s_seq" column="S_SEQ"/>
 		<result property="u_no" column="U_NO"/>
+		<result property="s_no" column="S_NO"/>
+		<result property="d_no" column="D_NO"/>
 		<result property="s_date" column="S_DATE"/>
 		<result property="s_time" column="S_TIME"/>
-		<result property="s_local" column="S_LOCAL"/>
+		<result property="s_location" column="S_LOCATION"/>
 		<result property="s_course" column="S_COURSE"/>
 		<result property="s_people" column="S_PEOPLE"/>
 		<result property="s_regdate" column="S_REGDATE"/>
+		<result property="s_latitude" column="S_LATITUDE"/>
+		<result property="s_longitude" column="S_LONGITUDE"/>
+		<result property="s_confirmed_check" column="S_CONFIRMED_CHECK"/>
 	</resultMap>
-	
-	
-	
-	
 	
 	<select id="selectlogin" parameterType="UserDto" resultType="UserDto">
 	SELECT * FROM USER_TABLE WHERE U_ID = #{u_id} AND U_PW = #{u_pw} AND U_ENABLED = 'Y'
@@ -26,8 +28,8 @@
 	SELECT U_ID FROM USER_TABLE WHERE U_ID = #{u_id}
 	</select>
 	
-	<insert id="insert" parameterType="UserDto">
-	INSERT INTO USER_TABLE VALUES(U_NO_SEQ.NEXTVAL, #{u_name}, #{u_id}, #{u_pw}, #{u_birth}, #{u_gender}, #{u_phone}, #{u_email}, 'Y','USER')
+	<insert id="insertSchedule" parameterType="ScheduleDto">
+	INSERT INTO SCHEDULE_TABLE VALUES(S_SEQ.NEXTVAL, #{u_no}, #{d_no}, 1, #{s_date}, #{s_time}, #{s_location}, #{s_course}, #{s_people}, #{s_price}, #{s_regdate}, #{s_latitude}, #{s_longitude},'N')
 	</insert>
 
 </mapper>

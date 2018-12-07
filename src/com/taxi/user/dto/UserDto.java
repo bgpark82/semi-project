@@ -111,6 +111,13 @@ public class UserDto {
 	public void setU_enabled(String u_enabled) {
 		this.u_enabled = u_enabled;
 	}
+
+	@Override
+	public String toString() {
+		return "UserDto [u_no=" + u_no + ", u_name=" + u_name + ", u_id=" + u_id + ", u_pw=" + u_pw + ", u_birth="
+				+ u_birth + ", u_gender=" + u_gender + ", u_phone=" + u_phone + ", u_email=" + u_email + ", u_role="
+				+ u_role + ", u_enabled=" + u_enabled + "]";
+	}
 	
 	
 }

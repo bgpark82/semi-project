@@ -78,32 +78,25 @@ public class DriverRegistController extends HttpServlet {
 				System.out.println("ext : " + ext);
 				
 				if(ext.equals("jpg") || ext.equals("png") || ext.equals("gif") || ext.equals("jpeg")) {
-					String prev = new DriverDao().getUser(d_id).getD_profile();
-					
-					System.out.println("prev : "+ prev);
-					
-					File prevFile = new File(savePath + "/" + prev);
-					if(prevFile.exists()) {
-						prevFile.delete();
-					}
+//					String prev = new DriverDao().getUser(d_id).getD_profile();
+//					
+//					System.out.println("prev : "+ prev);
+//					
+//					File prevFile = new File(savePath + "/" + prev);
+//					if(prevFile.exists()) {
+//						prevFile.delete();
+//					}
 					fileName = file.getName();
 					System.out.println("fileName : "+fileName);			// 1.png
 				}else {
-					if(file.exists()) {
-						file.delete();
-					}
-					System.out.println("오류3");
+//					if(file.exists()) {
+//						file.delete();
+//					}
+					System.out.println(".jpg .png .gif .jpeg 형식만 지원가능합니다");
 					response.sendRedirect("driver_registform.jsp");
 					return;
 				}
 			}
-			
-			
-			
-			
-			
-			
-			
 			
 //			new DriverDao().profile(d_id, fileName);
 //			DriverDto dto = new DriverDao().getUser(d_id);

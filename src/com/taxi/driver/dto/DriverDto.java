@@ -175,6 +175,15 @@ public class DriverDto {
 		this.d_content = d_content;
 	}
 
+	@Override
+	public String toString() {
+		return "DriverDto [d_no=" + d_no + ", d_profile=" + d_profile + ", d_region=" + d_region + ", d_name=" + d_name
+				+ ", d_id=" + d_id + ", d_pw=" + d_pw + ", d_birth=" + d_birth + ", d_gender=" + d_gender + ", d_phone="
+				+ d_phone + ", d_email=" + d_email + ", d_enabled=" + d_enabled + ", d_license=" + d_license
+				+ ", d_carnum=" + d_carnum + ", d_role=" + d_role + ", d_title=" + d_title + ", d_content=" + d_content
+				+ "]";
+	}
+
 	
 	
 	

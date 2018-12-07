@@ -41,8 +41,6 @@
 						<tr>
 						<th>프로필 사진</th>
 							<td><img style="width: 200px; height: 200px; border-radius:100%;" src="${dto.d_profile }"/></td>
-						
-						
 					</tr>	
 					<tr>
 						<th>아이디</th>
@@ -63,6 +61,10 @@
 					<tr>
 						<th>성별</th>
 						<td>${dto.d_gender }</td>
+					</tr>
+					<tr>
+						<th>지역</th>
+						<td>${dto.d_region }</td>
 					</tr>
 					<tr>
 						<th>전화번호</th>

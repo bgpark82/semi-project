@@ -85,7 +85,7 @@
         	 <div class="col-md-3">
         	 
         	 </div>
-        	 <button class="btn btn-default" onclick="location.href='route_payment_confirmed.jsp'" style="float:right">결제 완료</button>
+        	 <button class="btn btn-default" onclick="location.href='ScheduleController?command=route_payment_confirmed'" style="float:right">결제 완료</button>
       	</div>
 	</div>
 </div>

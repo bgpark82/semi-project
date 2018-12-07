@@ -66,12 +66,11 @@
 
         <div class="row">
             <div class="col-md-4 portfolio-item" align="center">
-                <a href="#project-link">
-                    <img class="img-responsive" src="img/td.png">
-                </a>
+            <div class="panel panel-default">
+            	<div class="panel-body">
+				<img class="img-responsive" style="width:200px; height:200px; border-radius:100%;" src="${driverDto.d_profile }">               
                 <h3>${driverDto.d_name }</h3>
                 <div>
-                <h4><b>평점</b> :</h4>
 					<span class="fa fa-star checked" style="margin-top: 8px;"></span>
 					<span class="fa fa-star checked"></span>
 					<span class="fa fa-star checked"></span>
@@ -79,7 +78,10 @@
                 </div>
                 <h4><b>성별 :</b> ${driverDto.d_gender }</h4>
                 <h4><b>나이 :</b> ${driverDto.d_birth }</h4>
-                <h4><b>지역 :</b> 제주도</h4>
+                <h4><b>지역 :</b> ${driverDto.d_region }</h4>
+            	</div>
+            </div>
+
             </div>
         </div>
         </div>
