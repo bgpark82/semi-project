@@ -1,6 +1,6 @@
 package com.taxi.schedule.dto;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class ScheduleDto {
 
@@ -8,7 +8,7 @@ public class ScheduleDto {
 	private int u_no;
 	private int d_no;
 	private int s_no;
-	private Date s_date;
+	private String s_date;
 	private int s_time;
 	private String s_location;
 	private String s_course;
@@ -23,7 +23,7 @@ public class ScheduleDto {
 		
 	}
 
-	public ScheduleDto(int s_seq, int u_no, int d_no, int s_no, Date s_date, int s_time, String s_location,
+	public ScheduleDto(int s_seq, int u_no, int d_no, int s_no, String s_date, int s_time, String s_location,
 			String s_course, int s_people, String s_price, Date s_regdate, String s_latitude, String s_longitude,
 			String s_confirmed_check) {
 		super();
@@ -75,11 +75,11 @@ public class ScheduleDto {
 		this.s_no = s_no;
 	}
 
-	public Date getS_date() {
+	public String getS_date() {
 		return s_date;
 	}
 
-	public void setS_date(Date s_date) {
+	public void setS_date(String s_date) {
 		this.s_date = s_date;
 	}
 
@@ -162,7 +162,4 @@ public class ScheduleDto {
 				+ ", s_people=" + s_people + ", s_price=" + s_price + ", s_regdate=" + s_regdate + ", s_latitude="
 				+ s_latitude + ", s_longitude=" + s_longitude + ", s_confirmed_check=" + s_confirmed_check + "]";
 	}
-	
-	
-
-	}
+}

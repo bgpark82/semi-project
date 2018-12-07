@@ -52,14 +52,14 @@
 
 
 
-	<div class="container">
+	<div class="container" style="width:500px;">
 		<br>
-		<br><h1 style="text-align:center">마이페이지</h1><br><hr><hr>
+		<br><h1 style="text-align:center">마이페이지</h1><br><hr>
 		
 		
 		
-		<div class="row">
-			<div class="col-md-6">
+	<!-- 	<div class="row">
+			<div class="col-md-6"> -->
 				<div class="panel panel-default">
 					<div class="panel-body">
 				<form action="UserController?commad=" method="post" id="userupdate">
@@ -113,7 +113,7 @@
 				</div>
 				</div>
 			</div>
-			<div class="col-md-6">
+			<!-- <div class="col-md-6">
 				<ul>
 					<li class="list-group-item" style="width:100%" >
   							<div class="container" style="max-height: 150px; width:100%">
@@ -135,20 +135,20 @@
 											<span class="fa fa-star"></span>
 										</div>
 		     							<div style="margin: 45% 0 50% 0">
-											<!-- <label class="checkbox-inline"> -->
-												<input type="button" value="보기"  class="btn btn-default" >
-												<input type="button" value="선택"  class="btn btn-primary" >
-												<input type="button" value="거절"  class="btn btn-danger" >
-											<!-- </label> -->
+											<label class="checkbox-inline">
+											<input type="button" value="보기"  class="btn btn-default" >
+											<input type="button" value="선택"  class="btn btn-primary" >
+											<input type="button" value="거절"  class="btn btn-danger" >
+											</label>
 										</div>
 	     							</div>
      							</div>    
 							</div>
 						</li>
 				</ul>
-			</div>
-		</div>
-	</div>
+			</div> -->
+		<!-- </div>
+	</div> -->
 
 
 

@@ -1,10 +1,10 @@
 package com.taxi.schedule.controller;
 
 import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.io.PrintWriter;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -14,11 +14,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import com.taxi.driver.dao.DriverDao;
 import com.taxi.driver.dto.DriverDto;
 import com.taxi.schedule.dao.ScheduleDao;
 import com.taxi.schedule.dto.ScheduleDto;
-import com.taxi.user.dao.UserDao;
 import com.taxi.user.dto.UserDto;
 
 
@@ -38,7 +39,7 @@ public class ScheduleController extends HttpServlet {
 		
 		String command = (String) request.getParameter("command");
 		DriverDao driverDao = new DriverDao();
-		ScheduleDao dao = new ScheduleDao();
+		ScheduleDao scheduleDao = new ScheduleDao();
 		HttpSession session = request.getSession();
 		
 		if(command.equals("route")) {
@@ -70,20 +71,7 @@ public class ScheduleController extends HttpServlet {
 			int time = Integer.parseInt(request.getParameter("time"));
 			int people = Integer.parseInt(request.getParameter("people"));
 			
-			// 현재 날짜
-			Date regdate = new Date();
-			Date regdateRes = null;
-			SimpleDateFormat regdateformat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
-			try {regdateRes = regdateformat.parse(regdateformat.format(regdate));} 
-			catch (ParseException e1) {e1.printStackTrace();}
-			
-			// 여행 일자
-			SimpleDateFormat dateformat = new SimpleDateFormat("yyyy-mm-dd");
-			Date dateRes =null;
-			try {dateRes = dateformat.parse(date);
-			} catch (ParseException e) {e.printStackTrace();}
-			
-			ScheduleDto dto = new ScheduleDto(0,0,0,0,dateRes,time,location,course,people,price,regdateRes,lat,lng,"");
+			ScheduleDto dto = new ScheduleDto(0,0,0,0,date,time,location,course,people,price,null,lat,lng,"");
 			System.out.println(dto);
 			
 			session.setAttribute("scheduleDto", dto);
@@ -107,13 +95,28 @@ public class ScheduleController extends HttpServlet {
 			scheduleDto.setU_no(u_no);
 			scheduleDto.setD_no(d_no);
 			
-			int res = dao.insertSchedule(scheduleDto);
+			int res = scheduleDao.insertSchedule(scheduleDto);
 			System.out.println(scheduleDto);
 			if(res > 0) {
 				request.setAttribute("scheduleDto", scheduleDto);
 				dispatch("route_payment_confirmed.jsp", request, response);
 			}
 		}
+		else if(command.equals("scheduleDetail")){
+			int s_seq = Integer.parseInt(request.getParameter("s_seq"));
+			UserDto userDto = (UserDto) session.getAttribute("userDto");
+			int u_no = userDto.getU_no();
+			
+			ScheduleDto scheduleDetail = scheduleDao.UserCalDetail(u_no, s_seq);
+			Map<String,ScheduleDto> map = new HashMap<String,ScheduleDto>();
+			map.put("scheduleDetail", scheduleDetail);
+			Gson gson = new Gson();
+			String json = gson.toJson(map);
+			PrintWriter out = response.getWriter();
+			out.println(json);
+			
+			
+		}	
 	}
 
 

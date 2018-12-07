@@ -1,0 +1,35 @@
+#UserCal{
+		border-collapse: collapse;
+		border: 1px solid #eeeeee;
+	}
+	
+	#UserCal th{
+		width: 80px;
+		border: 1px solid #eeeeee;
+	}
+
+	#UserCal td{
+		width: 80px;
+		height: 150px;
+		border: 1px solid #eeeeee;
+		text-align: left;
+		vertical-align: top;
+		position: relative;
+	}
+
+	a { 
+		text-decoration: none;
+		/* cursor: pointer; */
+	}
+	
+	
+	.clist > p {
+		font-size: 5px;
+		margin: 1px;
+		background-color: #F3F781;
+		cursor: pointer;
+	}
+
+	/* #CalDetail{
+		cursor: pointer;
+	} */

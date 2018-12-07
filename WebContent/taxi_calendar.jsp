@@ -2,11 +2,14 @@
     pageEncoding="UTF-8"%>
 <% request.setCharacterEncoding("UTF-8"); %>				
 <% response.setContentType("text/html; charset=UTF-8"); %> 
-<%@page import="com.taxi.calendar.dao.CalendarDao"%>
+<%@page import="com.taxi.schedule.dao.ScheduleDao"%>
+<%@page import="com.taxi.schedule.dao.Util" %>
+<%@page import="com.taxi.schedule.dto.ScheduleDto" %>
+
 <%@page import="java.util.Calendar"%>
-<%@page import="com.taxi.calendar.dao.Util" %>
-<%@page import="com.taxi.calendar.dto.CalendarDto" %>
 <%@page import="java.util.List" %>
+<%@page import="com.taxi.user.dto.UserDto" %>
+<%@page import="com.taxi.schedule.dto.ScheduleDto" %>
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -22,126 +25,88 @@
 <!-- jQuery -->
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script src="https://www.paypalobjects.com/api/checkout.js"></script>
-
-<style type="text/css">
-
-	#UserCal{
-		border-collapse: collapse;
-		border: 1px solid #eeeeee;
-	}
-	
-	#UserCal th{
-		width: 80px;
-		border: 1px solid #eeeeee;
-	}
-
-	#UserCal td{
-		width: 80px;
-		height: 150px;
-		border: 1px solid #eeeeee;
-		text-align: left;
-		vertical-align: top;
-		position: relative;
-	}
-
-	a { 
-		text-decoration: none;
-		/* cursor: pointer; */
-	}
-	
-	
-	.clist > p {
-		font-size: 5px;
-		margin: 1px;
-		background-color: #F3F781;
-		cursor: pointer;
-	}
-
-	/* #CalDetail{
-		cursor: pointer;
-	} */
-	
-</style>
+<link rel="stylesheet" type="text/css" href="css/calendar.css">
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script type="text/javascript">
 
 
 //날짜 클릭시 상세일정 보기 
-function UserCalDetail() {
+/* function UserCalDetail() {
 	var con = document.getElementById("UserCalDetail");
 	
 	if (con.style.display =='none') {
 		con.style.display = 'block';
-		
-		
 	}else {
 		con.style.display = 'none';
 	}
-}
+} */
 
-//날짜 클릭시 캘린더 밑에 일정 상세보기 
-	$(function() {
-		$("#CalDetail").click(
-				
-				function() {
-					$.ajax({
-						url : "UserCalController?command=ajaxboard", //server와 통신 
-						dataType : "json", //받는 데이터 속성
-						success : function(data) { //data는 받아온 데이터값들?
-								
-								
-							$("#rs_table thead").append(
-												 "<tr>"+
-												 "<th>"+"번호"+"</th>"+
-												 "<th>"+"아이디"+"</th>"+
-												 "<th>"+"제목"+"</th>"+
-												 "<th>"+"내용"+"</th>"+
-												 "<th>"+"일정"+"</th>"+
-												 "<th>"+"작성 날짜"+"</th>"+
-												 "</tr>"
-							)
-							//for()문 돌면서 값을 가져온다.
-							$("#rs_table tbody").append(
-									
-									
-												"<tr>"+
-												"<td>"+ data.cal_no +"</td>"+
-												"<td>"+ data.cal_id +"</td>"+
-												"<td>"+ data.cal_title +"</td>"+
-												"<td>"+ data.cal_content +"</td>"+
-												"<td>"+ data.mdate +"</td>"+
-												"<td>"+ data.regdate+"</td>"+
-												"</tr>"
-							);
-						},
-						error : function() {
-							alert("상세 일정 보기 실패 fail...");
-						}
-					});
-				});
-	});
+	//날짜 클릭시 캘린더 밑에 일정 상세보기 
+	function scheduleDetail(chk){
+		alert($(chk).attr('id'));
+		$.ajax({
+			type : "POST",
+			url : "ScheduleController", //server와 통신 
+			data : {
+				command : "scheduleDetail",
+				s_seq : $(chk).attr("id")
+			},
+			dataType : "json", //받는 데이터 속성
+			success : function(data) { //data는 받아온 데이터값들?
+				var detail = data.scheduleDetail;
+				$("#test").append(detail.s_date);
+					
+			
+					
+				$("#rs_table thead").append(
+									 "<tr>"+
+									 "<th>"+"번호"+"</th>"+
+									 "<th>"+"아이디"+"</th>"+
+									 "<th>"+"제목"+"</th>"+
+									 "<th>"+"내용"+"</th>"+
+									 "<th>"+"일정"+"</th>"+
+									 "<th>"+"작성 날짜"+"</th>"+
+									 "</tr>"
+				)
+				//for()문 돌면서 값을 가져온다.
+				$("#rs_table tbody").append(
+									"<tr>"+
+									"<td>"+ data.cal_no +"</td>"+
+									"<td>"+ data.cal_id +"</td>"+
+									"<td>"+ data.cal_title +"</td>"+
+									"<td>"+ data.cal_content +"</td>"+
+									"<td>"+ data.mdate +"</td>"+
+									"<td>"+ data.regdate+"</td>"+
+									"</tr>"
+				);
+			},
+			error : function() {
+				alert("상세 일정 보기 실패 fail...");
+			}
+		});
+	}
+	
+	
+	
+	
 </script>
 
 </head>
 <body>
 <%@ include file="form/header.jsp" %>
 <%
-
+	
 	Calendar cal = Calendar.getInstance();
 
+	// 1. 초기 해당 년, 월 
 	int year = cal.get(Calendar.YEAR);
 	int month = cal.get(Calendar.MONTH);
 	
+	// 2. 브라우저에서 받은 년, 월
 	String paramYear = request.getParameter("year");
-	
 	String paramMonth = request.getParameter("month");
-	if(paramYear != null){
-		year = Integer.parseInt(paramYear);
-	}
-	
-	if(paramMonth != null){
-		month = Integer.parseInt(paramMonth);
-	}
+	if(paramYear != null) year = Integer.parseInt(paramYear);
+	if(paramMonth != null) month = Integer.parseInt(paramMonth);
 
 	if(month > 12){
 		year++;
@@ -153,8 +118,8 @@ function UserCalDetail() {
 		month = 12;
 	}
 
-	///현재 년도, 월, 해당 월의 1일
-	cal.set(year, month-1,1);
+	// 년도, 월, 해당 월의 1일
+	cal.set(year,month-1,1);
 	
 	//1일의 요일 
 	int dayOfweek = cal.get(Calendar.DAY_OF_WEEK);
@@ -164,14 +129,16 @@ function UserCalDetail() {
 	int count = 0;
 	
 	//달력에 일정 표현
-	CalendarDao dao = new CalendarDao();
-	String yyyyMM  = year + Util.isTwo(String.valueOf(month));
-	List<CalendarDto> clist = dao.UserCalView("단비짱", yyyyMM);
-	
+	ScheduleDao dao = new ScheduleDao();
+	UserDto userDto = (UserDto)session.getAttribute("userDto");
+	int u_no = userDto.getU_no();
+	String yyyy_MM  = year + "-" +Util.isTwo(String.valueOf(month));
+	System.out.println("yyyyMM : " + yyyy_MM);
+	List<ScheduleDto> clist = dao.UserCalView(u_no, yyyy_MM);
 
 %>
 
-<br><br><h1 style="text-align:center">내 일정 보기</h1><br><hr>
+<br><br><h1 style="text-align:center" id="test">내 일정 보기</h1><br><hr>
 <div class="container" style="margin:10;">
 
 	
@@ -218,6 +185,7 @@ function UserCalDetail() {
 		}
 %>			
 	</table>
+	
 	<div id="UserCalDetail" style="display: none">
 	<h2>상세 일정 보기</h2>
 		<table id="rs_table" border="1"> 

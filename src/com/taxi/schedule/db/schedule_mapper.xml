@@ -24,12 +24,25 @@
 	SELECT * FROM USER_TABLE WHERE U_ID = #{u_id} AND U_PW = #{u_pw} AND U_ENABLED = 'Y'
 	</select>
 	
-	<select id="selectChk" parameterType="String" resultType="String">
-	SELECT U_ID FROM USER_TABLE WHERE U_ID = #{u_id}
+	<select id="getDate" parameterType="int" resultType="String">
+	SELECT S_DATE FROM SCHEDULE_TABLE WHERE U_NO = #{u_no}
 	</select>
 	
 	<insert id="insertSchedule" parameterType="ScheduleDto">
-	INSERT INTO SCHEDULE_TABLE VALUES(S_SEQ.NEXTVAL, #{u_no}, #{d_no}, 1, #{s_date}, #{s_time}, #{s_location}, #{s_course}, #{s_people}, #{s_price}, #{s_regdate}, #{s_latitude}, #{s_longitude},'N')
+	INSERT INTO SCHEDULE_TABLE VALUES(S_SEQ.NEXTVAL, #{u_no}, #{d_no}, 1, #{s_date}, #{s_time}, #{s_location}, #{s_course}, #{s_people}, #{s_price}, SYSDATE, #{s_latitude}, #{s_longitude},'N')
 	</insert>
 
+	<select id="UserCalView" parameterType="ScheduleDto" resultType="ScheduleDto" >
+	SELECT *
+	FROM (SELECT (ROW_NUMBER() OVER (PARTITION BY SUBSTR(S_DATE,1,10) ORDER BY S_DATE)) 
+		RN, S_SEQ, U_NO, D_NO, S_NO, S_DATE, S_TIME, S_LOCATION, S_COURSE, S_PEOPLE, S_PRICE, S_REGDATE, S_LATITUDE, S_LONGITUDE, S_CONFIRMED_CHECK
+		FROM SCHEDULE_TABLE WHERE U_NO = #{u_no} AND SUBSTR(S_DATE,1,7)= #{s_date} ) 
+	WHERE RN BETWEEN 1 AND 3
+	</select>
+	
+	<select id="UserCalDetail" parameterType="ScheduleDto" resultType="ScheduleDto">
+	SELECT * FROM SCHEDULE_TABLE 
+	WHERE U_NO= #{u_no} AND S_SEQ = #{s_seq}
+	</select>
+	
 </mapper>
