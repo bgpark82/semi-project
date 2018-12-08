@@ -42,6 +42,7 @@ public class ScheduleController extends HttpServlet {
 		ScheduleDao scheduleDao = new ScheduleDao();
 		HttpSession session = request.getSession();
 		
+		// 1. 지도에서 경로설정
 		if(command.equals("route")) {
 			String course =  request.getParameter("course");
 			String lat =  request.getParameter("lat");
@@ -60,8 +61,9 @@ public class ScheduleController extends HttpServlet {
 			request.setAttribute("dto", dto);
 			dispatch("route_schedule.jsp", request, response);
 		} 
+		
+		// 2. 일정 설정
 		else if(command.equals("schedule")) {
-			
 			String course =  request.getParameter("course");
 			String lat =  request.getParameter("lat");
 			String lng =  request.getParameter("lng");
@@ -80,12 +82,16 @@ public class ScheduleController extends HttpServlet {
 			request.setAttribute("driverList", list);
 			dispatch("route_driver_list.jsp", request, response);
 		}
+		
+		// 3. 결제 정보 
 		else if(command.equals("payment")){
 			int d_no = Integer.parseInt(request.getParameter("id"));
 			DriverDto driverDto = driverDao.selectDriver(d_no);
 			session.setAttribute("driverDto", driverDto);
 			response.sendRedirect("route_payment.jsp");
 		}
+		
+		// 4. 결제 완료 및 데이터베이스 입력
 		else if(command.equals("route_payment_confirmed")) {
 			ScheduleDto scheduleDto = (ScheduleDto) session.getAttribute("scheduleDto");
 			DriverDto driverDto = (DriverDto) session.getAttribute("driverDto");
@@ -102,6 +108,31 @@ public class ScheduleController extends HttpServlet {
 				dispatch("route_payment_confirmed.jsp", request, response);
 			}
 		}
+		
+		// 5. 스케쥴에 지도 출력
+		else if(command.equals("scheduleMap")) {
+			ScheduleDto scheduleDto = (ScheduleDto) session.getAttribute("scheduleDto");
+			
+			String s_course = scheduleDto.getS_course();
+			String s_latitude = scheduleDto.getS_latitude();
+			String s_longitude = scheduleDto.getS_longitude();
+			
+			String s_courseArr[] = s_course.split("/");
+			String s_latitudeArr[] = s_latitude.split("/");
+			String s_longitudeArr[] = s_longitude.split("/");
+			
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("s_course", s_courseArr);
+			map.put("s_latitude", s_latitudeArr);
+			map.put("s_longitude", s_longitudeArr);
+			Gson gson = new Gson();
+			String json = gson.toJson(map);
+			PrintWriter out = response.getWriter();
+			out.println(json);
+		}
+		
+		
+		// 달력에 해당 일자 스케쥴 출력
 		else if(command.equals("scheduleDetail")){
 			int s_seq = Integer.parseInt(request.getParameter("s_seq"));
 			UserDto userDto = (UserDto) session.getAttribute("userDto");
@@ -114,9 +145,8 @@ public class ScheduleController extends HttpServlet {
 			String json = gson.toJson(map);
 			PrintWriter out = response.getWriter();
 			out.println(json);
-			
-			
 		}	
+		
 	}
 
 

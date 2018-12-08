@@ -15,7 +15,7 @@
 <!-- jQuery -->
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <!-- custom.css -->
-<link rel="stylesheet" type="text/css" href="css/custom.css">
+<link rel="stylesheet" type="text/css" href="css/map.css">
 </head>
 <body>
 <%@ include file="form/header.jsp" %>

@@ -233,9 +233,6 @@ function initMap(){
 
 
 
-	
-
-
 
 // route coordinate
 function routeCoordinate(latitude, longitude){
