@@ -8,10 +8,18 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-<script src="https://apis.google.com/js/platform.js" async defer></script>
-<meta name="google-signin-client_id" content="690508328531-01hp95icnlji25iomgb897khfc4vevfu.apps.googleusercontent.com">
+
+ 
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script> 
+ <script src="https://apis.google.com/js/platform.js" async defer></script> 
+ <meta name="google-signin-client_id" content="690508328531-01hp95icnlji25iomgb897khfc4vevfu.apps.googleusercontent.com">
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> 
+ <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script> 
+ 
+ 
+
+
 <script>
 	function init(){
 		gapi.load('auth2', function() { 
@@ -19,7 +27,6 @@
 				client_id: '690508328531-01hp95icnlji25iomgb897khfc4vevfu.apps.googleusercontent.com'
 			});
 			gauth.then(function(){
-				
 				checkLoginStatus();
 			},function(){
 				alert("에러발생");
@@ -69,7 +76,7 @@
 							</c:when>
 							<c:otherwise>
 								<li><a href="taxi_registform.jsp">회원가입</a></li>
-								<li><a href="#" data-toggle="modal" data-target="#myModal">로그인</a></li>
+								<li><a href="#" id="login">로그인</a></li>
 							</c:otherwise>
 						</c:choose>
                 	</ul>
@@ -147,6 +154,12 @@
 		</div>
 	</div>
   
+  <script>
+  	$("#login").on('click',function(){
+  		$("#myModal").modal();
+  	})	
+  
+  </script>
 
 </body>
 </html>

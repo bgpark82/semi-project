@@ -22,11 +22,11 @@
 		/* cursor: pointer; */
 	}
 	
-	
+	/* 달력에 보여지는 일정 */
 	.clist > p {
 		font-size: 5px;
 		margin: 1px;
-		background-color: #F3F781;
+		background-color: rgb(63, 198,243);
 		cursor: pointer;
 	}
 

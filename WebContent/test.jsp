@@ -241,10 +241,12 @@ $(document).ready(function(){
 
 <script type="text/javascript">
 
-	
+	function scheduleDetail(){
+		$("#myCal").modal();
+	}
 
 	//날짜 클릭시 캘린더 밑에 일정 상세보기 
-	 function scheduleDetail(chk){
+	/* function scheduleDetail(chk){
 		$.ajax({
 			type : "POST",
 			url : "ScheduleController", //server와 통신 
@@ -255,15 +257,17 @@ $(document).ready(function(){
 			dataType : "json", //받는 데이터 속성
 			success : function(data) { //data는 받아온 데이터값들?
 				var detail = data.scheduleDetail;
+				alert(detail.s_location);
 				$("#s_location").text(detail.s_location);
 				 $("#myCal").modal();
-	
+					
+				
 			},
 			error : function() {
 				alert("상세 일정 보기 실패 fail...");
 			}
 		});
-	} 
+	} */
 	
 	
 	

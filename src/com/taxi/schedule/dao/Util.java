@@ -37,11 +37,12 @@ public class Util {
 		
 		for(ScheduleDto dto : list) {													//     678
 			if(dto.getS_date().substring(8, 10).equals(d)) {							//19890522
-				res += "<p id="+dto.getS_seq()+" onclick='scheduleDetail(this);' >";
+				res += "<p id="+dto.getS_seq()+" onclick='scheduleDetail(this);' style='cursor: pointer;'>";
 				res += (dto.getS_location().length()>6)? dto.getS_location().substring(0, 6)+".." : dto.getS_location()+" 여행";
 				res += "</p>";
 			}
 		}
 		return res;
 	}
+//	 data-toggle='modal' data-target='#myCal' 
 }
