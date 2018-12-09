@@ -26,9 +26,7 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> 
  <!-- custom css -->
 <link rel="stylesheet" type="text/css" href="css/calendar.css">
-<style type="text/css">
-th{width: 40%; text-align: center;}
-</style>
+
 </head>
 <body>
 <%@ include file="form/header.jsp" %>
@@ -74,13 +72,12 @@ th{width: 40%; text-align: center;}
 	String yyyy_MM  = year + "-" +Util.isTwo(String.valueOf(month));
 	System.out.println("yyyyMM : " + yyyy_MM);
 	List<ScheduleDto> clist = dao.UserCalView(u_no, yyyy_MM);
-
+	
 %>
 
 <br><br><h1 style="text-align:center" id="test">내 일정 보기</h1><br><hr>
-<div class="container" style="margin:10;">
+<div class="container" style="margin:0 auto; width:800px;">
 
-	
 	<table id="UserCal" style="width:100%; height:100%" class="table table-borderless">
 		<caption style="text-align:center">
 			<a href="taxi_calendar.jsp?year=<%=year-1 %>&month=<%=month%>">《</a>
@@ -130,49 +127,81 @@ th{width: 40%; text-align: center;}
 
  
 <!--  일정 모달창 -->
-   <div class="container-fluid row">
-      <div class="modal fade" id="myCal" role="dialog">
-         <div class="modal-dialog" align="center">
+   <div class="container-fluid" style="width:100%">
+      <div class="modal fade" id="myCal" role="dialog" >
+         <div class="modal-dialog modal-lg" align="center">
 
-            <div class="modal-content" style="width: 300px;">
+            <div class="modal-content" >
 
                <div class="modal-header">
                   <button type="button" class="close" data-dismiss="modal">&times;</button>
-                  <h4 class="modal-title" align="center">내 상세 일정</h4>
+                  <h4 class="modal-title" align="center">세부일정 <small>예약한 상세내용과 선택한 기사님을 확인하세요</small></h4>
                </div>
 
                <div class="modal-body">
                   
-                  <table class="table table-hover" style="border-bottom: 1px solid #DDDDDD">
-
-                     <tbody>
-                        <tr>
-                           <th>번호</th>
-                           <td id="s_location"></td>
-                           
-                        </tr>
-                        <tr>
-                           <th>아이디</th>
-                           <td></td>
-                        </tr>                        
-                        <tr>
-                           <th>제목</th>
-                           <td></td>
-                        </tr>
-                        <tr>
-                           <th>내용</th>
-                           <td></td>
-                        </tr>      
-                        <tr>
-                           <th>일정</th>
-                           <td></td>
-                        </tr>
-                        <tr>
-                           <th>작성날짜</th>
-                           <td></td>
-                        </tr>               
-                     </tbody>
-                  </table>
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-lg-5 col-md-5">
+							<div id="map"></div>
+						</div>
+						<div class="col-lg-4 col-md-4">
+							<div class="panel panel-default" style="height: 300px">
+								<div class="panel-body">
+									<table class="table">
+										<tr>
+											<th>지역</th>
+											<td id="s_location"></td>
+										</tr>
+										<tr>
+											<th>날짜</th>
+											<td id="s_date"></td>
+										</tr>
+										<tr>
+											<th>인원</th>
+											<td id="s_peopel"></td>
+										</tr>
+										<tr>
+											<th>금액</th>
+											<td id="s_price"></td>
+										</tr>
+										<tr>
+											<th>경로</th>
+											<td id="s_course"></td>
+										</tr>
+									</table>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-3 portfolio-item" align="center">
+							
+								<div class="panel panel-default" style="height:80%">
+									<div class="panel-body">
+										<img class="img-responsive"
+											style="width: 200px; height: 200px; border-radius: 100%;"
+											src="images/icon.jpg">
+										<h3></h3>
+										<div>
+											<span class="fa fa-star checked" style="margin-top: 8px;"></span>
+											<span class="fa fa-star checked"></span> 
+											<span class="fa fa-star checked"></span> 
+											<span class="fa fa-star"></span>
+										</div>
+										<h4>
+											<b>성별 :</b><span></span>
+										</h4>
+										<h4>
+											<b>나이 :</b>
+										</h4>
+										<h4>
+											<b>지역 :</b>
+										</h4>
+									</div>
+								</div>
+						</div>
+					</div>
+				</div>
+				
                </div>
 
                <div class="modal-footer">
@@ -185,43 +214,7 @@ th{width: 40%; text-align: center;}
       </div>
    </div>
 
-
-
-<script type="text/javascript">
-
-	//날짜 클릭시 캘린더 밑에 일정 상세보기 
-	 function scheduleDetail(chk){
-		$.ajax({
-			type : "POST",
-			url : "ScheduleController", //server와 통신 
-			data : {
-				command : "scheduleDetail",
-				s_seq : $(chk).attr("id")
-			},
-			dataType : "json", //받는 데이터 속성
-			success : function(data) { //data는 받아온 데이터값들?
-				var detail = data.scheduleDetail;
-				$("#s_location").text(detail.s_location);
-				 $("#myCal").modal();
-	
-			},
-			error : function() {
-				alert("상세 일정 보기 실패 fail...");
-			}
-		});
-	} 
-	
-	
-	
-	
-</script>
-
-
-
-
-
-
-
+<script type="text/javascript" src="js/schedule_detail.js"></script>
 
 <%@ include file="form/footer.jsp" %>
 

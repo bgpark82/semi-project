@@ -139,8 +139,14 @@ public class ScheduleController extends HttpServlet {
 			int u_no = userDto.getU_no();
 			
 			ScheduleDto scheduleDetail = scheduleDao.UserCalDetail(u_no, s_seq);
-			Map<String,ScheduleDto> map = new HashMap<String,ScheduleDto>();
+			System.out.println(scheduleDetail);
+			int d_no = scheduleDetail.getD_no();
+			DriverDto driverDto = driverDao.selectDriver(d_no);
+			
+			
+			Map<String,Object> map = new HashMap<String,Object>();
 			map.put("scheduleDetail", scheduleDetail);
+			map.put("driverDetail", driverDto);
 			Gson gson = new Gson();
 			String json = gson.toJson(map);
 			PrintWriter out = response.getWriter();

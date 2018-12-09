@@ -29,7 +29,7 @@
 	</select>
 	
 	<insert id="insertSchedule" parameterType="ScheduleDto">
-	INSERT INTO SCHEDULE_TABLE VALUES(S_SEQ.NEXTVAL, #{u_no}, #{d_no}, 1, #{s_date}, #{s_time}, #{s_location}, #{s_course}, #{s_people}, #{s_price}, SYSDATE, #{s_latitude}, #{s_longitude},'N')
+	INSERT INTO SCHEDULE_TABLE VALUES(S_SEQ.NEXTVAL, #{u_no}, #{d_no}, 1, #{s_date}, #{s_time}, #{s_location}, #{s_course}, #{s_people}, #{s_price}, SYSDATE, #{s_latitude}, #{s_longitude},'P')
 	</insert>
 
 	<select id="UserCalView" parameterType="ScheduleDto" resultType="ScheduleDto" >

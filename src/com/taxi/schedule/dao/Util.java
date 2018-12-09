@@ -37,9 +37,20 @@ public class Util {
 		
 		for(ScheduleDto dto : list) {													//     678
 			if(dto.getS_date().substring(8, 10).equals(d)) {							//19890522
-				res += "<p id="+dto.getS_seq()+" onclick='scheduleDetail(this);' style='cursor: pointer;'>";
-				res += (dto.getS_location().length()>6)? dto.getS_location().substring(0, 6)+".." : dto.getS_location()+" 여행";
+				res += "<div class='panel panel-default' style='margin-bottom:5px'>";
+				res += "<div class='panel-body' style='padding:5px'>";
+				res += "<p id="+dto.getS_seq()+" onclick='scheduleDetail(this);' style='cursor: pointer; margin:0; font-size:10px;'><span>";
+				res += (dto.getS_location().length()>6)? dto.getS_location().substring(0, 6)+".." : dto.getS_location()+" 여행</span>";
+				if(dto.getS_confirmed_check().equals("P")) {
+					res += "<span id='dot' confirmed='"+dto.getS_confirmed_check()+"' style='float:right; color:orange'>●</span>";
+				} else if(dto.getS_confirmed_check().equals("N")) {
+					res += "<span id='dot' confirmed='"+dto.getS_confirmed_check()+"' style='float:right; color:red'>●</span>";
+				} else {
+					res += "<span id='dot' confirmed='"+dto.getS_confirmed_check()+"' style='float:right; color:green'>●</span>";
+				}
 				res += "</p>";
+				res += "</div>";
+				res += "</div>";
 			}
 		}
 		return res;

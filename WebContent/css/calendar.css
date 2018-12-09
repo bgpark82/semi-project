@@ -1,17 +1,20 @@
+
 #UserCal{
 		border-collapse: collapse;
-		border: 1px solid #eeeeee;
+		border: 0px solid #eeeeee;
+		height:110px;
 	}
 	
 	#UserCal th{
 		width: 80px;
-		border: 1px solid #eeeeee;
+		border: 0px solid #eeeeee;
+		text-align: left;
 	}
 
 	#UserCal td{
 		width: 80px;
-		height: 150px;
-		border: 1px solid #eeeeee;
+		height: 120px;
+		border: 0px solid #eeeeee;
 		text-align: left;
 		vertical-align: top;
 		position: relative;
@@ -26,9 +29,18 @@
 	.clist > p {
 		font-size: 5px;
 		margin: 1px;
-		background-color: rgb(63, 198,243);
 		cursor: pointer;
 	}
+	
+	.panel {
+		margin-bottom:5px;
+	}
+	
+	.panel-body {
+		padding: 5px;
+	}
+	
+
 
 	/* #CalDetail{
 		cursor: pointer;
