@@ -1,6 +1,5 @@
 package com.taxi.driver.controller;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -13,10 +12,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.oreilly.servlet.MultipartRequest;
-import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import com.taxi.driver.dao.DriverDao;
 import com.taxi.driver.dto.DriverDto;
+import com.taxi.schedule.dto.ScheduleDto;
 
 
 
@@ -84,6 +82,8 @@ public class DriverController extends HttpServlet {
 			int d_no = Integer.parseInt(request.getParameter("d_no"));
 			DriverDto dto = dao.selectDriver(d_no);
 			
+			List<ScheduleDto> scheduleDto = dao.showRequest(d_no);
+			System.out.println(scheduleDto);
 			request.setAttribute("dto", dto);
 			System.out.println("profile check : " + dto.getD_profile());
 			dispatch("driver_info.jsp", request, response);

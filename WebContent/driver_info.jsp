@@ -97,6 +97,7 @@
 					</table>	
 			</div>
 			<div class="col-md-6">
+				<h2>요청 정보</h2>
 				<ul>
 					<li class="list-group-item" style="width:100%" >
   							<div class="container" style="max-height: 150px; width:100%">

@@ -67,6 +67,13 @@
 	UPDATE DRIVER_TABLE SET D_PROFILE = #{d_profile} WHERE D_ID = #{d_id} 
 </update>
 
+<!-- <select id="showRequest" parameterType="int" resultMap="ScheduleTableMap">
+SELECT DR.D_NO, SH.U_NO, SH.S_SEQ, SH.S_DATE, SH.S_TIME, SH.S_LOCATION, SH.S_COURSE, SH.S_PEOPLE, SH.S_PRICE, SH.S_REGDATE, SH.S_LATITUDE, SH.S_LONGITUDE, SH.S_CONFIRMED_CHECK
+FROM DRIVER_TABLE DR, SCHEDULE_TABLE SH
+WHERE DR.D_NO = SH.D_NO 
+AND DR.D_NO = #{d_no}
+</select> -->
+
 
   </mapper>
   

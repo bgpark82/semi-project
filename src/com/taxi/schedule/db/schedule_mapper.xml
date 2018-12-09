@@ -18,6 +18,7 @@
 		<result property="s_latitude" column="S_LATITUDE"/>
 		<result property="s_longitude" column="S_LONGITUDE"/>
 		<result property="s_confirmed_check" column="S_CONFIRMED_CHECK"/>
+		<!-- <collection property="driver_dto" resultMap="com.taxi.driver.dto.DriverDto"></collection> -->
 	</resultMap>
 	
 	<select id="selectlogin" parameterType="UserDto" resultType="UserDto">

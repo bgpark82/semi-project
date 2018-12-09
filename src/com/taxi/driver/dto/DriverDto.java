@@ -175,6 +175,8 @@ public class DriverDto {
 		this.d_content = d_content;
 	}
 
+	
+
 	@Override
 	public String toString() {
 		return "DriverDto [d_no=" + d_no + ", d_profile=" + d_profile + ", d_region=" + d_region + ", d_name=" + d_name

@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 
 import com.taxi.common.SqlMapConfig;
 import com.taxi.driver.dto.DriverDto;
+import com.taxi.schedule.dto.ScheduleDto;
 
 public class DriverDao extends SqlMapConfig{
 
@@ -145,6 +146,24 @@ public class DriverDao extends SqlMapConfig{
 		}
 		return res;
 	}
+	
+	
+	public List<ScheduleDto> showRequest(int d_no) {
+		SqlSession session = null;
+		List<ScheduleDto> res = null;
+		try {
+			session = getSqlSessionFactory().openSession(true);
+			res = session.selectList(namespace+"showRequest", d_no);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			session.close();
+		}
+		return res;
+	}
+	
+	
+	
 	
 	
 	//프로필 사진

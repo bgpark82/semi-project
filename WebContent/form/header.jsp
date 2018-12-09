@@ -85,7 +85,7 @@
 			<ul class="nav navbar-nav navbar-right">
 				<c:choose>
 					<c:when test="${userDto.u_name != null}">
-						<li><a href="#"><span class="glyphicon glyphicon-user"></span><span>${userDto.u_name }</span>님 반갑습니다. </a></li>	
+						<li><a href="#"><span class="glyphicon glyphicon-bell"></span>&nbsp;<span class="glyphicon glyphicon-user"></span><span>${userDto.u_name }</span>님 반갑습니다. </a></li>	
 					</c:when>
 					<c:when test="${driverDto.d_name != null}">
 						<li><a href="#"><img style="width:25px; height:25px; border-radius:100%;" src="${driverDto.d_profile }"/><span>${driverDto.d_name }</span>님 반갑습니다. </a></li>
