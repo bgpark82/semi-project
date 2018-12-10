@@ -2,37 +2,23 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  <mapper namespace="com.taxi.driver">
+  <mapper namespace="com.taxi.rating">
   
-  	<resultMap type="com.taxi.driver.dto.DriverDto" id="DriverTableMap">
+  	<resultMap type="com.taxi.rating.dto.RatingDto" id="RatingTableMap">
+  		<result property="ra_no" column="RA_NO" />
+  		<result property="u_no" column="U_NO" />
   		<result property="d_no" column="D_NO" />
-  		<result property="d_profile" column="D_PROFILE" />
-  		<result property="d_region" column="D_REGION" />
-		<result property="d_name" column="D_NAME" />
-		<result property="d_id" column="D_ID" />
-		<result property="d_pw" column="D_PW" />
-		<result property="d_birth" column="D_BIRTH" />
-		<result property="d_gender" column="D_GENDER" />
-		<result property="d_phone" column="D_PHONE" />
-		<result property="d_email" column="D_EMAIL" />
-		<result property="d_enabled" column="D_ENABLED" />
-		<result property="d_license" column="D_LICENSE" />
-		<result property="d_carnum" column="D_CARNUM" />
-		<result property="d_role" column="D_ROLE" />
-		<result property="d_title" column="D_TITLE" />
-		<result property="d_content" column="D_CONTENT" />
+  		<result property="ra_rating" column="RA_RATING" />
   	</resultMap>
   	
   
-  
-  	
-<insert id="regist" parameterType="DriverDto" >
-	INSERT INTO DRIVER_TABLE VALUES(D_NO_SEQ.NEXTVAL,#{d_profile}, #{d_region}, #{d_name}, #{d_id}, #{d_pw}, #{d_birth}, #{d_gender}, #{d_phone}, #{d_email}, 'Y', #{d_license}, #{d_carnum}, 'DRIVER', NULL, NULL)
+<insert id="insertRating" parameterType="com.taxi.rating.dto.RatingDto" >
+	INSERT INTO RATING_TABLE VALUES(RA_SEQ.NEXTVAL, #{u_no}, #{d_no}, #{ra_rating})
 </insert>
 
 
 
-<select id="login" parameterType="DriverDto" resultType="DriverDto">
+<!-- <select id="login" parameterType="DriverDto" resultType="DriverDto">
 	SELECT * FROM DRIVER_TABLE WHERE D_ID = #{d_id} AND D_PW = #{d_pw} AND D_ENABLED = 'Y' 
 </select>
 
@@ -58,19 +44,18 @@
   	
 <update id="driverdelete" parameterType="DriverDto">
 	UPDATE DRIVER_TABLE SET D_ENABLED = 'N' WHERE D_NO = #{d_no}
-</update>  	
+</update>  	 -->
   	
   	
-<select id="driverlist"  resultMap="DriverTableMap">  	
+<!-- <select id="driverlist"  resultMap="DriverTableMap">  	
   	SELECT * FROM DRIVER_TABLE WHERE D_ENABLED = 'Y' ORDER BY D_NO DESC
 </select> 	
 
 <update id="updateProfile" parameterType="DriverDto">
 	UPDATE DRIVER_TABLE SET D_PROFILE = #{d_profile} WHERE D_ID = #{d_id} 
-</update>
+</update> -->
 
-
-</mapper>
+  </mapper>
   
   
   

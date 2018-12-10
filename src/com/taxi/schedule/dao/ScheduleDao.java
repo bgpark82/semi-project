@@ -51,7 +51,6 @@ public class ScheduleDao extends SqlMapConfig{
 			session.close();
 		}
 		return res;
-		
 	}
 	
 	
@@ -72,7 +71,36 @@ public class ScheduleDao extends SqlMapConfig{
 		} finally {
 			session.close();
 		}
-
+		return res;
+	}
+	
+	
+	
+	public List<ScheduleDto> showAllSchedule(int u_no) {
+		SqlSession session = null;
+		List<ScheduleDto> res = null;
+		try {
+			session = getSqlSessionFactory().openSession(true);
+			res = session.selectList(namespace+"showAllSchedule", u_no);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			session.close();
+		}
+		return res;
+	}
+	
+	public ScheduleDto selectOne(int s_seq) {
+		SqlSession session = null;
+		ScheduleDto res = null;
+		try {
+			session = getSqlSessionFactory().openSession(true);
+			res = session.selectOne(namespace+"selectOne", s_seq);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			session.close();
+		}
 		return res;
 	}
 }

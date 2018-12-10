@@ -48,6 +48,8 @@
       
       <form class="form-horizontal" action="UserController" method="post">
          <input name="command" value="regist"  type="hidden"/>
+         
+         
                    
         <div class="form-group">
            <div class="col-sm-1"></div>

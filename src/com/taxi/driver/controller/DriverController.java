@@ -82,8 +82,6 @@ public class DriverController extends HttpServlet {
 			int d_no = Integer.parseInt(request.getParameter("d_no"));
 			DriverDto dto = dao.selectDriver(d_no);
 			
-			List<ScheduleDto> scheduleDto = dao.showRequest(d_no);
-			System.out.println(scheduleDto);
 			request.setAttribute("dto", dto);
 			System.out.println("profile check : " + dto.getD_profile());
 			dispatch("driver_info.jsp", request, response);

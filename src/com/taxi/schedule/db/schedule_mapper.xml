@@ -5,10 +5,10 @@
 <mapper namespace="com.taxi.schedule">
 
 	<resultMap type="com.taxi.schedule.dto.ScheduleDto" id="ScheduleTableMap">
+		<id property="d_no" column="D_NO"/>
 		<result property="s_seq" column="S_SEQ"/>
 		<result property="u_no" column="U_NO"/>
 		<result property="s_no" column="S_NO"/>
-		<result property="d_no" column="D_NO"/>
 		<result property="s_date" column="S_DATE"/>
 		<result property="s_time" column="S_TIME"/>
 		<result property="s_location" column="S_LOCATION"/>
@@ -18,8 +18,43 @@
 		<result property="s_latitude" column="S_LATITUDE"/>
 		<result property="s_longitude" column="S_LONGITUDE"/>
 		<result property="s_confirmed_check" column="S_CONFIRMED_CHECK"/>
-		<!-- <collection property="driver_dto" resultMap="com.taxi.driver.dto.DriverDto"></collection> -->
+		<!-- <collection property="driverDto"  resultMap="DriverTableMap"></collection> -->
 	</resultMap>
+		
+		<!-- <collection property="" column="" ofType="" select=""></collection> -->
+	
+	
+	<resultMap type="com.taxi.driver.dto.DriverDto" id="DriverTableMap">
+  		<id property="d_no" column="D_NO" />
+  		<result property="d_profile" column="D_PROFILE" />
+  		<result property="d_region" column="D_REGION" />
+		<result property="d_name" column="D_NAME" />
+		<result property="d_id" column="D_ID" />
+		<result property="d_pw" column="D_PW" />
+		<result property="d_birth" column="D_BIRTH" />
+		<result property="d_gender" column="D_GENDER" />
+		<result property="d_phone" column="D_PHONE" />
+		<result property="d_email" column="D_EMAIL" />
+		<result property="d_enabled" column="D_ENABLED" />
+		<result property="d_license" column="D_LICENSE" />
+		<result property="d_carnum" column="D_CARNUM" />
+		<result property="d_role" column="D_ROLE" />
+		<result property="d_title" column="D_TITLE" />
+		<result property="d_content" column="D_CONTENT" />
+  	</resultMap>
+  	
+  	<!-- <resultMap type="com.taxi.user.dto.UserDto" id="UserTableMap">
+		<result property="u_no" column="U_NO"/>
+		<result property="u_name" column="U_NAME"/>
+		<result property="u_id" column="U_ID"/>
+		<result property="u_pw" column="U_PW"/>
+		<result property="u_birth" column="U_BIRTH"/>
+		<result property="u_gender" column="U_GENDER"/>
+		<result property="u_phone" column="U_PHONE"/>
+		<result property="u_email" column="U_EMAIL"/>
+		<result property="u_role" column="U_ROLE"/>
+		<result property="u_enabled" column="U_ENABLED"/>
+	</resultMap> -->
 	
 	<select id="selectlogin" parameterType="UserDto" resultType="UserDto">
 	SELECT * FROM USER_TABLE WHERE U_ID = #{u_id} AND U_PW = #{u_pw} AND U_ENABLED = 'Y'
@@ -45,5 +80,27 @@
 	SELECT * FROM SCHEDULE_TABLE 
 	WHERE U_NO= #{u_no} AND S_SEQ = #{s_seq}
 	</select>
+
+	
+	<select id="showAllSchedule"  parameterType="int" resultMap="ScheduleTableMap">
+	SELECT US.U_NO, US.U_NAME, US.U_PHONE, SH.D_NO, DR.D_PROFILE, DR.D_REGION, DR.D_NAME, DR.D_BIRTH, DR.D_GENDER, DR.D_TITLE, DR.D_CONTENT, SH.U_NO, SH.S_SEQ, SH.S_DATE, SH.S_TIME, SH.S_LOCATION, SH.S_COURSE, SH.S_PEOPLE, SH.S_PRICE, SH.S_REGDATE, SH.S_LATITUDE, SH.S_LONGITUDE, SH.S_CONFIRMED_CHECK
+	FROM SCHEDULE_TABLE SH
+	INNER JOIN DRIVER_TABLE DR
+	ON SH.D_NO = DR.D_NO
+	INNER JOIN USER_TABLE US
+	ON SH.U_NO = US.U_NO
+	WHERE SH.U_NO = #{u_no}
+	</select>
+	
+	<select id="selectOne"  parameterType="int" resultType="ScheduleDto">
+	SELECT US.U_NO, US.U_NAME, US.U_PHONE, SH.D_NO, DR.D_PROFILE, DR.D_REGION, DR.D_NAME, DR.D_BIRTH, DR.D_GENDER, DR.D_TITLE, DR.D_CONTENT, SH.U_NO, SH.S_SEQ, SH.S_DATE, SH.S_TIME, SH.S_LOCATION, SH.S_COURSE, SH.S_PEOPLE, SH.S_PRICE, SH.S_REGDATE, SH.S_LATITUDE, SH.S_LONGITUDE, SH.S_CONFIRMED_CHECK
+	FROM SCHEDULE_TABLE SH
+	INNER JOIN DRIVER_TABLE DR
+	ON SH.D_NO = DR.D_NO
+	INNER JOIN USER_TABLE US
+	ON SH.U_NO = US.U_NO
+	WHERE SH.S_SEQ = #{s_seq}
+	</select>
+	
 	
 </mapper>

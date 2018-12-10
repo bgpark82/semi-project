@@ -148,23 +148,6 @@ public class DriverDao extends SqlMapConfig{
 	}
 	
 	
-	public List<ScheduleDto> showRequest(int d_no) {
-		SqlSession session = null;
-		List<ScheduleDto> res = null;
-		try {
-			session = getSqlSessionFactory().openSession(true);
-			res = session.selectList(namespace+"showRequest", d_no);
-		}catch(Exception e) {
-			e.printStackTrace();
-		}finally {
-			session.close();
-		}
-		return res;
-	}
-	
-	
-	
-	
 	
 	//프로필 사진
 		public String getProfile(int d_no) {
@@ -207,7 +190,6 @@ public class DriverDao extends SqlMapConfig{
 			DriverDto dto = new DriverDto();
 			int res = 0;
 			
-			
 			try {
 				session = getSqlSessionFactory().openSession(true);
 				dto.setD_id(d_id);
@@ -219,6 +201,11 @@ public class DriverDao extends SqlMapConfig{
 			}
 			return res;
 		}
+		
+
+		
+		
+		
 		
 
 	

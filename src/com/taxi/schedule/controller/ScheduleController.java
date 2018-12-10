@@ -152,7 +152,6 @@ public class ScheduleController extends HttpServlet {
 			PrintWriter out = response.getWriter();
 			out.println(json);
 		}	
-		
 	}
 
 

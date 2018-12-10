@@ -86,6 +86,7 @@ var contentid = [];
 									        draggable: true,
 									        info : item02(id, firstimage, title, addr1, tel, overview, latitude, longitude)
 									    });
+										markerArray.push({id:marker});
 						
 									marker.addListener('click',function(){
 										infowindow.setContent(this.info);
@@ -97,35 +98,6 @@ var contentid = [];
 				// display marker of the location information on map
 				})
 	});
-	
-	// insert checked list into selected list
-	function onCheck(chk){
-		var id = $(chk).parent().attr("id");
-		var firstimage = $(chk).next().find("img").attr("src");
-		var title = $(chk).next().find("#title").text();
-		var addr1 = $(chk).next().find("#addr1").text(); 
-		var tel = $(chk).next().find("#tel").text();
-		var latitude = parseFloat($(chk).parent().attr("data_lat"));
-		var longitude = parseFloat($(chk).parent().attr("data_lng"));
-		
-		
-		// click checkbox
-		if(chk.checked){
-			chk.checked = 'checked';
-			$("#trip_selected").append(item(id, firstimage, title, addr1, latitude, longitude));
-		}else{
-			$("#trip_selected").find("#"+id).remove();
-		}
-		
-		routeCoordinate(latitude, longitude);
-			      
-		// display route
-		if(routeCoordinates.length > 1){
-		calculateAndDisplayRoute(routeCoordinates, directionsService, new google.maps.DirectionsRenderer({map:map}));
-		}
-	};
-	
-	
 	
 	
 	
@@ -163,7 +135,6 @@ var contentid = [];
 		directionResult.splice(index-1,1);			// directionDisplay
 		responseResult.splice(index-1,1);				// response
 		durationArr.splice(index-1,1);				// duration
-		
 		
 	}
 	
