@@ -26,7 +26,12 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> 
  <!-- custom css -->
 <link rel="stylesheet" type="text/css" href="css/calendar.css">
-
+<style type="text/css">
+#map {
+	height: 400px;
+	width: 100%;
+}
+</style>
 </head>
 <body>
 <%@ include file="form/header.jsp" %>
@@ -115,7 +120,7 @@
 				out.print("</tr><tr>");
 			}
 		}
-
+		
 		for (int i = 0; i < (7 - (dayOfweek + lastDay - 1) % 7) % 7; i++) {
 			out.print("<td>&nbsp;</td>");
 		}
@@ -125,7 +130,6 @@
 
 
 
- 
 <!--  일정 모달창 -->
    <div class="container-fluid" style="width:100%">
       <div class="modal fade" id="myCal" role="dialog" >
@@ -159,7 +163,7 @@
 										</tr>
 										<tr>
 											<th>인원</th>
-											<td id="s_peopel"></td>
+											<td id="s_people"></td>
 										</tr>
 										<tr>
 											<th>금액</th>
@@ -188,14 +192,12 @@
 											<span class="fa fa-star"></span>
 										</div>
 										<h4>
-											<b>성별 :</b><span></span>
+											<b id="d_gender"></b><span></span>
 										</h4>
 										<h4>
-											<b>나이 :</b>
+											<b id="d_location"></b>
 										</h4>
-										<h4>
-											<b>지역 :</b>
-										</h4>
+										<div id="s_confirmed_check"></div>
 									</div>
 								</div>
 						</div>
@@ -215,6 +217,8 @@
    </div>
 
 <script type="text/javascript" src="js/schedule_detail.js"></script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDogTL8Fk8vbPq2JCZrZKedH35rNtSGKJE&libraries=places"></script>
+<!-- <script type="text/javascript" src="js/schedule.js"></script> -->
 
 <%@ include file="form/footer.jsp" %>
 

@@ -111,11 +111,20 @@ public class ScheduleController extends HttpServlet {
 		
 		// 5. 스케쥴에 지도 출력
 		else if(command.equals("scheduleMap")) {
-			ScheduleDto scheduleDto = (ScheduleDto) session.getAttribute("scheduleDto");
-			
-			String s_course = scheduleDto.getS_course();
-			String s_latitude = scheduleDto.getS_latitude();
-			String s_longitude = scheduleDto.getS_longitude();
+			ScheduleDto scheduleDto = null;
+			String s_course;
+			String s_latitude;
+			String s_longitude;
+			if(session.getAttribute("scheduleDto") != null) {
+				scheduleDto = (ScheduleDto) session.getAttribute("scheduleDto");
+				s_course = scheduleDto.getS_course();
+				s_latitude = scheduleDto.getS_latitude();
+				s_longitude = scheduleDto.getS_longitude();
+			} else {
+				s_course = (String)request.getParameter("s_course");
+				s_latitude = (String)request.getParameter("s_latitude");
+				s_longitude = (String)request.getParameter("s_longitude");
+			}
 			
 			String s_courseArr[] = s_course.split("/");
 			String s_latitudeArr[] = s_latitude.split("/");
@@ -135,18 +144,12 @@ public class ScheduleController extends HttpServlet {
 		// 달력에 해당 일자 스케쥴 출력
 		else if(command.equals("scheduleDetail")){
 			int s_seq = Integer.parseInt(request.getParameter("s_seq"));
-			UserDto userDto = (UserDto) session.getAttribute("userDto");
-			int u_no = userDto.getU_no();
+			ScheduleDto dto = scheduleDao.selectOne(s_seq);
 			
-			ScheduleDto scheduleDetail = scheduleDao.UserCalDetail(u_no, s_seq);
-			System.out.println(scheduleDetail);
-			int d_no = scheduleDetail.getD_no();
-			DriverDto driverDto = driverDao.selectDriver(d_no);
 			
 			
 			Map<String,Object> map = new HashMap<String,Object>();
-			map.put("scheduleDetail", scheduleDetail);
-			map.put("driverDetail", driverDto);
+			map.put("scheduleDetail", dto);
 			Gson gson = new Gson();
 			String json = gson.toJson(map);
 			PrintWriter out = response.getWriter();
