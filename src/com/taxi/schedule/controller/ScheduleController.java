@@ -151,7 +151,22 @@ public class ScheduleController extends HttpServlet {
 			String json = gson.toJson(map);
 			PrintWriter out = response.getWriter();
 			out.println(json);
-		}	
+			
+		} else if(command.equals("checkConfirmed"))	{
+			int s_seq = Integer.parseInt(request.getParameter("s_seq"));
+			int res = scheduleDao.checkConfirmed(s_seq);
+			if(res > 0) {
+				PrintWriter out = response.getWriter();
+				out.println("스케쥴이 확정되었습니다.");
+			}
+		} else if(command.equals("rejected"))	{
+			int s_seq = Integer.parseInt(request.getParameter("s_seq"));
+			int res = scheduleDao.checkRejected(s_seq);
+			if(res > 0) {
+				PrintWriter out = response.getWriter();
+				out.println("스케쥴을 거절하였습니다.");
+			}
+		}
 	}
 
 

@@ -102,5 +102,23 @@
 	WHERE SH.S_SEQ = #{s_seq}
 	</select>
 	
+	<select id="driverInfo"  parameterType="int" resultMap="ScheduleTableMap">
+	SELECT US.U_NO, US.U_NAME, US.U_PHONE, SH.D_NO, DR.D_PROFILE, DR.D_REGION, DR.D_NAME, DR.D_BIRTH, DR.D_GENDER, DR.D_TITLE, DR.D_CONTENT, SH.U_NO, SH.S_SEQ, SH.S_DATE, SH.S_TIME, SH.S_LOCATION, SH.S_COURSE, SH.S_PEOPLE, SH.S_PRICE, SH.S_REGDATE, SH.S_LATITUDE, SH.S_LONGITUDE, SH.S_CONFIRMED_CHECK
+	FROM SCHEDULE_TABLE SH
+	INNER JOIN DRIVER_TABLE DR
+	ON SH.D_NO = DR.D_NO
+	INNER JOIN USER_TABLE US
+	ON SH.U_NO = US.U_NO
+	WHERE SH.D_NO = #{d_no}
+	</select>
+	
+	<update id="checkConfirmed" parameterType="int">
+	UPDATE SCHEDULE_TABLE SET S_CONFIRMED_CHECK = 'Y' WHERE S_SEQ = #{s_seq}
+	</update>
+	
+	<update id="checkRejected" parameterType="int">
+	UPDATE SCHEDULE_TABLE SET S_CONFIRMED_CHECK = 'N' WHERE S_SEQ = #{s_seq}
+	</update>  
+	
 	
 </mapper>

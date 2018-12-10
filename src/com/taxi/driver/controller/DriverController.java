@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 
 import com.taxi.driver.dao.DriverDao;
 import com.taxi.driver.dto.DriverDto;
+import com.taxi.schedule.dao.ScheduleDao;
 import com.taxi.schedule.dto.ScheduleDto;
 
 
@@ -38,6 +39,7 @@ public class DriverController extends HttpServlet {
 		String command = request.getParameter("command");
 		System.out.println("[" + command + "]");
 		DriverDao dao = new DriverDao();
+		ScheduleDao scheduleDao = new ScheduleDao();
 		
 		//회원가입 폼
 		if(command.equals("registform")) {
@@ -81,9 +83,10 @@ public class DriverController extends HttpServlet {
 		} else if(command.equals("driverinfo")) {
 			int d_no = Integer.parseInt(request.getParameter("d_no"));
 			DriverDto dto = dao.selectDriver(d_no);
+			List<ScheduleDto> scheduleList = scheduleDao.driverInfo(d_no);
 			
 			request.setAttribute("dto", dto);
-			System.out.println("profile check : " + dto.getD_profile());
+			request.setAttribute("scheduleList", scheduleList);
 			dispatch("driver_info.jsp", request, response);
 			
 		

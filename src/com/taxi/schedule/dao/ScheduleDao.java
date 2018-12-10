@@ -90,6 +90,7 @@ public class ScheduleDao extends SqlMapConfig{
 		return res;
 	}
 	
+	
 	public ScheduleDto selectOne(int s_seq) {
 		SqlSession session = null;
 		ScheduleDto res = null;
@@ -103,4 +104,48 @@ public class ScheduleDao extends SqlMapConfig{
 		}
 		return res;
 	}
+	
+	
+	public List<ScheduleDto> driverInfo(int d_no) {
+		SqlSession session = null;
+		List<ScheduleDto> res = null;
+		try {
+			session = getSqlSessionFactory().openSession(true);
+			res = session.selectList(namespace+"driverInfo", d_no);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			session.close();
+		}
+		return res;
+	}
+	
+	public int checkConfirmed(int s_seq) {
+		int res = 0;
+		SqlSession session = null;
+		try {
+			session = getSqlSessionFactory().openSession(true);
+			res = session.update(namespace+"checkConfirmed", s_seq);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			session.close();
+		}
+		return res;
+	}
+	
+	public int checkRejected(int s_seq) {
+		int res = 0;
+		SqlSession session = null;
+		try {
+			session = getSqlSessionFactory().openSession(true);
+			res = session.update(namespace+"checkRejected", s_seq);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			session.close();
+		}
+		return res;
+	}
+	
 }
