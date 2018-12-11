@@ -39,6 +39,10 @@
 .glyphicon-star.on{
 	color:orange;
 }
+th {
+	width:50px;
+}
+
 </style>
 </head>
 <body>
@@ -50,7 +54,7 @@
 
 	// 1. 초기 해당 년, 월 
 	int year = cal.get(Calendar.YEAR);
-	int month = cal.get(Calendar.MONTH);
+	int month = cal.get(Calendar.MONTH)+1;
 	
 	// 2. 브라우저에서 받은 년, 월
 	String paramYear = request.getParameter("year");
@@ -154,11 +158,11 @@
                   
 				<div class="container-fluid">
 					<div class="row">
-						<div class="col-lg-5 col-md-5">
+						<div class="col-md-5">
 							<div id="map"></div>
 						</div>
-						<div class="col-lg-4 col-md-4">
-							<div class="panel panel-default" style="height: 300px">
+						<div class="col-md-4">
+							<div class="panel panel-default" style="height: 100%">
 								<div class="panel-body">
 									<table class="table">
 										<tr>
@@ -185,22 +189,20 @@
 								</div>
 							</div>
 						</div>
-						<div class="col-md-3 portfolio-item" align="center">
-							
-								<div class="panel panel-default" style="height:80%">
-									<div class="panel-body">
-										<img class="img-responsive"
-											style="width: 200px; height: 200px; border-radius: 100%;"
-											src="images/icon.jpg">
-										<h3></h3>
+						<div class="col-md-3 portfolio-item" align="center" >
+								<div class="panel panel-default" style="height:400px;" >
+									<div class="panel-body" style="height:400px;">
+										<img class="img-responsive" id="profile" style="width: 170px; height: 170px; border-radius: 100%;">
+										<h4>
+											<b id="d_name"></b>
+										</h4>
 											<div id="star"></div>
 										<h4>
-											<b id="d_gender"></b><span></span>
+											성별 : <b id="d_gender"></b>
 										</h4>
-										<h4>
-											<b id="d_location"></b>
-										</h4>
-										<div id="s_confirmed_check"></div>
+										
+										<hr>
+										<div style="padding:16px;" id="s_confirmed_check"></div>
 									</div>
 								</div>
 						</div>

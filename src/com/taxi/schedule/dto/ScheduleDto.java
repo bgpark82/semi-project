@@ -206,12 +206,20 @@ public class ScheduleDto {
 		this.driverDto = driverDto;
 	}
 
+
 	@Override
 	public String toString() {
 		return "ScheduleDto [s_seq=" + s_seq + ", u_no=" + u_no + ", d_no=" + d_no + ", s_no=" + s_no + ", s_date="
 				+ s_date + ", s_time=" + s_time + ", s_location=" + s_location + ", s_course=" + s_course
 				+ ", s_people=" + s_people + ", s_price=" + s_price + ", s_regdate=" + s_regdate + ", s_latitude="
-				+ s_latitude + ", s_longitude=" + s_longitude + ", s_confirmed_check=" + s_confirmed_check + "]";
+				+ s_latitude + ", s_longitude=" + s_longitude + ", s_confirmed_check=" + s_confirmed_check
+				+ ", driverDto=" + driverDto + ", d_profile=" + d_profile + ", d_region=" + d_region + ", d_name="
+				+ d_name + ", d_id=" + d_id + ", d_pw=" + d_pw + ", d_birth=" + d_birth + ", d_gender=" + d_gender
+				+ ", d_phone=" + d_phone + ", d_email=" + d_email + ", d_enabled=" + d_enabled + ", d_license="
+				+ d_license + ", d_carnum=" + d_carnum + ", d_role=" + d_role + ", d_title=" + d_title + ", d_content="
+				+ d_content + ", u_name=" + u_name + ", u_id=" + u_id + ", u_pw=" + u_pw + ", u_birth=" + u_birth
+				+ ", u_gender=" + u_gender + ", u_phone=" + u_phone + ", u_email=" + u_email + ", u_role=" + u_role
+				+ ", u_enabled=" + u_enabled + ", ra_no=" + ra_no + ", ra_rating=" + ra_rating + "]";
 	}
 
 	public String getD_profile() {

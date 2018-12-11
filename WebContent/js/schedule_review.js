@@ -10,7 +10,10 @@ $(function(){
 		type:"POST",
 		url: "ScheduleController",
 		data:{
-			command : "scheduleMap"
+			command : "scheduleMap",
+			s_course : $("#s_course").val(),
+			s_latitude : $("#s_latitude").val(),
+			s_longitude: $("#s_longitude").val()
 		},
 		dataType: "json"
 	})

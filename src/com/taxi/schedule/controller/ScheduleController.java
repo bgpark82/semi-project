@@ -149,6 +149,7 @@ public class ScheduleController extends HttpServlet {
 			int s_seq = Integer.parseInt(request.getParameter("s_seq"));
 			ScheduleDto dto = scheduleDao.selectOne(s_seq);
 			
+			System.out.println("schedule : " + dto);
 			Map<String,Object> map = new HashMap<String,Object>();
 			map.put("scheduleDetail", dto);
 			Gson gson = new Gson();

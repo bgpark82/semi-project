@@ -15,12 +15,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <!-- 부트스트랩 -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <!-- custom css -->
 <link rel="stylesheet" type="text/css" href="css/calendar.css">
 <style type="text/css">
@@ -64,6 +61,9 @@
 
 		<div class="row">
 			<div class="col-lg-5 col-md-5">
+					<input type="hidden" id="s_course" value="${dto.s_course }">
+					<input type="hidden" id="s_latitude" value="${dto.s_latitude }">
+					<input type="hidden" id="s_longitude" value="${dto.s_longitude }">
 				<div id="map"></div>
 			</div>
 			<div class="col-lg-4 col-md-4">
@@ -120,9 +120,7 @@
 							</c:otherwise>
 						</c:choose>
 						
-						<h4>
-							<b>나이 :</b> ${dto.d_birth }
-						</h4>
+						
 						<h4>
 							<b>지역 :</b> ${dto.d_region }
 						</h4>
@@ -208,11 +206,12 @@
 
 </script>
 
-
+	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDogTL8Fk8vbPq2JCZrZKedH35rNtSGKJE&libraries=places"></script>
+	<script type="text/javascript" src="js/schedule_review.js"></script>
 
 
 	<%@ include file="form/footer.jsp"%>
-
+	
 
 </body>
 </html>

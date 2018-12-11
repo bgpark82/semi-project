@@ -13,39 +13,47 @@ var s_longitude
 	dataType : "json"}) 				
 	.done(function(data) { 		
 		var s_detail = data.scheduleDetail;
-		
+		console.log(s_detail);
 		var s_seq = s_detail.s_seq;
 		var u_no = s_detail.u_no;
 		var	d_no = s_detail.d_no;
+		var	d_name = s_detail.d_name;
+		var d_profile = s_detail.d_profile;
 		var s_no = s_detail.s_no;
 		var s_date = s_detail.s_date;
 		var s_time = s_detail.s_time;
 		var s_location = s_detail.s_location;
-		 s_course = s_detail.s_course;
+		s_course = s_detail.s_course;
 		var s_people = s_detail.s_people;
 		var s_price = s_detail.s_price;
 		var s_regdate = s_detail.s_regdate;
-		 s_latitude = s_detail.s_latitude;
-		 s_longitude = s_detail.s_longitude;
+		s_latitude = s_detail.s_latitude;
+		s_longitude = s_detail.s_longitude;
 		var d_gender = s_detail.d_gender;
-		var d_location = s_detail.d_location;
+		var s_location = s_detail.s_location;
 		var s_confirmed_check = s_detail.s_confirmed_check;
 		var ra_rating = s_detail.ra_rating;
+		
+		
 		
 		$("#s_location").text(s_location);
 		$("#s_date").text(s_date);
 		$("#s_people").text(s_people);
 		$("#s_price").text(s_price);
 		$("#s_course").text(s_course);
+		$("#d_name").text(d_name);
 		$("#d_gender").text(d_gender);
-		$("#d_location").text(d_location);
+		
+		$("#profile").attr("src",d_profile);
+		
+
 		
 		if(s_confirmed_check == 'Y'){
-			$("#s_confirmed_check").html('<span style="color:green" class="glyphicon glyphicon-ok"></span>');
+			$("#s_confirmed_check").html('<span style="color:green; font-size:40px;" class="glyphicon glyphicon-ok"></span>');
 		} else if(s_confirmed_check == 'N'){
-			$("#s_confirmed_check").html('<span style="color:red" class="glyphicon glyphicon-remove"></span>');
+			$("#s_confirmed_check").html('<span style="color:red; font-size:40px; " class="glyphicon glyphicon-remove"></span>');
 		} else {
-			$("#s_confirmed_check").html('<span style="color:orange" class="glyphicon glyphicon-time"></span>');
+			$("#s_confirmed_check").html('<span style="color:orange; font-size:40px;" class="glyphicon glyphicon-time"></span>');
 		}
 		
 		console.log(ra_rating);
