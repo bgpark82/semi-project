@@ -18,43 +18,8 @@
 		<result property="s_latitude" column="S_LATITUDE"/>
 		<result property="s_longitude" column="S_LONGITUDE"/>
 		<result property="s_confirmed_check" column="S_CONFIRMED_CHECK"/>
-		<!-- <collection property="driverDto"  resultMap="DriverTableMap"></collection> -->
 	</resultMap>
-		
-		<!-- <collection property="" column="" ofType="" select=""></collection> -->
 	
-	
-	<resultMap type="com.taxi.driver.dto.DriverDto" id="DriverTableMap">
-  		<id property="d_no" column="D_NO" />
-  		<result property="d_profile" column="D_PROFILE" />
-  		<result property="d_region" column="D_REGION" />
-		<result property="d_name" column="D_NAME" />
-		<result property="d_id" column="D_ID" />
-		<result property="d_pw" column="D_PW" />
-		<result property="d_birth" column="D_BIRTH" />
-		<result property="d_gender" column="D_GENDER" />
-		<result property="d_phone" column="D_PHONE" />
-		<result property="d_email" column="D_EMAIL" />
-		<result property="d_enabled" column="D_ENABLED" />
-		<result property="d_license" column="D_LICENSE" />
-		<result property="d_carnum" column="D_CARNUM" />
-		<result property="d_role" column="D_ROLE" />
-		<result property="d_title" column="D_TITLE" />
-		<result property="d_content" column="D_CONTENT" />
-  	</resultMap>
-  	
-  	<!-- <resultMap type="com.taxi.user.dto.UserDto" id="UserTableMap">
-		<result property="u_no" column="U_NO"/>
-		<result property="u_name" column="U_NAME"/>
-		<result property="u_id" column="U_ID"/>
-		<result property="u_pw" column="U_PW"/>
-		<result property="u_birth" column="U_BIRTH"/>
-		<result property="u_gender" column="U_GENDER"/>
-		<result property="u_phone" column="U_PHONE"/>
-		<result property="u_email" column="U_EMAIL"/>
-		<result property="u_role" column="U_ROLE"/>
-		<result property="u_enabled" column="U_ENABLED"/>
-	</resultMap> -->
 	
 	<select id="selectlogin" parameterType="UserDto" resultType="UserDto">
 	SELECT * FROM USER_TABLE WHERE U_ID = #{u_id} AND U_PW = #{u_pw} AND U_ENABLED = 'Y'
@@ -99,7 +64,7 @@
 	ON SH.D_NO = DR.D_NO
 	INNER JOIN USER_TABLE US
 	ON SH.U_NO = US.U_NO
-	JOIN (SELECT AVG(RA_RATING) AS RA_RATING, D_NO FROM RATING_TABLE GROUP BY D_NO) RA
+	LEFT OUTER JOIN (SELECT AVG(RA_RATING) AS RA_RATING, D_NO FROM RATING_TABLE GROUP BY D_NO) RA
 	ON SH.D_NO = RA.D_NO 
 	WHERE SH.S_SEQ = #{s_seq}
 	</select>
@@ -111,7 +76,7 @@
 	ON SH.D_NO = DR.D_NO
 	INNER JOIN USER_TABLE US
 	ON SH.U_NO = US.U_NO
-	INNER JOIN RATING_TABLE RA
+	LEFT OUTER JOIN RATING_TABLE RA
 	ON SH.D_NO = RA.D_NO
 	WHERE SH.D_NO = #{d_no}
 	</select>

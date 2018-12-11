@@ -23,7 +23,12 @@
 	src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script src="https://www.paypalobjects.com/api/checkout.js"></script>
 <link rel="stylesheet" href="css/timeline.css">
-
+<style>
+.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th,
+	.table>thead>tr>td, .table>thead>tr>th {
+	border-top: 0px;
+}
+</style>
 <script type="text/javascript">
 	$(function() {
 		$("#userupdate").submit(
@@ -50,23 +55,20 @@
 		UserDto dto = (UserDto) request.getAttribute("dto");
 	%>
 
+	<br>
+	<h1 style="text-align: center">마이페이지</h1>
+	<br>
+	<hr>
 
+	<div class="container" style="width: 500px;">
 
-	<div class="container" style="width:500px;">
-		<br>
-		<br><h1 style="text-align:center">마이페이지</h1><br><hr>
-		
-		
-		
-	<!-- 	<div class="row">
-			<div class="col-md-6"> -->
-				<div class="panel panel-default">
-					<div class="panel-body">
+		<div class="panel panel-default">
+			<div class="panel-body">
 				<form action="UserController?commad=" method="post" id="userupdate">
 					<input type="hidden" name="command" value="userupdate"> 
 					<input type="hidden" name="u_no" value="${dto.u_no }">
-					<table class="table">
-						
+						<table class="table">
+
 						<tr>
 							<th>이 름</th>
 							<td>${dto.u_name }</td>
@@ -85,8 +87,8 @@
 						</tr>
 						<tr>
 							<th>비밀번호</th>
-							<td><input type="password" name="pw1" value="${dto.u_pw }" class="form-control">
-							</td>
+							<td><input type="password" name="pw1" value="${dto.u_pw }"
+								class="form-control"></td>
 						</tr>
 						<tr>
 							<th>비밀번호 재확인</th>
@@ -104,16 +106,16 @@
 						</tr>
 						<tr>
 							<td colspan="2">
-							<input type="submit" value="수정하기" class="btn btn-default" style="float:right"/> 
-							<input type="button" value="탈퇴하기" onclick="location.href='UserController?command=userout&u_no=${dto.u_no}'" class='btn btn-default' style="float:right"/>
+							<input type="submit" value="수정하기" class="btn btn-default" style="float: right" /> 
+							<input type="button" value="탈퇴하기" onclick="location.href='UserController?command=userout&u_no=${dto.u_no}'" class='btn btn-default' style="float: right" />
 							</td>
 						</tr>
 					</table>
 				</form>
-				</div>
-				</div>
 			</div>
-			<!-- <div class="col-md-6">
+		</div>
+	</div>
+	<!-- <div class="col-md-6">
 				<ul>
 					<li class="list-group-item" style="width:100%" >
   							<div class="container" style="max-height: 150px; width:100%">
@@ -147,7 +149,7 @@
 						</li>
 				</ul>
 			</div> -->
-		<!-- </div>
+	<!-- </div>
 	</div> -->
 
 

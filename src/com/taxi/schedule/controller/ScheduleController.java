@@ -103,6 +103,7 @@ public class ScheduleController extends HttpServlet {
 			int d_no = driverDto.getD_no();
 			scheduleDto.setU_no(u_no);
 			scheduleDto.setD_no(d_no);
+			System.out.println(scheduleDto);
 			
 			int res = scheduleDao.insertSchedule(scheduleDto);
 			System.out.println(scheduleDto);

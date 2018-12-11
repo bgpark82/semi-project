@@ -16,18 +16,24 @@
 <!-- 뷰포트 -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- 부트스트랩 -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<!-- jQuery -->
-<script type="text/javascript"
-	src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <style>
 .glyphicon-star{
 	cursor: pointer;
+	font-size: 30px;
 }
 .glyphicon-star.on{
 	color:orange;
 }
+.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
+	border-top:0px;
+}
+th{
+	text-align:right;
+}
+
 </style>	
 
 <script type="text/javascript">
@@ -78,44 +84,45 @@
 <body>
 	<%@ include file="form/header.jsp"%>
 
-	<div class="container">
+	
 		<br>
-		<h1>마이페이지</h1>
-		<br>
-		<hr>
-		<div class="row">
-			<div class="col-md-6">
-				<table class="table ">
-					<col width="150" />
-					<col width="300" />
+		<h1><span style="margin-left:280px;">마이페이지</span> <span style="float:right; margin-right:320px;">요청 정보</span></h1><br><hr>
+		
+		<div class="container">
+			<div class="row">
+				<div class="col-md-1" ></div>
+				<div class="col-md-5" style="text-align:center; width:400px;">
+					<div class="panel panel-default">	
+						<div class="panel-body">
+							<img style="width: 200px; height: 200px; border-radius: 100%; " src="${dto.d_profile }" />
+								<div class="star">
+									<c:choose>
+										<c:when test="${rating != 0 }">
+											<c:forEach begin="1" end="${rating }" step="1">
+												<span class="glyphicon glyphicon-star on"></span>
+											</c:forEach>
+											<c:forEach begin="${rating +1}" end="5" step="1">
+												<span class="glyphicon glyphicon-star"></span>
+											</c:forEach>
+										</c:when>
+										<c:otherwise>
+											<span class="glyphicon glyphicon-star"></span>
+											<span class="glyphicon glyphicon-star"></span>
+											<span class="glyphicon glyphicon-star"></span>
+											<span class="glyphicon glyphicon-star"></span>
+											<span class="glyphicon glyphicon-star"></span>
+										</c:otherwise>	
+									</c:choose>	
+								</div>	
+				
+				<table class="table">
+					<col width="60px" />
+					<col width="50px" />
 					<tr>
-						<th>프로필 사진</th>
-						<td><img
-							style="width: 200px; height: 200px; border-radius: 100%;"
-							src="${dto.d_profile }" /></td>
-						
-						<!-- 별점 표시 -->	
-						<div class="star" style="font-size:30px;">	
-						<c:choose>
-							<c:when test="${rating != 0 }">
-								<c:forEach begin="1" end="${rating }" step="1">
-									<span class="glyphicon glyphicon-star on"></span>
-								</c:forEach>
-								<c:forEach begin="${rating +1}" end="5" step="1">
-									<span class="glyphicon glyphicon-star"></span>
-								</c:forEach>
-							</c:when>
-							<c:otherwise>
-								<span class="glyphicon glyphicon-star"></span>
-								<span class="glyphicon glyphicon-star"></span>
-								<span class="glyphicon glyphicon-star"></span>
-								<span class="glyphicon glyphicon-star"></span>
-								<span class="glyphicon glyphicon-star"></span>
-							</c:otherwise>	
-						</c:choose>	
-						</div>	
-						
+						<td>
+						</td>
 					</tr>
+					
 					<tr>
 						<th>아이디</th>
 						<td>${dto.d_id }</td>
@@ -156,55 +163,65 @@
 						<th>차량번호</th>
 						<td>${dto.d_carnum }</td>
 					</tr>
-					<tr>
-						<td colspan="5"><input type="button" value="수정"
-							onclick="updatedriver(${dto.d_no});" /> <input type="button"
-							value="탈퇴" onclick="deletedriver(${dto.d_no});" /> <input
-							type="button" value="목록"
-							onclick="location.href='driver_main.jsp'" /> <input
-							type="button" value="운전자전체목록"
-							onclick="location.href='DriverController?command=driverlist'" />
-						</td>
-					</tr>
 				</table>
+				
+				<input type="button" value="수정" onclick="updatedriver(${dto.d_no});" class="btn btn-default form-control" /> 
+				<input type="button" value="탈퇴" onclick="deletedriver(${dto.d_no});" class="btn btn-default form-control"/> 
+				</div>
+			</div>
 			</div>
 			<div class="col-md-6">
-				<h2>요청 정보</h2>
-				<ul>
-					<li class="list-group-item" style="width: 100%">
-						<div class="container" style="max-height: 150px; width: 100%">
+
+						<div class="container">
 							<div class="row">
+								<div class="col-xs-6">
+								<ul>
 								<c:forEach var="dto" items="${scheduleList }">
-									
-									<div class="col-xs-6" style="margin-top: 0px;">
-										<div style="margin-bottom: 5px">
-											<h3>
-												<strong>${dto.u_name }</strong>
+									<li class="list-group-item" style="width: 100%">				
+					
+										<div >
+											<h3 style="margin-top:10px; margin-bottom:10px;">
+												<strong style="margin-left:20px;">${dto.u_name }</strong>
+												<div style="float:right;">
+													<input type="button" value="보기" class="btn btn-default">
+													<input id="${dto.s_seq }" type="button" value="선택" class="btn btn-primary" onclick="confirmed(this)">
+													<input id="${dto.s_seq }" type="button" value="거절" class="btn btn-danger" onclick="rejected(this)">
+												</div>
 											</h3>
 										</div>
-										<div style="margin-bottom: 5px">
-											<b>시간 </b><span>${dto.s_time }</span>
-										</div>
-										<div style="margin-bottom: 5px">
-											<b>인원수 </b><span>${dto.s_people }</span>
-										</div>
-										<div style="margin-bottom: 5px">
-											<b>경로 </b> <span>${dto.s_course }</span>
-										</div>
-									</div>
-
-									<div class="col-xs-6" style="margin-top: 18px; padding: 0px;">
+										<table class="table" style="margin-bottom:0px;">
+										<tr>
+											<td>시간</td>
+											<td>${dto.s_time }시</td>
+										</tr>
+										<tr>
+											<td>일자</td>
+											<td>${dto.s_date }</td>
+										</tr>
+										<tr>
+											<td>인원수</td>
+											<td>${dto.s_people }명</td>
+										</tr>
+										<tr>
+											<td>경로</td>
+											<td>${dto.s_course }</td>
+										</tr>
+										</table>
+										
+						
+						<div class="col-xs-6" style="margin-top: 18px; padding: 0px;">
 										<!-- <label class="checkbox-inline"> -->
-										<input type="button" value="보기" class="btn btn-default">
-										<input id="${dto.s_seq }" type="button" value="선택" class="btn btn-primary" onclick="confirmed(this)">
-										<input id="${dto.s_seq }" type="button" value="거절" class="btn btn-danger" onclick="rejected(this)">
+										
 										<!-- </label> -->
 									</div>
+									</li>
 								</c:forEach>
+								
+						</ul>
+						</div>
 							</div>
 						</div>
-					</li>
-				</ul>
+				
 			</div>
 		</div>
 	</div>

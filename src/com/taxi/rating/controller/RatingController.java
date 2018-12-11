@@ -41,6 +41,8 @@ public class RatingController extends HttpServlet {
 			int d_no = Integer.parseInt(request.getParameter("d_no"));
 			int s_seq = Integer.parseInt(request.getParameter("s_seq"));
 			
+			System.out.println("ra_rating : " +ra_rating);
+			
 			int res = ratingDao.insertRating(ra_rating, d_no, u_no);
 			
 			if(res > 0) {

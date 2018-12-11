@@ -3,6 +3,7 @@ var s_latitude
 var s_longitude
 //날짜 클릭시 캘린더 밑에 일정 상세보기 
  function scheduleDetail(chk){
+	
 	$.ajax({
 		type : "POST",
 		url : "ScheduleController",  
@@ -58,6 +59,7 @@ var s_longitude
 		
 		console.log(ra_rating);
 		$("#star").children().remove();
+		
 		if(ra_rating != 0){
 			for(var i = 0; i < ra_rating; i++){
 				$("#star").append('<span class="glyphicon glyphicon-star on"></span>');
@@ -67,7 +69,7 @@ var s_longitude
 			}
 		} else {
 			for(var i =1; i <=5; i++){
-				$("#star").append('<span class="glyphicon glyphicon-star on"></span>');
+				$("#star").append('<span class="glyphicon glyphicon-star"></span>');
 			}
 		}
 		

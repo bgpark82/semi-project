@@ -199,7 +199,7 @@
 	});
 		
 	function checkStars(){
-		var count = document.getElementsByClassName('on').length;
+		var count = $(".star > .on").length;
 		$("#sendStars").append("<input type='hidden' name='ra_rating' value='"+count+"'>");
 		$("#sendStars").submit();
 	}
