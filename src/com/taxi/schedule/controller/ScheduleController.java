@@ -18,6 +18,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.taxi.driver.dao.DriverDao;
 import com.taxi.driver.dto.DriverDto;
+import com.taxi.rating.dto.RatingDto;
 import com.taxi.schedule.dao.ScheduleDao;
 import com.taxi.schedule.dto.ScheduleDto;
 import com.taxi.user.dto.UserDto;
@@ -74,11 +75,13 @@ public class ScheduleController extends HttpServlet {
 			int people = Integer.parseInt(request.getParameter("people"));
 			
 			ScheduleDto dto = new ScheduleDto(0,0,0,0,date,time,location,course,people,price,null,lat,lng,"");
-			System.out.println(dto);
-			
 			session.setAttribute("scheduleDto", dto);
 			
 			List<DriverDto> list = driverDao.DriverList();
+			for(int i = 0; i<list.size(); i++) {
+				System.out.println("rating : "+ list.get(i).getRa_rating());
+			}
+			
 			request.setAttribute("driverList", list);
 			dispatch("route_driver_list.jsp", request, response);
 		}
@@ -145,8 +148,6 @@ public class ScheduleController extends HttpServlet {
 		else if(command.equals("scheduleDetail")){
 			int s_seq = Integer.parseInt(request.getParameter("s_seq"));
 			ScheduleDto dto = scheduleDao.selectOne(s_seq);
-			
-			
 			
 			Map<String,Object> map = new HashMap<String,Object>();
 			map.put("scheduleDetail", dto);

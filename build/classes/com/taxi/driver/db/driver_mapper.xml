@@ -43,7 +43,11 @@
   	
   	
 <select id="driverinfo" parameterType="int" resultType="DriverDto">
-	SELECT * FROM DRIVER_TABLE WHERE D_NO = #{d_no}  
+	SELECT DR.D_NO, DR.D_PROFILE, DR.D_REGION ,DR.D_NAME, DR.D_ID, DR.D_PW, DR.D_BIRTH, DR.D_GENDER, DR.D_PHONE, DR.D_EMAIL , DR.D_ENABLED, DR.D_LICENSE, DR.D_CARNUM, DR.D_ROLE, DR.D_TITLE, DR.D_CONTENT, RA_RATING
+	FROM DRIVER_TABLE DR
+	INNER JOIN (SELECT AVG(RA_RATING) AS RA_RATING, D_NO FROM RATING_TABLE GROUP BY D_NO) RA
+	ON DR.D_NO = RA.D_NO(+)
+	WHERE DR.D_ENABLED = 'Y' AND DR.D_NO = #{d_no}
 </select>
 
 <select id="getprofile" parameterType="int" resultType="String">
@@ -62,12 +66,19 @@
   	
   	
 <select id="driverlist"  resultMap="DriverTableMap">  	
-  	SELECT * FROM DRIVER_TABLE WHERE D_ENABLED = 'Y' ORDER BY D_NO DESC
+  	SELECT DR.D_NO, DR.D_PROFILE, DR.D_REGION ,DR.D_NAME, DR.D_ID, DR.D_PW, DR.D_BIRTH, DR.D_GENDER, DR.D_PHONE, DR.D_EMAIL , DR.D_ENABLED, DR.D_LICENSE, DR.D_CARNUM, DR.D_ROLE, DR.D_TITLE, DR.D_CONTENT, RA_RATING
+	FROM DRIVER_TABLE DR
+	INNER JOIN (SELECT AVG(RA_RATING) AS RA_RATING, D_NO FROM RATING_TABLE GROUP BY D_NO) RA
+	ON DR.D_NO = RA.D_NO(+)
+	WHERE DR.D_ENABLED = 'Y'
+	ORDER BY DR.D_NO DESC
 </select> 	
 
 <update id="updateProfile" parameterType="DriverDto">
 	UPDATE DRIVER_TABLE SET D_PROFILE = #{d_profile} WHERE D_ID = #{d_id} 
 </update>
+
+
 
 
 </mapper>

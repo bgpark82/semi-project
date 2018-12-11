@@ -133,11 +133,12 @@ public class DriverDao extends SqlMapConfig{
 	
 	//운전자 리스트 조회
 	public List<DriverDto> DriverList(){
-		List<DriverDto> res = new ArrayList<DriverDto>();
+		List<DriverDto> res = null;
 		SqlSession session = null;
 		try {
 			session = getSqlSessionFactory().openSession(true);
 			res = session.selectList(namespace + "driverlist");
+
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

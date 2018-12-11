@@ -30,6 +30,7 @@ var s_longitude
 		var d_gender = s_detail.d_gender;
 		var d_location = s_detail.d_location;
 		var s_confirmed_check = s_detail.s_confirmed_check;
+		var ra_rating = s_detail.ra_rating;
 		
 		$("#s_location").text(s_location);
 		$("#s_date").text(s_date);
@@ -46,7 +47,24 @@ var s_longitude
 		} else {
 			$("#s_confirmed_check").html('<span style="color:orange" class="glyphicon glyphicon-time"></span>');
 		}
-
+		
+		console.log(ra_rating);
+		$("#star").children().remove();
+		if(ra_rating != 0){
+			for(var i = 0; i < ra_rating; i++){
+				$("#star").append('<span class="glyphicon glyphicon-star on"></span>');
+			}
+			for(var i = ra_rating+1; i <=5; i++){
+				$("#star").append('<span class="glyphicon glyphicon-star"></span>');
+			}
+		} else {
+			for(var i =1; i <=5; i++){
+				$("#star").append('<span class="glyphicon glyphicon-star on"></span>');
+			}
+		}
+		
+	
+		
 		
 	})
 	.done(function(){
@@ -58,7 +76,6 @@ var s_longitude
 			s_course : s_course,	
 			s_latitude : s_latitude,
 			s_longitude : s_longitude
-			
 		},
 		dataType: "json"
 	})
@@ -71,7 +88,7 @@ var s_longitude
 		var course = data.s_course;
 		var latitude = data.s_latitude;
 		var longitude = data.s_longitude;
-		console.log(latitude);
+		
 		
 		for(var i = 0; i < data.s_latitude.length; i++){
 			marker = new google.maps.Marker({

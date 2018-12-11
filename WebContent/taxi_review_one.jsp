@@ -102,11 +102,23 @@
 							style="width: 200px; height: 200px; border-radius: 100%;"
 							src="${dto.d_profile }">
 						<h3>${dto.d_name }</h3>
-						<div>
-							<span class="fa fa-star checked" style="margin-top: 8px;"></span>
-							<span class="fa fa-star checked"></span> <span
-								class="fa fa-star checked"></span> <span class="fa fa-star"></span>
-						</div>
+						<c:choose>
+							<c:when test="${dto.ra_rating != 0 }">
+								<c:forEach begin="1" end="${dto.ra_rating }" step="1">
+									<span class="glyphicon glyphicon-star on"></span>
+								</c:forEach>
+								<c:forEach begin="${dto.ra_rating +1}" end="5" step="1">
+									<span class="glyphicon glyphicon-star"></span>
+								</c:forEach>
+							</c:when>
+							<c:otherwise>
+								<span class="glyphicon glyphicon-star"></span>
+								<span class="glyphicon glyphicon-star"></span>
+								<span class="glyphicon glyphicon-star"></span>
+								<span class="glyphicon glyphicon-star"></span>
+								<span class="glyphicon glyphicon-star"></span>
+							</c:otherwise>
+						</c:choose>
 						
 						<h4>
 							<b>나이 :</b> ${dto.d_birth }
@@ -183,7 +195,6 @@
 
 <script>
 	
-		
 	$('.star span').click(function(){
 		$(this).parent().children('span').removeClass('on');
 		$(this).addClass('on').prevAll('span').addClass('on');
@@ -194,8 +205,6 @@
 		$("#sendStars").append("<input type='hidden' name='ra_rating' value='"+count+"'>");
 		$("#sendStars").submit();
 	}
-	
-
 
 </script>
 

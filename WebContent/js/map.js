@@ -20,14 +20,15 @@ var contentid = [];
 // run ajax as button selected
 
 	$("#local").on('change',function(){
+		
 		var id = $("#local option:selected").val();
-		var url = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/areaBasedList?ServiceKey=TfotMHpUdUtGCMBSV%2BBxCG7vi%2FzLocIn1xq%2FeycGAO9NFBGIz37scDa0ABTB92P8%2BaMGgmsDIKCXTcNA6zditg%3D%3D"
+		var url = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/areaBasedList?ServiceKey=Lpx7RnFSIm3b7RtjRZ3tHBmiiU7kH1FoSUC6oR1ZYvqRyrtZdnvZonD3is5eN7P1bd4GWsm%2FM0b8i1ZHpq7frw%3D%3D"
             +"&contentTypeId=12"
             +"&areaCode="+id 
             +"&sigunguCode=" 
             +"&cat1=&cat2=&cat3="
             +"&listYN=Y&MobileOS=ETC&MobileApp=TourAPI3.0_Guide&arrange=A"
-            +"&numOfRows=5&pageNo=1";
+            +"&numOfRows=7&pageNo=1";
 		
 			$.ajax({
 				type : "GET",
@@ -35,22 +36,23 @@ var contentid = [];
 				dataType : "xml"})
 				// display the location information on the top of the page
 				.done(function(data){
+					
 					$(data).find("item").each(function(i){
 						var contentid = $(this).find("contentid").text();
 						
-						var url2 = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/detailCommon?ServiceKey=TfotMHpUdUtGCMBSV%2BBxCG7vi%2FzLocIn1xq%2FeycGAO9NFBGIz37scDa0ABTB92P8%2BaMGgmsDIKCXTcNA6zditg%3D%3D"
-		                     +"&contentTypeId=12" 
-		                     +"&contentId="+contentid
-		                     +"&MobileOS=ETC&MobileApp=TourAPI3.0_Guide&defaultYN=Y" 
-		                     +"&firstImageYN=Y&areacodeYN=Y" 
-		                     +"&catcodeYN=Y&addrinfoYN=Y&mapinfoYN=Y" 
-		                     +"&overviewYN=Y&transGuideYN=Y";
+						var url2 = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/detailCommon?ServiceKey=Lpx7RnFSIm3b7RtjRZ3tHBmiiU7kH1FoSUC6oR1ZYvqRyrtZdnvZonD3is5eN7P1bd4GWsm%2FM0b8i1ZHpq7frw%3D%3D"
+	                           +"&contentTypeId=12" 
+	                           +"&contentId="+contentid
+	                           +"&MobileOS=ETC&MobileApp=TourAPI3.0_Guide&defaultYN=Y" 
+	                           +"&firstImageYN=Y&areacodeYN=Y" 
+	                           +"&catcodeYN=Y&addrinfoYN=Y&mapinfoYN=Y" 
+	                           +"&overviewYN=Y&transGuideYN=Y";
 						$.ajax({
 							type: "GET",
 							url: url2,
 							dataType: "xml"})
 							.done(function(data){
-								$(data).find("item").each(function(i){
+								$(data).find("item").each(function(){
 									var id = $(this).find("contentid").text();
 									var firstimage = $(this).find("firstimage").text();
 									var addr1 = $(this).find("addr1").text();
@@ -60,6 +62,9 @@ var contentid = [];
 									var longitude = parseFloat($(this).find("mapx").text());
 									var overview = $(this).find("overview").text();
 									
+									if(firstimage == ""){
+										firstimage="images/marker.jpg";
+									}
 									// store all of location information 
 									locationInfo(id,latitude,longitude,addr1,title,tel,overview,firstimage,coordinate);
 									
@@ -83,7 +88,6 @@ var contentid = [];
 										marker = new google.maps.Marker({
 									        position : {lat:latitude,lng:longitude},
 									        map : map,
-									        draggable: true,
 									        info : item02(id, firstimage, title, addr1, tel, overview, latitude, longitude)
 									    });
 										markerArray.push({id:marker});
@@ -144,10 +148,12 @@ var contentid = [];
 function item(id, firstimage, title, addr1, latitude, longitude){
 	return "<li id="+id+" data_lat="+latitude+" data_lng="+longitude+">" +
 			"<div onclick='displayMarker(this)' >"+
+				"<div class='panel panel-default' style='margin-bottom:5px;>"+
+					"<div class='panel-body'>"+
 					"<img src='"+firstimage+"' width='50px' height='50px'/>"
-					+"<strong><span id='title'>&nbsp;"+title+"</span></strong><br>"+
+					+"<span id='title'>&nbsp;"+title+"</span><br>"+
 //					+"<span id='addr1'>"+addr1+"</span><br>"
-			"</div><hr></li>";
+			"</div></div></div></li>";
 }
 
 function item02(id, firstimage, title, addr1, tel, overview, latitude, longitude){
@@ -169,11 +175,12 @@ function item02(id, firstimage, title, addr1, tel, overview, latitude, longitude
 
 function item03(id, firstimage, title, addr1, latitude, longitude){
 	return "<li id="+id+" data_lat="+latitude+" data_lng="+longitude+" onclick='closeList(this)'>" +
-			"<div >"+
-					"<img src='"+firstimage+"' width='50px' height='50px'/>"
-					+"<strong><span id='title'>"+title+"</span></strong><br>"+
+			"<div class='panel panel-default' style='margin-bottom:0px;'>"+
+				"<div class='panel-body' style='font-size:17px;'>"+
+					"<span class='glyphicon glyphicon-map-marker' style='color:red; ' ></span>"
+					+"<span id='title'>"+title+"</span><br>"+
 //					+"<span id='addr1'>"+addr1+"</span><br>"
-			"</div><hr></li>";
+			"</div></div></li>";
 }
 
 
@@ -244,8 +251,8 @@ function calculateAndDisplayRoute(routeCoordinate, directionsService, directions
     		var duration = Math.round(Number(response.routes[0].legs[0].duration.value)/60);
     		durationArr.push(duration);
     		
-    		$("#trip_selected").find("li").eq(listSize).prepend(distance);
-    		$("#trip_selected").find("li").eq(listSize).prepend("<span id='duration'>"+duration+"분</span>");
+//    		$("#trip_selected").find("li").eq(listSize).prepend(distance);
+    		$("#trip_selected").find("li").eq(listSize).prepend("<div style='margin-top:5px; margin-bottom:5px; color:#797979;'><span class='glyphicon glyphicon-option-vertical' style='font-size:15px;'></span>&nbsp;<span class='glyphicon glyphicon-time'></span>&nbsp;<span id='duration'>"+duration+"분</span></div>");
     		
     		var totalDuration = 0;
     		for(var i = 0; i < durationArr.length; i++){

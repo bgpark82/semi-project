@@ -24,15 +24,11 @@
 <body>
 	<%@ include file="form/header.jsp"%>
 
+	<br><h1 style="text-align:center">즐거운 여행되셨나요? <small>여행을 함께한 기사님의 평점과 리뷰를 작성해주세요</small></h1><hr>
+						
 	<div class="container" style="width:1000px; margin: 0 auto;">
 		<div class="row">
-			<div class="col-lg-12">
-				<h1 class="page-header">
-					즐거운 여행되셨나요? <small>여행을 함께한 기사님의 평점과 리뷰를 작성해주세요</small> <input type="button"
-						value="홈으로 가기" onclick="location.href='index.jsp'"
-						class="btn btn-default" style="float: right">
-				</h1>
-			</div>
+			
 		</div>
 		<div class="container" style="width:800px; margin: 0 auto;">
 		<table class="table">
@@ -59,7 +55,7 @@
 				</c:forEach>
 
 		</table>
-
+	<input style="float:right" type="button" value="홈으로 가기" onclick="location.href='index.jsp'" class="btn btn-default" style="float: right">
 
 			</div>
 			</div>

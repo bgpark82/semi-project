@@ -1,7 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<% request.setCharacterEncoding("UTF-8"); %>				
-<% response.setContentType("text/html; charset=UTF-8"); %> 
+	pageEncoding="UTF-8"%>
+<%
+	request.setCharacterEncoding("UTF-8");
+%>
+<%
+	response.setContentType("text/html; charset=UTF-8");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,161 +14,191 @@
 <!-- 뷰포트 -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- 부트스트랩 -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <!-- jQuery -->
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script type="text/javascript"
+	src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <!-- paypal -->
 <script src="https://www.paypalobjects.com/api/checkout.js"></script>
 </head>
 <body>
-<%@ include file="form/header.jsp" %>
+	<%@ include file="form/header.jsp"%>
 
 
 
+	<br>
+	<h1 style="text-align: center;">결제 정보</h1>
+	<br>
+	<hr>
+	<div class="container" style="margin:0 auto; width: 500px;">
+		<h3>
+			<span>${userDto.u_name }</span><small>님의 결제정보창입니다.</small>
+		</h3>
+		<div class="panel panel-default" style="width: 400px">
+			<div class="panel-body">
+				<table class="table ">
+					<thead>
+						<tr>
+							<th width="40%"></th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>이름</td>
+							<td><span>${userDto.u_name }</span></td>
+						</tr>
+						<tr>
+							<td>금액</td>
+							<td><span>${scheduleDto.s_price }</span></td>
+						</tr>
+						<tr>
+							<td>인원수</td>
+							<td><span>${scheduleDto.s_people }</span></td>
+						</tr>
+						<tr>
+							<td>휴대전화</td>
+							<td><span>${userDto.u_phone }</span></td>
+						</tr>
+						<tr>
+							<td>예약날짜</td>
+							<td><span>${scheduleDto.s_date }</span></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div class="container" style="float: center">
 
- <div class="container">   
-      <div class="row">
-         <div class="col-md-3"></div>         
-         <div class="col-md-6">
-            <h1 style="text-align:center; margin-top:100px;">결제 정보</h1><hr>
-            <p><span>${userDto.u_name }</span>님의 결제정보창입니다.</p>
-            <div class="panel panel-default" style="width:400px">
-            	<div class="panel-body">
-            <table class="table ">
-               <thead>
-                  <tr>
-                     <th width="40%"></th>
-                     <th></th>
-                  </tr>
-               </thead>
-               <tbody>
-                  <tr>
-                     <td>이름</td>
-                     <td><span>${userDto.u_name }</span></td>
-                  </tr>
-                  <tr>
-                     <td>금액</td>
-                     <td><span>${scheduleDto.s_price }</span></td>
-                  </tr>
-                  <tr>
-                     <td>결제일</td>
-                     <td><span>${scheduleDto.s_regdate }</span></td>
-                  </tr>
-                  <tr>
-                     <td>인원수</td>
-                     <td><span>${scheduleDto.s_people }</span></td>
-                  </tr>
-                  <tr>
-                     <td>휴대전화</td>
-                     <td><span>${userDto.u_phone }</span></td>
-                  </tr>
-                  <tr>
-                     <td>예약날짜</td>
-                     <td><span>${scheduleDto.s_date }</span></td>
-                  </tr>
-               </tbody>
-            </table>
-           </div>
-          </div> 
-				<div class="container" style="float:center">
-					
-					<div id="paypal-button-container"></div>
-					
-					<div id="confirm" class="hidden">
-					    <div>Ship to:</div>
-					    <div><span id="recipient"></span>, <span id="line1"></span>, <span id="city"></span></div>
-					    <div><span id="state"></span>, <span id="zip"></span>, <span id="country"></span></div>
-					
-					    <button id="confirmButton">Complete Payment</button>
-					</div>
-					
-					<div id="thanks" class="hidden">
-					    Thanks, <span id="thanksname"></span>
-					</div>
+			<div id="paypal-button-container"></div>
+
+			<div id="confirm" class="hidden">
+				<div>Ship to:</div>
+				<div>
+					<span id="recipient"></span>, <span id="line1"></span>, <span
+						id="city"></span>
 				</div>
-        	 <div class="col-md-3">
-        	 
-        	 </div>
-        	 <button class="btn btn-default" onclick="location.href='ScheduleController?command=route_payment_confirmed'" style="float:right">결제 완료</button>
-      	</div>
+				<div>
+					<span id="state"></span>, <span id="zip"></span>, <span
+						id="country"></span>
+				</div>
+
+				<button id="confirmButton">Complete Payment</button>
+			</div>
+
+			<div id="thanks" class="hidden">
+				Thanks, <span id="thanksname"></span>
+			</div>
+		</div>
+
+		<button class="btn btn-default"
+			onclick="location.href='ScheduleController?command=route_payment_confirmed'"
+			style="float: right">결제 완료</button>
 	</div>
-</div>
 
 
-<script>
-    paypal.Button.render({
 
-        env: 'sandbox', // sandbox | production
+	<script>
+		paypal.Button
+				.render(
+						{
 
-        client: {
-            sandbox:    'AUb8TBTh13LfZmOGIlw2logfFahD1cOFyX2Tw85fqdBCOpDeDGfwnR2y-LXfZAkb-BiW3mpzc8a7aWpe',
-            production: '<insert production client id>'
-        },
+							env : 'sandbox', // sandbox | production
 
-        payment: function(data, actions) {
-            return actions.payment.create({
-                payment: {
-                    transactions: [
-                        {
-                            amount: { total: '0.01', currency: 'USD' }
-                        }
-                    ]
-                }
-            });
-        },
+							client : {
+								sandbox : 'AUb8TBTh13LfZmOGIlw2logfFahD1cOFyX2Tw85fqdBCOpDeDGfwnR2y-LXfZAkb-BiW3mpzc8a7aWpe',
+								production : '<insert production client id>'
+							},
 
-        // Wait for the payment to be authorized by the customer
+							payment : function(data, actions) {
+								return actions.payment.create({
+									payment : {
+										transactions : [ {
+											amount : {
+												total : '0.01',
+												currency : 'USD'
+											}
+										} ]
+									}
+								});
+							},
 
-        onAuthorize: function(data, actions) {
+							// Wait for the payment to be authorized by the customer
 
-            // Get the payment details
+							onAuthorize : function(data, actions) {
 
-            return actions.payment.get().then(function(data) {
+								// Get the payment details
 
-                // Display the payment details and a confirmation button
+								return actions.payment
+										.get()
+										.then(
+												function(data) {
 
-                var shipping = data.payer.payer_info.shipping_address;
+													// Display the payment details and a confirmation button
 
-                document.querySelector('#recipient').innerText = shipping.recipient_name;
-                document.querySelector('#line1').innerText     = shipping.line1;
-                document.querySelector('#city').innerText      = shipping.city;
-                document.querySelector('#state').innerText     = shipping.state;
-                document.querySelector('#zip').innerText       = shipping.postal_code;
-                document.querySelector('#country').innerText   = shipping.country_code;
+													var shipping = data.payer.payer_info.shipping_address;
 
-                document.querySelector('#paypal-button-container').style.display = 'none';
-                document.querySelector('#confirm').style.display = 'block';
+													document
+															.querySelector('#recipient').innerText = shipping.recipient_name;
+													document
+															.querySelector('#line1').innerText = shipping.line1;
+													document
+															.querySelector('#city').innerText = shipping.city;
+													document
+															.querySelector('#state').innerText = shipping.state;
+													document
+															.querySelector('#zip').innerText = shipping.postal_code;
+													document
+															.querySelector('#country').innerText = shipping.country_code;
 
-                // Listen for click on confirm button
+													document
+															.querySelector('#paypal-button-container').style.display = 'none';
+													document
+															.querySelector('#confirm').style.display = 'block';
 
-                document.querySelector('#confirmButton').addEventListener('click', function() {
+													// Listen for click on confirm button
 
-                    // Disable the button and show a loading message
+													document
+															.querySelector(
+																	'#confirmButton')
+															.addEventListener(
+																	'click',
+																	function() {
 
-                    document.querySelector('#confirm').innerText = 'Loading...';
-                    document.querySelector('#confirm').disabled = true;
+																		// Disable the button and show a loading message
 
-                    // Execute the payment
+																		document
+																				.querySelector('#confirm').innerText = 'Loading...';
+																		document
+																				.querySelector('#confirm').disabled = true;
 
-                    return actions.payment.execute().then(function() {
+																		// Execute the payment
 
-                        // Show a thank-you note
+																		return actions.payment
+																				.execute()
+																				.then(
+																						function() {
 
-                        document.querySelector('#thanksname').innerText = shipping.recipient_name;
+																							// Show a thank-you note
 
-                        document.querySelector('#confirm').style.display = 'none';
-                        document.querySelector('#thanks').style.display = 'block';
-                    });
-                });
-            });
-        }
+																							document
+																									.querySelector('#thanksname').innerText = shipping.recipient_name;
 
-    }, '#paypal-button-container');
+																							document
+																									.querySelector('#confirm').style.display = 'none';
+																							document
+																									.querySelector('#thanks').style.display = 'block';
+																						});
+																	});
+												});
+							}
 
-</script>
+						}, '#paypal-button-container');
+	</script>
 
 
-<%@ include file="form/footer.jsp" %>
+	<%@ include file="form/footer.jsp"%>
 
 </body>
 </html>

@@ -53,6 +53,11 @@ public class ScheduleDto {
 	private String u_enabled;
 	
 	
+	private int ra_no;
+	private int ra_rating;
+
+	
+	
 	
 	public ScheduleDto() {
 		
@@ -400,7 +405,28 @@ public class ScheduleDto {
 	public void setU_enabled(String u_enabled) {
 		this.u_enabled = u_enabled;
 	}
+
 	
+	
+	
+	
+	
+	// 별점 
+	public int getRa_no() {
+		return ra_no;
+	}
+
+	public void setRa_no(int ra_no) {
+		this.ra_no = ra_no;
+	}
+
+	public int getRa_rating() {
+		return ra_rating;
+	}
+
+	public void setRa_rating(int ra_rating) {
+		this.ra_rating = ra_rating;
+	}
 	
 	
 	

@@ -25,6 +25,17 @@
 	height: 400px;
 	width: 100%;
 }
+th{
+	width:50px;
+}
+.glyphicon-star{
+  
+  cursor: pointer;
+}
+.glyphicon-star.on{
+	color:orange;
+}
+
 </style>
 </head>
 <body>
@@ -67,7 +78,16 @@
 							</tr>
 							<tr>
 								<th>경로</th>
-								<td>${scheduleDto.s_course }</td>
+								<td>
+									${scheduleDto.s_course }
+									<!--  <li id="+id+" data_lat="+latitude+" data_lng="+longitude+" onclick='closeList(this)'>
+									<div class='panel panel-default' style='margin-bottom:0px;'>
+									<div class='panel-body' style='font-size:17px;'>
+									<span class='glyphicon glyphicon-map-marker' style='color:red; ' ></span>
+									<span id='title'>"+title+"</span><br>
+									<span id='addr1'>"+addr1+"</span><br>
+									</div></div></li> -->
+								</td>
 							</tr>
 
 						</table>
@@ -81,16 +101,25 @@
 							style="width: 200px; height: 200px; border-radius: 100%;"
 							src="${driverDto.d_profile }">
 						<h3>${driverDto.d_name }</h3>
-						<div>
-							<span class="fa fa-star checked" style="margin-top: 8px;"></span>
-							<span class="fa fa-star checked"></span> <span
-								class="fa fa-star checked"></span> <span class="fa fa-star"></span>
-						</div>
+						<c:choose>
+							<c:when test="${driverDto.ra_rating != 0 }">
+								<c:forEach begin="1" end="${driverDto.ra_rating }" step="1">
+									<span class="glyphicon glyphicon-star on"></span>
+								</c:forEach>
+								<c:forEach begin="${driverDto.ra_rating +1}" end="5" step="1">
+									<span class="glyphicon glyphicon-star"></span>
+								</c:forEach>
+							</c:when>
+							<c:otherwise>
+								<span class="glyphicon glyphicon-star"></span>
+								<span class="glyphicon glyphicon-star"></span>
+								<span class="glyphicon glyphicon-star"></span>
+								<span class="glyphicon glyphicon-star"></span>
+								<span class="glyphicon glyphicon-star"></span>
+							</c:otherwise>	
+						</c:choose>	
 						<h4>
 							<b>성별 :</b> ${driverDto.d_gender }
-						</h4>
-						<h4>
-							<b>나이 :</b> ${driverDto.d_birth }
 						</h4>
 						<h4>
 							<b>지역 :</b> ${driverDto.d_region }
@@ -98,48 +127,8 @@
 					</div>
 
 				</div>
-				<hr>
 
-				<%-- <div class="container">
 
-					<div class="row">
-
-						<div class="col-lg-12">
-							<h1 class="page-header">
-								내가 선택한 기사님 <small>해당 기사님들께 예약요청을 보냈습니다.</small>
-							</h1>
-						</div>
-
-					</div>
-
-					<div class="row">
-						<div class="col-md-3 portfolio-item" align="center">
-							<div class="panel panel-default">
-								<div class="panel-body">
-									<img class="img-responsive"
-										style="width: 200px; height: 200px; border-radius: 100%;"
-										src="${driverDto.d_profile }">
-									<h3>${driverDto.d_name }</h3>
-									<div>
-										<span class="fa fa-star checked" style="margin-top: 8px;"></span>
-										<span class="fa fa-star checked"></span> <span
-											class="fa fa-star checked"></span> <span class="fa fa-star"></span>
-									</div>
-									<h4>
-										<b>성별 :</b> ${driverDto.d_gender }
-									</h4>
-									<h4>
-										<b>나이 :</b> ${driverDto.d_birth }
-									</h4>
-									<h4>
-										<b>지역 :</b> ${driverDto.d_region }
-									</h4>
-								</div>
-							</div>
-
-						</div>
-					</div>
-				</div> --%>
 			</div>
 			</div>
 			</div>

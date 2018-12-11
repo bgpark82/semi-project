@@ -58,7 +58,7 @@
 						<option value="39">제주도</option>
 					</select>
 					</div>
-					<ul><ins id="trip_info"></ins></ul>
+					<ul><div id="trip_info"></div></ul>
 				</div>
 				
 				<!-- map -->
@@ -73,13 +73,21 @@
 					<div id="map"></div>
 				</div>
 				
+			
 				<!-- right box -->
 				<div class="col-md-2">
 					<div class="card">
-						<div class="card-body"><h2><span id="totalDuration"></span></h2></div>
+						<div class="card-body">
+							<div class="panel panel-default" style="margin-bottom:10px;">
+								<div class="panel-body">
+									<h3 style="margin-top:10px; ">&nbsp;<span class="glyphicon glyphicon-time"></span>&nbsp;<span id="totalDuration"></span></h3>
+								</div>
+							</div>
+						</div>
 					</div>
 					<div style="height:700px; overflow-y:scroll">
-						<ul><ins id="trip_selected"></ins></ul>
+						<ul><div id="trip_selected"></div></ul>
+						<input type="button" value="경로지정" class="btn btn-default btn-lg" style="float:right; margin-right:10%;" onclick="sendData()">
 					</div>
 				</div>
 				<form action="ScheduleController" method="post" id="route">
@@ -87,9 +95,7 @@
 				</form>
 				
 			</div>
-			<div class="row">
-				<input type="button" value="경로지정" class="btn btn-default btn-lg" style="float:right; margin-right:10%;" onclick="sendData()">
-			</div>
+			
 		</div>
 	
 	<!-- geoCode -->	

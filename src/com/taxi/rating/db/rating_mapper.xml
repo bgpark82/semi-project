@@ -17,6 +17,10 @@
 </insert>
 
 
+<select id="showRating" parameterType="int" resultType="int">
+	SELECT AVG(RA_RATING) FROM RATING_TABLE WHERE D_NO = #{d_no}  
+</select>
+
 
 <!-- <select id="login" parameterType="DriverDto" resultType="DriverDto">
 	SELECT * FROM DRIVER_TABLE WHERE D_ID = #{d_id} AND D_PW = #{d_pw} AND D_ENABLED = 'Y' 
@@ -28,9 +32,7 @@
 </select>
   	
   	
-<select id="driverinfo" parameterType="int" resultType="DriverDto">
-	SELECT * FROM DRIVER_TABLE WHERE D_NO = #{d_no}  
-</select>
+
 
 <select id="getprofile" parameterType="int" resultType="String">
 	SELECT D_PROFILE FROM DRIVER_TABLE WHERE D_NO = #{d_no}  

@@ -44,7 +44,7 @@
    <br><h1 style="text-align: center;">사 용 자  회 원 가 입</h1><br><hr>
 </div>
    <div class=container align="center">
-   <div class="jumbotron" style="width: 800px;" >
+   <div class="jumbotron" style="width: 800px;">
       
       <form class="form-horizontal" action="UserController" method="post">
          <input name="command" value="regist"  type="hidden"/>

@@ -31,6 +31,13 @@
 .checked {
 	color: orange;
 }
+.glyphicon-star{
+  
+  cursor: pointer;
+}
+.glyphicon-star.on{
+	color:orange;
+}
 </style>
 </head>
 
@@ -46,7 +53,8 @@
 		<ul class="list-group">
 			<c:choose>
 				<c:when test="${empty driverList }">
-					<li class="list-group-item">-------선택 지역에 해당하는 운전자가 존재하지 않습니다-------</li>
+					<li class="list-group-item">-------선택 지역에 해당하는 운전자가 존재하지
+						않습니다-------</li>
 				</c:when>
 				<c:otherwise>
 					<c:forEach var="dto" items="${driverList }">
@@ -56,7 +64,8 @@
 									<div class="container" style="max-height: 150px; width: 100%">
 										<div class="row">
 											<div class="col-xs-4">
-												<img src="${dto.d_profile }" style="border-radius: 100%; width:150px; height:150px" />
+												<img src="${dto.d_profile }"
+													style="border-radius: 100%; width: 150px; height: 150px" />
 											</div>
 											<div class="col-xs-4" style="margin-top: 0px;">
 												<div style="margin-bottom: 5px">
@@ -77,18 +86,28 @@
 											</div>
 
 											<div class="col-xs-4" style="margin-top: 18px;">
-												<div>
-													<span class="fa fa-star checked"></span> 
-													<span class="fa fa-star checked"></span> 
-													<span class="fa fa-star checked"></span> 
-													<span class="fa fa-star"></span> 
-													<span class="fa fa-star"></span>
-												</div>
+												<c:choose>
+													<c:when test="${dto.ra_rating != 0 }">
+														<c:forEach begin="1" end="${dto.ra_rating }" step="1">
+															<span class="glyphicon glyphicon-star on"></span>
+														</c:forEach>
+														<c:forEach begin="${dto.ra_rating +1}" end="5" step="1">
+															<span class="glyphicon glyphicon-star"></span>
+														</c:forEach>
+													</c:when>
+													<c:otherwise>
+														<span class="glyphicon glyphicon-star"></span>
+														<span class="glyphicon glyphicon-star"></span>
+														<span class="glyphicon glyphicon-star"></span>
+														<span class="glyphicon glyphicon-star"></span>
+														<span class="glyphicon glyphicon-star"></span>
+													</c:otherwise>
+												</c:choose>
 
 												<div>
 													<!-- <label class="checkbox-inline"> -->
 													<input type="button" value="선택"
-														style="margin: 40% 0 0 60%;" class="btn btn-primary"
+														style="margin: 40% 0 0 20%;" class="btn btn-default"
 														id="${dto.d_no }" onclick="selectDriver(this)">
 													<!-- </label> -->
 												</div>
@@ -104,14 +123,6 @@
 		</ul>
 		<br>
 		<hr>
-		<div class="row" align="center">
-			<h1>
-				<span>운전자를 선택 하시겠습니까?</span>
-			</h1>
-			<input type="button" value="확인" class="btn btn-default btn-big"
-				onclick="location.href='route_payment.jsp'" /> <input type="button"
-				value="취소" class="btn btn-default btn-big" onclick="history.back()" />
-		</div>
 	</div>
 
 	<script>

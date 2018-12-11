@@ -60,8 +60,12 @@
                 <li><a href="answer.do?command=list">게시판</a></li>
                 <li><a href="DriverController?command=driverlist">운전자 리스트</a></li>
                 <li><a href="taxi_best.jsp">베스트 여행지</a></li>
-                <li><a href="taxi_calendar.jsp">일정관리</a></li>
-                <li><a href="taxi_chat.jsp">채팅</a></li>
+                <c:choose>
+                	<c:when test="${userDto.u_name != null }">
+                		<li><a href="taxi_calendar.jsp">일정관리</a></li>
+                	</c:when>
+                </c:choose>
+                
                 <li class="dropdown">
                 	<a href="#" class="dropdown-toggle" data-toggle="dropdown">회원관리<span class="caret"></span></a>
                 	<ul class="dropdown-menu">
@@ -69,6 +73,7 @@
 							<c:when test="${userDto.u_name != null }">
 								<li><a href="UserController?command=userinfo&u_no=${userDto.u_no}">마이페이지</a></li>
 								<li><a href="DriverController?command=logout">로그아웃</a></li>
+								<li><a href="ReviewController?command=review&u_no=${userDto.u_no }">지난일정</a></li>
 							</c:when>
 							<c:when test="${driverDto.d_name != null }">
 								<li><a href="DriverController?command=driverinfo&d_no=${driverDto.d_no}">마이페이지</a></li>
@@ -77,6 +82,7 @@
 							<c:otherwise>
 								<li><a href="taxi_registform.jsp">회원가입</a></li>
 								<li><a href="#" id="login">로그인</a></li>
+								
 							</c:otherwise>
 						</c:choose>
                 	</ul>
@@ -85,10 +91,10 @@
 			<ul class="nav navbar-nav navbar-right">
 				<c:choose>
 					<c:when test="${userDto.u_name != null}">
-						<li><a href="ReviewController?command=review&u_no=${userDto.u_no }"><span class="glyphicon glyphicon-bell"></span>&nbsp;<span class="glyphicon glyphicon-user"></span><span>${userDto.u_name }</span>님 반갑습니다. </a></li>	
+						<li><a href="#"> &nbsp;<span class="glyphicon glyphicon-user"></span><span>${userDto.u_name }</span>님 반갑습니다. </a></li>	
 					</c:when>
 					<c:when test="${driverDto.d_name != null}">
-						<li><a href="#"><img style="width:25px; height:25px; border-radius:100%;" src="${driverDto.d_profile }"/><span>${driverDto.d_name }</span>님 반갑습니다. </a></li>
+						<li><a href="#"><img style="width:25px; height:25px; border-radius:100%;" src="${driverDto.d_profile }"/>&nbsp;<span>${driverDto.d_name }</span>님 반갑습니다. </a></li>
 					</c:when>
 					<c:otherwise>
 					</c:otherwise>

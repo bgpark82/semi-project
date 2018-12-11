@@ -21,6 +21,15 @@
 <!-- jQuery -->
 <script type="text/javascript"
 	src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<style>
+.glyphicon-star{
+	cursor: pointer;
+}
+.glyphicon-star.on{
+	color:orange;
+}
+</style>	
+
 <script type="text/javascript">
 
 	function updatedriver(d_no) {
@@ -63,6 +72,8 @@
 
 </script>
 
+
+
 </head>
 <body>
 	<%@ include file="form/header.jsp"%>
@@ -82,6 +93,28 @@
 						<td><img
 							style="width: 200px; height: 200px; border-radius: 100%;"
 							src="${dto.d_profile }" /></td>
+						
+						<!-- 별점 표시 -->	
+						<div class="star" style="font-size:30px;">	
+						<c:choose>
+							<c:when test="${rating != 0 }">
+								<c:forEach begin="1" end="${rating }" step="1">
+									<span class="glyphicon glyphicon-star on"></span>
+								</c:forEach>
+								<c:forEach begin="${rating +1}" end="5" step="1">
+									<span class="glyphicon glyphicon-star"></span>
+								</c:forEach>
+							</c:when>
+							<c:otherwise>
+								<span class="glyphicon glyphicon-star"></span>
+								<span class="glyphicon glyphicon-star"></span>
+								<span class="glyphicon glyphicon-star"></span>
+								<span class="glyphicon glyphicon-star"></span>
+								<span class="glyphicon glyphicon-star"></span>
+							</c:otherwise>	
+						</c:choose>	
+						</div>	
+						
 					</tr>
 					<tr>
 						<th>아이디</th>
@@ -122,10 +155,6 @@
 					<tr>
 						<th>차량번호</th>
 						<td>${dto.d_carnum }</td>
-					</tr>
-					<tr>
-						<th>등급</th>
-						<td>${ dto.d_role.equals("DRIVER")?"운전자":"여행자" }</td>
 					</tr>
 					<tr>
 						<td colspan="5"><input type="button" value="수정"

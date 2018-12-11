@@ -34,7 +34,7 @@
 
 <c:choose>
 	<c:when test="${userDto.u_name != null }">
-		<h1 align="center">${userDto.u_name}&nbsp;님의 일정 예약하기</h1><br><hr>	
+		<br><h1 align="center">${userDto.u_name}&nbsp;<small>님의 일정 예약하기</small></h1><br><hr>
 	</c:when>
 </c:choose>
 
@@ -113,7 +113,8 @@
 					</table>
 					<br><hr>
 		<div class="row" align="center">
-			<h1><span>예약 하시겠습니까?</span></h1>
+		
+			<h1>예약 하시겠습니까?</h1><br>
 			<input type="submit" value="확인" class="btn btn-default btn-big" />
 			<input type="button" value="취소" class="btn btn-default btn-big" onclick="history.back()"/>
 		</div>

@@ -34,4 +34,22 @@ public class RatingDao extends SqlMapConfig{
 		}
 		return res;
 	}
+	
+	public int showRating(int d_no) {
+		SqlSession session = null;
+		int res = 0;
+		
+
+		try {
+			session = getSqlSessionFactory().openSession(true);
+			res = session.selectOne(namespace+"showRating", d_no);
+
+		
+		System.out.println("res : "+res);
+		
+		} catch (Exception e) {
+			session.close();
+		}
+		return res;
+	}
 }

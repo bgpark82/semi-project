@@ -31,6 +31,14 @@
 	height: 400px;
 	width: 100%;
 }
+
+.glyphicon-star{
+  
+  cursor: pointer;
+}
+.glyphicon-star.on{
+	color:orange;
+}
 </style>
 </head>
 <body>
@@ -185,12 +193,7 @@
 											style="width: 200px; height: 200px; border-radius: 100%;"
 											src="images/icon.jpg">
 										<h3></h3>
-										<div>
-											<span class="fa fa-star checked" style="margin-top: 8px;"></span>
-											<span class="fa fa-star checked"></span> 
-											<span class="fa fa-star checked"></span> 
-											<span class="fa fa-star"></span>
-										</div>
+											<div id="star"></div>
 										<h4>
 											<b id="d_gender"></b><span></span>
 										</h4>

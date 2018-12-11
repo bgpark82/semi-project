@@ -52,6 +52,8 @@ public class RatingController extends HttpServlet {
 				jsResponse("평점을 남기는데 실패하였습니다.", "history.back()", response);
 			}
 		}
+		
+		
 	}
 
 	
