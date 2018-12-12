@@ -10,7 +10,8 @@ public class RBoardDto {
 	private String r_content;
 	private String r_area;
 	private Date r_date;
-	private int r_count;
+	private int r_hit;
+	private int r_recommend;
 	
 	
 	
@@ -19,7 +20,7 @@ public class RBoardDto {
 	}
 
 	public RBoardDto(int r_no, String r_writer, String r_title, String r_content, String r_area, Date r_date,
-			int r_count) {
+			int r_hit, int r_recommend) {
 		super();
 		this.r_no = r_no;
 		this.r_writer = r_writer;
@@ -27,7 +28,8 @@ public class RBoardDto {
 		this.r_content = r_content;
 		this.r_area = r_area;
 		this.r_date = r_date;
-		this.r_count = r_count;
+		this.r_hit = r_hit;
+		this.r_recommend = r_recommend;
 	}
 
 	public int getR_no() {
@@ -78,12 +80,20 @@ public class RBoardDto {
 		this.r_date = r_date;
 	}
 
-	public int getR_count() {
-		return r_count;
+	public int getR_hit() {
+		return r_hit;
 	}
 
-	public void setR_count(int r_count) {
-		this.r_count = r_count;
+	public void setR_hit(int r_hit) {
+		this.r_hit = r_hit;
+	}
+
+	public int getR_recommend() {
+		return r_recommend;
+	}
+
+	public void setR_recommend(int r_recommend) {
+		this.r_recommend = r_recommend;
 	} 
 	
 	

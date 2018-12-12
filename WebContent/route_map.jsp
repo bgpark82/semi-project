@@ -12,8 +12,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- 부트스트랩 -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<!-- jQuery -->
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> 
 <!-- custom.css -->
 <link rel="stylesheet" type="text/css" href="css/map.css">
 </head>
@@ -29,15 +29,18 @@
 			</c:when>
 		</c:choose>
 
-		<br><h1 style="text-align:center; ">지역 조회</h1><br><hr>
 		
-		<div class="container-fluid">
+		<input type="button" value="경로지정" class="btn btn-default btn-lg" style="float:right; margin-right:1%; margin-top:3px; width:190px;" onclick="sendData()">
+		
+		
+		
+		<div class="container-fluid" style="height:600px;">
 			<div class="row">
 			
 				<!-- left box -->
 				<div class="col-md-2">
-					<div class="form-group">
-					<select id="local" class="form-control">
+					<div class="form-group" style="margin-bottom:5px;">
+					<select id="local" class="form-control" onchange="showLocation(this);">
 						<option >지역을 선택해주세요</option>
 						<option value="1">서울</option>
 						<option value="2">인천</option>
@@ -58,8 +61,23 @@
 						<option value="39">제주도</option>
 					</select>
 					</div>
-					<ul><div id="trip_info"></div></ul>
+					
+					<ul class="pagination" style="margin:0px; margin-left:20%; text-align:center;">
+					  <li><a href="#">&laquo;</a></li>
+					  <li><a id="left" href="#" onclick="showLocation(this);">&lsaquo;</a></li>
+					  <li><a id="right" href="#" onclick="showLocation(this);">&rsaquo;</a></li>
+					  <li><a href="#">&raquo;</a></li>
+					</ul>
+					<ul>
+						<div id="trip_info" ></div>
+					</ul>
 				</div>
+				
+				
+				
+				
+				
+				
 				
 				<!-- map -->
 				<div class="col-md-8">
@@ -86,8 +104,11 @@
 						</div>
 					</div>
 					<div style="height:700px; overflow-y:scroll">
-						<ul><div id="trip_selected"></div></ul>
-						<input type="button" value="경로지정" class="btn btn-default btn-lg" style="float:right; margin-right:10%;" onclick="sendData()">
+						<ul>
+							<div id="trip_selected">
+							</div>
+						</ul>
+						
 					</div>
 				</div>
 				<form action="ScheduleController" method="post" id="route">

@@ -48,6 +48,11 @@
 			nameTxt.innerHTML = '';
 		}
 	}
+	
+	function readyToOpen(){
+		alert("준비 중인 서비스입니다.");
+	}
+	
 </script>
 </head>
 <body>
@@ -57,9 +62,14 @@
                 <a class="navbar-brand" href="index.jsp">TaxiRo</a>
             </div>
             <ul class="nav navbar-nav">
-                <li><a href="answer.do?command=list">게시판</a></li>
+            	<c:choose>
+            		<c:when test="${userDto.u_no != null }">
+            			<li><a href="RBoardController?command=boardlist&u_no=${userDto.u_no }">리뷰 게시판</a></li>	
+            		</c:when>
+            	</c:choose>
+                
                 <li><a href="DriverController?command=driverlist">운전자 리스트</a></li>
-                <li><a href="taxi_best.jsp">베스트 여행지</a></li>
+                <li><a href="#" onclick="readyToOpen();">베스트 여행지</a></li>
                 <c:choose>
                 	<c:when test="${userDto.u_name != null }">
                 		<li><a href="taxi_calendar.jsp">일정관리</a></li>

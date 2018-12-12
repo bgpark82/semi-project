@@ -27,6 +27,27 @@ public class RBoardDao extends SqlMapConfig {
 		return res;
 	}
 	
+	//전체출력_조회순
+		public List<RBoardDto> selectAll_hit(){
+			List<RBoardDto> res = null;
+			SqlSession session = null;
+			session = getSqlSessionFactory().openSession(true);
+			res = session.selectList(namespace+"selectAll_hit");
+			session.close();
+			return res;
+		}
+		
+		//전체출력_추천순
+		public List<RBoardDto> selectAll_recommend(){
+			List<RBoardDto> res = null;
+			SqlSession session = null;
+			session = getSqlSessionFactory().openSession(true);
+			res = session.selectList(namespace+"selectAll_rec");
+			session.close();
+			
+			return res;
+		}
+	
 	public RBoardDto selectOne(int r_no) {
 		SqlSession session = null;
 		RBoardDto res = new RBoardDto();
@@ -71,6 +92,21 @@ public class RBoardDao extends SqlMapConfig {
 		return res;
 	}
 	
+	//조회수 증가
+		public void updateHit(int r_no) {
+			System.out.println(r_no);
+			SqlSession session = null;
+			try {
+				session = getSqlSessionFactory().openSession(true);
+				session.update(namespace+"updateHit", r_no);
+			} catch(Exception e) {
+				e.printStackTrace();
+			} finally {
+				session.close();
+			}
+			
+		}
+	
 	public int delete(int r_no) {
 		int res = 0;
 		SqlSession session = null;
@@ -95,6 +131,33 @@ public class RBoardDao extends SqlMapConfig {
 			session.close();
 		}
 	}
+	
+	//추천수 증가
+	public void plusLike(int r_no) {
+		SqlSession session = null;
+			
+		try {
+			session = getSqlSessionFactory().openSession(true);
+			session.update(namespace+"pluslike", r_no);
+		} catch(Exception e) {
+			session.close();
+		}
+			
+	}
+		
+	//추천수 감소
+	public void minusLike(int r_no) {
+		SqlSession session = null;
+			
+		try {
+			session = getSqlSessionFactory().openSession(true);
+			session.update(namespace+"minuslike", r_no);
+		} catch(Exception e) {
+			session.close();
+		}
+			
+	}
+	
 	
 	
 	

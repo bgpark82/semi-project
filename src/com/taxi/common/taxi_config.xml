@@ -12,6 +12,7 @@
   		<typeAlias type="com.taxi.board.dto.RBoardDto" alias="RBoardDto"/>
   		<typeAlias type="com.taxi.schedule.dto.ScheduleDto" alias="ScheduleDto"/>
   		<typeAlias type="com.taxi.rating.dto.RatingDto" alias="RatingDto"/>
+  		<typeAlias type="com.taxi.like.dto.likeDto" alias="LikeDto"/>
   	</typeAliases>
   
   <environments default="development">
@@ -32,6 +33,7 @@
     <mapper resource="com/taxi/driver/db/driver_mapper.xml"/>
     <mapper resource="com/taxi/schedule/db/schedule_mapper.xml"/>
     <mapper resource="com/taxi/rating/db/rating_mapper.xml"/>
+    <mapper resource="com/taxi/like/db/like_mapper.xml"/>
   </mappers>
   
 </configuration>

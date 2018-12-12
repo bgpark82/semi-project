@@ -176,35 +176,35 @@ th{
 							<div class="row">
 								<div class="col-xs-6">
 								<ul>
-								<c:forEach var="dto" items="${scheduleList }">
+								<c:forEach var="scheduleDto" items="${scheduleList }">
 									<li class="list-group-item" style="width: 100%">				
 					
 										<div >
 											<h3 style="margin-top:10px; margin-bottom:10px;">
-												<strong style="margin-left:20px;">${dto.u_name }</strong>
+												<strong style="margin-left:20px;">${scheduleDto.u_name }</strong>
 												<div style="float:right;">
 													<input type="button" value="보기" class="btn btn-default">
-													<input id="${dto.s_seq }" type="button" value="선택" class="btn btn-primary" onclick="confirmed(this)">
-													<input id="${dto.s_seq }" type="button" value="거절" class="btn btn-danger" onclick="rejected(this)">
+													<input id="${scheduleDto.s_seq }" type="button" value="선택" class="btn btn-primary" onclick="confirmed(this)">
+													<input id="${scheduleDto.s_seq }" type="button" value="거절" class="btn btn-danger" onclick="rejected(this)">
 												</div>
 											</h3>
 										</div>
 										<table class="table" style="margin-bottom:0px;">
 										<tr>
 											<td>시간</td>
-											<td>${dto.s_time }시</td>
+											<td>${scheduleDto.s_time }시</td>
 										</tr>
 										<tr>
 											<td>일자</td>
-											<td>${dto.s_date }</td>
+											<td>${scheduleDto.s_date }</td>
 										</tr>
 										<tr>
 											<td>인원수</td>
-											<td>${dto.s_people }명</td>
+											<td>${scheduleDto.s_people }명</td>
 										</tr>
 										<tr>
 											<td>경로</td>
-											<td>${dto.s_course }</td>
+											<td>${scheduleDto.s_course }</td>
 										</tr>
 										</table>
 										

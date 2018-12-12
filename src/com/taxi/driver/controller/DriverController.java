@@ -69,12 +69,12 @@ public class DriverController extends HttpServlet {
 			
 			DriverDto dto = dao.login(id, pw);
 			
-			if(dto.getD_id().equals(id)) {
+			if(dto != null) {
 				session.setAttribute("driverDto", dto);
 				session.setMaxInactiveInterval(60*60);
 				jsResponse("로그인 성공", "index.jsp", response);
 			} else {
-				jsResponse("로그인 실패", "taxi_login.jsp", response);	
+				jsResponse("아이디 혹은 비밀번호를 확인해주세요", "taxi_login.jsp", response);	
 			}
 		
 		//로그아웃

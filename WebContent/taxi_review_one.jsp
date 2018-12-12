@@ -17,7 +17,7 @@
 <!-- 부트스트랩 -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> 
 <!-- custom css -->
 <link rel="stylesheet" type="text/css" href="css/calendar.css">
 <style type="text/css">
@@ -53,7 +53,7 @@
 			<div class="col-lg-12">
 				<h1 class="page-header">
 					완료된 여행 <small>기사님의 평점과 리뷰를 작성해주세요</small> <input type="button"
-						value="리뷰 쓰러가기" onclick="location.href='index.jsp'"
+						value="리뷰 쓰러가기" onclick="location.href='RBoardController?command=boardlist&u_no=${userDto.u_no }'"
 						class="btn btn-default" style="float: right">
 				</h1>
 			</div>

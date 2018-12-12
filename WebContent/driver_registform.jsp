@@ -12,8 +12,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- 부트스트랩 -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<!-- jQuery -->
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> 
 <script type="text/javascript">
 
 function idChk() {
@@ -119,7 +119,7 @@ function idChkConfirm() {
       
 	<div class="form-group">
 		<div class="col-sm-1"></div>
-		<label class="col-sm-2 control-label">성별</label>
+		<label class="col-sm-2 control-label">지역</label>
 		<div class="col-sm-5" style="margin-top: 6px;">
       		<select id="local" name="d_region" class="form-control">
 				<option >지역을 선택해주세요</option>

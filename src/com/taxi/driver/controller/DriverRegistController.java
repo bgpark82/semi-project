@@ -102,7 +102,7 @@ public class DriverRegistController extends HttpServlet {
 //			DriverDto dto = new DriverDao().getUser(d_id);
 //			request.setAttribute("dto", dto);
 //			RequestDispatcher dispatch = request.getRequestDispatcher("driver_info.jsp");
-//			dispatch.forward(request, response);
+//			dispatch.forward(request, response);s
 			
 			DriverDto dto = new DriverDto();
 			if(fileName.equals("")) {

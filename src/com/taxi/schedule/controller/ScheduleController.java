@@ -75,12 +75,10 @@ public class ScheduleController extends HttpServlet {
 			int people = Integer.parseInt(request.getParameter("people"));
 			
 			ScheduleDto dto = new ScheduleDto(0,0,0,0,date,time,location,course,people,price,null,lat,lng,"");
+			
 			session.setAttribute("scheduleDto", dto);
 			
 			List<DriverDto> list = driverDao.DriverList();
-			for(int i = 0; i<list.size(); i++) {
-				System.out.println("rating : "+ list.get(i).getRa_rating());
-			}
 			
 			request.setAttribute("driverList", list);
 			dispatch("route_driver_list.jsp", request, response);

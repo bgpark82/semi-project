@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.taxi.like">
+
+	<resultMap type="com.taxi.like.dto.likeDto" id="LikeTableMap">
+		<result property="like_no" column="LIKE_NO"/>
+		<result property="r_no" column="R_NO"/>
+		<result property="u_no" column="U_NO"/>
+		<result property="like_check" column="LIKE_CHECK"/>
+	</resultMap>
+	
+	<select id="selectOne" parameterType="LikeDto" resultType="LikeDto">
+	SELECT * FROM LIKE_TABLE WHERE R_NO = #{r_no} AND U_NO = #{u_no}
+	</select>
+	
+	<update id="confirm" parameterType="LikeDto">
+	UPDATE LIKE_TABLE SET LIKE_CHECK = LIKE_CHECK WHERE R_NO = #{r_no} AND U_NO = #{u_no}
+	</update>
+	
+	
+	<insert id="insert" parameterType="LikeDto">
+	INSERT INTO LIKE_TABLE VALUES(LIKE_NO_SEQ.NEXTVAL, #{r_no}, #{u_no}, 0)
+	</insert>
+	
+	<update id="add" parameterType="LikeDto">
+	UPDATE LIKE_TABLE SET LIKE_CHECK = 1 WHERE R_NO = #{r_no} AND U_NO = #{u_no}
+	</update>
+	
+	<update id="cancel" parameterType="LikeDto">
+	UPDATE LIKE_TABLE SET LIKE_CHECK = 0 WHERE R_NO = #{r_no} AND U_NO = #{u_no}
+	</update>
+	
+	
+</mapper>	

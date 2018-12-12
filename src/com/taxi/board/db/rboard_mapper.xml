@@ -11,11 +11,20 @@
 		<result property="r_content" column="R_CONTENT"/>
 		<result property="r_area" column="R_AREA"/>
 		<result property="r_date" column="R_DATE"/>
-		<result property="r_count" column="R_COUNT"/>
+		<result property="r_hit" column="R_HIT"/>
+		<result property="r_recommend" column="R_RECOMMEND"/>
 	</resultMap>
 	
 	<select id="selectAll" resultMap="RBoardMap">
 	SELECT * FROM REVIEWBOARD ORDER BY R_NO DESC
+	</select>
+
+	<select id="selectAll_hit" resultMap="RBoardMap">
+	SELECT R_NO,R_WRITER,R_TITLE,R_CONTENT,R_AREA,R_DATE,R_HIT,R_RECOMMEND FROM REVIEWBOARD ORDER BY R_HIT DESC
+	</select>
+
+	<select id="selectAll_rec" resultMap="RBoardMap">
+	SELECT * FROM REVIEWBOARD ORDER BY R_RECOMMEND DESC
 	</select>
 
 	<select id="selectOne" parameterType="int" resultType="RBoardDto">
@@ -23,11 +32,15 @@
 	</select>
 
 	<insert id="insert" parameterType="RBoardDto">
-	INSERT INTO REVIEWBOARD VALUES(R_NO_SEQ.NEXTVAL, #{r_writer}, #{r_title}, #{r_content}, #{r_area}, SYSDATE, 0)
+	INSERT INTO REVIEWBOARD VALUES(R_NO_SEQ.NEXTVAL, #{r_writer}, #{r_title}, #{r_content}, #{r_area}, SYSDATE, 0, 0)
 	</insert>
 
 	<update id="update" parameterType="RBoardDto">
 	UPDATE REVIEWBOARD SET R_TITLE = #{r_title}, R_CONTENT = #{r_content}, R_AREA = #{r_area} WHERE R_NO = #{r_no}
+	</update>
+	
+	<update id="updateHit" parameterType="RBoardDto">
+		UPDATE REVIEWBOARD SET R_HIT = R_HIT+1 WHERE R_NO = #{r_no}
 	</update>
 	
 	<delete id="delete" parameterType="int">
@@ -36,6 +49,14 @@
 	
 	<update id="updatecount" parameterType="RBoardDto">
 	UPDATE REVIEWBOARD SET R_COUNT = #{r_count} WHERE R_NO = #{r_no}
+	</update>
+	
+	<update id="pluslike" parameterType="int">
+	UPDATE REVIEWBOARD SET R_RECOMMEND = R_RECOMMEND+1 WHERE R_NO = #{r_no}
+	</update>
+	
+	<update id="minuslike" parameterType="int">
+	UPDATE REVIEWBOARD SET R_RECOMMEND = R_RECOMMEND-1 WHERE R_NO = #{r_no}
 	</update>
 
 </mapper>

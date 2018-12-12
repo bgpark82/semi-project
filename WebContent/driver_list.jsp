@@ -16,8 +16,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- 부트스트랩 -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<!-- jQuery -->
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> 
 <!-- font awesome -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
@@ -52,7 +52,7 @@
 						<li class="list-group-item" style="margin:0 20%" >
   							<div class="container" style="max-height: 150px; width:100%">
   								<div class="row">
-     							<div class="col-xs-4"><img src="${dto.d_profile }" style="border-radius:100%;" width="150px"/></div>
+     							<div class="col-xs-4"><img src="${dto.d_profile }" style="border-radius:100%;" width="150px" height="150px;"/></div>
   								<div class="col-xs-4" style="margin-top: 0px;">
 									<div style="margin-bottom: 5px"><h3><strong>${dto.d_name }</strong></h3></div>
 									<div style="margin-bottom: 5px"><b>성별 </b><span>${dto.d_gender }</span></div>
