@@ -9,6 +9,8 @@
 <%@ page import="com.taxi.board.dto.RBoardDto" %> <!-- 해당 페이지 전체에 com.my.dto.MyBoardDto가 적용 -->
 <%@ page import="com.taxi.board.dao.RBoardDao" %>
 <%@ page import="java.util.List" %>
+<%@ page import="java.util.regex.Matcher" %>
+<%@ page import="java.util.regex.Pattern" %>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -184,7 +186,19 @@ function login_need(){
          </header>
           <figure>
             <div class="frontpage_square img-rounded" onclick="location.href='RBoardController?command=selectone&r_no=${dto.r_no }&u_id=${param.u_no }'"  style="cursor: pointer" >              
-               ${dto.r_content }
+               <c:set var="content" value="${dto.r_content }" />
+<%
+            Pattern pattern  =  Pattern.compile("<img[^>]*src=[\"']?([^>\"']+)[\"']?[^>]*>");
+            String content = (String)pageContext.getAttribute("content");
+            Matcher match = pattern.matcher(content);
+            String imgTag = null;
+             
+            if(match.find()){ // 이미지 태그를 찾았다면,,
+                imgTag = match.group(0); // 글 내용 중에 첫번째 이미지 태그를 뽑아옴.
+            }
+%>
+            
+            <%=imgTag %>
                <div class="text">조회수 ${dto.r_hit }</div>
             </div>
              

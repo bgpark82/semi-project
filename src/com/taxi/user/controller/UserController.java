@@ -110,7 +110,7 @@ public class UserController extends HttpServlet {
 			dto.setU_phone(u_phone);
 			int res = dao.updateUser(dto);
 			if(res > 0) {
-				response.sendRedirect("user_main.jsp");
+				response.sendRedirect("index.jsp");
 			} else {
 				jsResponse("수정 실패", "UserController?command=userinfo", response);
 			}
@@ -123,7 +123,7 @@ public class UserController extends HttpServlet {
 			if(res > 0) {
 				jsResponse("탈퇴 완료", "index.jsp", response);
 			} else {
-				jsResponse("탈퇴 실패", "user_main.jsp", response);
+				jsResponse("탈퇴 실패", "index.jsp", response);
 			}
 			
 		}

@@ -20,12 +20,13 @@ console.log("d " + durationArr)
 console.log("routeCoordinate " +routeCoordinate);
 
 //----------------------------------------------------------------------------------------------------------------------------------->> main
-
 function setMarkerOnMap(map){
 	for(var i = 0; i< markers.length; i++){
 		markers[i].setMap(map);
 	}
 }
+
+
 
 
 // run ajax as button selected
@@ -49,7 +50,7 @@ function setMarkerOnMap(map){
 		}
 		
 		
-		var url = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/areaBasedList?ServiceKey=TfotMHpUdUtGCMBSV%2BBxCG7vi%2FzLocIn1xq%2FeycGAO9NFBGIz37scDa0ABTB92P8%2BaMGgmsDIKCXTcNA6zditg%3D%3D"
+		var url = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/areaBasedList?ServiceKey=YlB%2BQ5vTfQiAypVWR1Vh2nKWMfAU5saTv7tNOxpZ9ycTuhdJxP%2F%2BENbv22rv8OaDM3eT5lwYgvgx2vuD6tsdhQ%3D%3D"
             +"&contentTypeId=12"
             +"&areaCode="+ac 
             +"&sigunguCode=" 
@@ -66,7 +67,7 @@ function setMarkerOnMap(map){
 					$(data).find("item").each(function(i){
 						var contentid = $(this).find("contentid").text();
 						
-						var url2 = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/detailCommon?ServiceKey=TfotMHpUdUtGCMBSV%2BBxCG7vi%2FzLocIn1xq%2FeycGAO9NFBGIz37scDa0ABTB92P8%2BaMGgmsDIKCXTcNA6zditg%3D%3D"
+						var url2 = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/detailCommon?ServiceKey=YlB%2BQ5vTfQiAypVWR1Vh2nKWMfAU5saTv7tNOxpZ9ycTuhdJxP%2F%2BENbv22rv8OaDM3eT5lwYgvgx2vuD6tsdhQ%3D%3D"
 	                           +"&contentTypeId=12" 
 	                           +"&contentId="+contentid
 	                           +"&MobileOS=ETC&MobileApp=TourAPI3.0_Guide&defaultYN=Y" 
@@ -104,7 +105,6 @@ function setMarkerOnMap(map){
 									 // the tour site list depending on province
 									$("#trip_info").append(item(id, firstimage, title, addr1, latitude, longitude));
 									id++;
-									
 								})
 								
 							})
@@ -214,6 +214,7 @@ function setMarkerOnMap(map){
 		responseResult.splice(index-1,1);			// response
 		directionResult.splice(index,1);			// directionDisplay
 		responseResult.splice(index,1);				// response
+		
 		console.log("1"+durationArr);
 		// 4. 시간경과 배열 지움
 		durationArr.splice(index-1,1);				// duration
@@ -282,6 +283,8 @@ function locationInfo(id, latitude, longitude, addr1,title,tel, overview, firsti
 
 
 //------------------------------------------------------------------------------------------------------------------------------>> function
+
+
 
 // show map
 function initMap(){
